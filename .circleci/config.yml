@@ -1,0 +1,85 @@
+version: 2.1 # Use 2.1 to enable using orbs and other features.
+
+# Declare the orbs that we'll use in our config.
+# read more about orbs: https://circleci.com/docs/2.0/using-orbs/
+orbs:
+  ruby: circleci/ruby@1.0
+  node: circleci/node@2
+
+jobs:
+  build: # our first job, named "build"
+    docker:
+      - image: cimg/ruby:2.7-node # use a tailored CircleCI docker image.
+    steps:
+      - checkout # pull down our git code.
+      - ruby/install-deps # use the ruby orb to install dependencies
+      # use the node orb to install our packages
+      # specifying that we use `yarn` and to cache dependencies with `yarn.lock`
+      # learn more: https://circleci.com/docs/2.0/caching/
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
+
+  test:  # our next job, called "test"
+    # we run "parallel job containers" to enable speeding up our tests;
+    # this splits our tests across multiple containers.
+    parallelism: 3
+    # here we set 3 docker images.
+    docker:
+      - image: cimg/ruby:2.7-node # this is our primary docker image, where step commands run.
+      - image: circleci/postgres
+        environment: # add POSTGRES environment variables.
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test
+        name: db
+      - image: selenium/standalone-chrome
+        name: chrome
+    # environment variables specific to Ruby/Rails, applied to the primary container.
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      PGHOST: db
+      RAILS_ENV: test
+      SELENIUM_REMOTE_URL: http://chrome:4444/wd/hub
+    # A series of steps to run, some are similar to those in "build".
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
+      # Here we make sure that the secondary container boots
+      # up before we run operations on the database.
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://db:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace
+      # Run rspec in parallel
+      # - ruby/rspec-test
+      - run:
+          name: Run Tests
+          command: |
+            TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings) \
+            bundle exec rspec $TESTFILES \
+              --profile 10 \
+              --format RspecJunitFormatter \
+              --out tmp/rspec/results.xml
+      - store_artifacts:
+          # store screenshots for system spec
+          path: tmp/screenshots
+      - store_test_results:
+          # store rspec test result
+          path: tmp/rspec
+
+# We use workflows to orchestrate the jobs that we declared above.
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build

@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/naokikubo2/cooking_life_app.svg?style=svg)](https://circleci.com/gh/naokikubo2/cookinglife_app)
+[![CircleCI](https://circleci.com/gh/naokikubo2/cookinglife_app.svg?style=svg)](https://circleci.com/gh/naokikubo2/cookinglife_app)
 
 # README
 

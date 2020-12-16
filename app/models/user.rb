@@ -6,4 +6,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name, presence: true, uniqueness: true, length: { maximum: 20}
+
+  has_many :food_record, dependent: :destroy
 end

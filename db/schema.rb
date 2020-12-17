@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_16_165638) do
+ActiveRecord::Schema.define(version: 2020_12_17_123227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_12_16_165638) do
     t.integer "healthy_score"
     t.integer "total_score"
     t.integer "workload_score"
-    t.integer "food_timing"
+    t.string "food_timing"
     t.text "memo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

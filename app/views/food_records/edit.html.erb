@@ -1,2 +1,46 @@
 <h1>FoodRecords#edit</h1>
 <p>Find me in app/views/food_records/edit.html.erb</p>
+
+<%= image_tag @food_record.image.url %>
+
+<%= form_with(model: @food_record, local: true) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :food_name, "料理名" %><br />
+    <%= f.text_field :food_name, autofocus: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :total_score, "総合得点" %><br />
+    <%= f.select :total_score, [["☆", 1], ["☆☆", 2], ["☆☆☆", 3], ["☆☆☆☆", 4], ["☆☆☆☆☆", 5]], include_blank: "選択して下さい" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :workload_score, "手軽さ" %><br />
+    <%= f.select :workload_score, [["☆", 1], ["☆☆", 2], ["☆☆☆", 3], ["☆☆☆☆", 4], ["☆☆☆☆☆", 5]], include_blank: "選択して下さい" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :healthy_score, "ヘルシー" %><br />
+    <%= f.select :healthy_score, [["☆", 1], ["☆☆", 2], ["☆☆☆", 3], ["☆☆☆☆", 4], ["☆☆☆☆☆", 5]], include_blank: "選択して下さい" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :food_timing, "時間帯" %><br />
+    <%= f.select :food_timing, [["朝", "朝"], ["昼", "昼"], ["夜", "夜"], ["間食", "間食"]], include_blank: "選択して下さい" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :memo, "メモ" %><br />
+    <%= f.text_field :memo, autofocus: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "登録する" %>
+  </div>
+
+<% end %>
+
+<%= link_to "削除する", food_record_path(@food_record), method: :delete %>
+
+

@@ -2,12 +2,17 @@
 <p>Find me in app/views/homes/top.html.erb</p>
 
 <% if user_signed_in? %>
-  <a>username: </a>
-  <%= current_user.name %>
-  <%= link_to "ログアウトする", logout_path %>
-  <%= link_to "登録情報を変更する", edit_user_registration_path %>
-  <%= link_to "ユーザ削除", user_registration_path, method: :delete, data: { confirm: "You sure?" } %>
-  <%= link_to "料理画像を登録する", new_food_record_path %>
+  <div>
+    <a>username: </a>
+    <%= current_user.name %>
+    <%= link_to "ログアウトする", logout_path %>
+    <%= link_to "登録情報を変更する", edit_user_registration_path %>
+    <%= link_to "ユーザ削除", user_registration_path, method: :delete, data: { confirm: "You sure?" } %>
+  </div>
+  <div>
+    <%= link_to "料理を登録する", new_food_record_path %>
+    <%= link_to "料理一覧", food_records_path %>
+  </div>
 <% else %>
   <%= link_to "新規登録する", signup_path %>
   <%= link_to "ログインする", login_path %>

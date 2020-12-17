@@ -36,3 +36,5 @@ yarn-debug.log*
 .yarn-integrity
 
 test/
+public/uploads
+.irb_history

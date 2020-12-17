@@ -1,2 +1,11 @@
 <h1>FoodRecords#show</h1>
 <p>Find me in app/views/food_records/show.html.erb</p>
+
+<%= image_tag @food_record.image.url %>
+
+<p>料理名：<%= @food_record.food_name %></p>
+<p>総合得点：<%= star(@food_record.total_score) %></p>
+<p>手軽：<%= star(@food_record.workload_score) %></p>
+<p>ヘルシー：<%= star(@food_record.healthy_score) %></p>
+<p>時間帯：<%= @food_record.food_timing %></p>
+<p>メモ：<%= @food_record.memo %></p>

@@ -2,6 +2,7 @@
 <p>Find me in app/views/food_records/new.html.erb</p>
 
 <%= form_with(model: @food_record, local: true) do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
 
   <div class="field">
     <%= f.label :image %><br />

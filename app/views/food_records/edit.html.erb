@@ -4,6 +4,7 @@
 <%= image_tag @food_record.image.url %>
 
 <%= form_with(model: @food_record, local: true) do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
 
   <div class="form-group">
     <%= f.label :food_name, "料理名" %><br />
@@ -16,13 +17,13 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :workload_score, "手軽さ" %><br />
-    <%= f.select :workload_score, [["☆", 1], ["☆☆", 2], ["☆☆☆", 3], ["☆☆☆☆", 4], ["☆☆☆☆☆", 5]], include_blank: "選択して下さい" %>
+    <%= f.label :workload_score, "調理の手間" %><br />
+    <%= f.select :workload_score, [["とても楽", -4], ["楽", -3], ["まぁまぁ楽", -2], ["少し楽", -1], ["普通", 0], ["少し大変", 1], ["まぁまぁ大変", 2], ["大変", 3], ["とても大変", 4]], include_blank: "選択して下さい" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :healthy_score, "ヘルシー" %><br />
-    <%= f.select :healthy_score, [["☆", 1], ["☆☆", 2], ["☆☆☆", 3], ["☆☆☆☆", 4], ["☆☆☆☆☆", 5]], include_blank: "選択して下さい" %>
+    <%= f.label :healthy_score, "カロリー" %><br />
+    <%= f.select :healthy_score, [["とてもこってり", -4], ["こってり", -3], ["まぁまぁこってり", -2], ["少しこってり", -1], ["普通", 0], ["少しヘルシー", 1], ["まぁまぁヘルシー", 2], ["ヘルシー", 3], ["とてもヘルシー", 4]], include_blank: "選択して下さい" %>
   </div>
 
   <div class="form-group">

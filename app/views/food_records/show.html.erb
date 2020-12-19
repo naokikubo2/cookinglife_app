@@ -5,7 +5,7 @@
 
 <p>料理名：<%= @food_record.food_name %></p>
 <p>総合得点：<%= star(@food_record.total_score) %></p>
-<p>手軽：<%= star(@food_record.workload_score) %></p>
-<p>ヘルシー：<%= star(@food_record.healthy_score) %></p>
+<p>調理の手間：<%= cov_ScoreToAdverb("楽", "大変", @food_record.workload_score) %></p>
+<p>ヘルシー：<%= cov_ScoreToAdverb("こってり", "ヘルシー", @food_record.healthy_score) %></p>
 <p>時間帯：<%= @food_record.food_timing %></p>
 <p>メモ：<%= @food_record.memo %></p>

@@ -30,7 +30,7 @@ class FoodRecordsController < ApplicationController
   def update
     if @food_record.update(food_records_params)
       flash[:notice] = "登録に成功しました"
-      redirect_to root_url
+      redirect_to food_record_path(@food_record)
     else
         flash[:error] = "登録に失敗しました"
         render 'edit'

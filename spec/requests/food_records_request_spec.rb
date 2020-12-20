@@ -1,10 +1,9 @@
 require 'rails_helper'
 RSpec.describe "FoodRecords", type: :request do
-
-  before {
+  before do
     timestamp!
     log_in
-  }
+  end
 
   #index
   describe "GET /food_records" do
@@ -86,7 +85,7 @@ RSpec.describe "FoodRecords", type: :request do
     let(:food_record) { create(:food_record, user: current_user) }
     context 'valid params' do
       it "redirect to root page" do
-        put food_record_path(food_record), params: { food_record: { user_id: current_user.id, food_name: "food #{timestamp}"} }
+        put food_record_path(food_record), params: { food_record: { user_id: current_user.id, food_name: "food #{timestamp}" } }
         expect(response).to redirect_to(food_record_path(food_record))
         follow_redirect!
         expect(response.body).to include("登録に成功しました")
@@ -105,7 +104,7 @@ RSpec.describe "FoodRecords", type: :request do
     context 'try to update other users other_food_record' do
       it "redirect to root page" do
         other_food_record = create(:food_record_other)
-        put food_record_path(other_food_record), params: { other_food_record: { user_id: current_user.id, food_name: "food"} }
+        put food_record_path(other_food_record), params: { other_food_record: { user_id: current_user.id, food_name: "food" } }
         expect(response).to redirect_to(root_path)
       end
     end

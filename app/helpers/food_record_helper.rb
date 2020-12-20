@@ -1,10 +1,9 @@
 module FoodRecordHelper
-
   def star(score)
-    "☆" * score unless score == nil
+    "☆" * score unless score.nil?
   end
 
-  def cov_ScoreToAdverb(adj_m, adj_p, score)
+  def cov_score_to_adverb(adj_m, adj_p, score)
     if score == 0
       "普通"
     elsif score == 1
@@ -24,7 +23,5 @@ module FoodRecordHelper
     elsif score == -4
       "とても" + adj_m
     end
-
   end
-
 end

@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe FoodRecord, type: :model do
-
-  let(:food_record) { create(:food_record)  }
+  let(:food_record) { create(:food_record) }
   let(:food_record_other) { build(:food_record_other) }
-  let(:food_record_noimage) { build(:food_record_noimage)  }
+  let(:food_record_noimage) { build(:food_record_noimage) }
 
   # 関連付けのテスト
   describe 'Association' do
@@ -25,7 +24,6 @@ RSpec.describe FoodRecord, type: :model do
       # class_name で関連づいたクラス名を返します
       it { expect(association.class_name).to eq 'User' }
     end
-
   end
 
   describe '正常系' do
@@ -42,9 +40,7 @@ RSpec.describe FoodRecord, type: :model do
   end
 
   describe '境界値分析' do
-
     context 'food_name' do
-
       it 'is invalid with 26' do
         food_record.food_name = "a" * 26
         food_record.valid?
@@ -55,11 +51,9 @@ RSpec.describe FoodRecord, type: :model do
         food_record.food_name = "a" * 25
         expect(food_record).to be_valid
       end
-
     end
 
     context 'memo' do
-
       it 'is invalid with 26' do
         food_record.memo = "a" * 251
         food_record.valid?
@@ -70,11 +64,9 @@ RSpec.describe FoodRecord, type: :model do
         food_record.memo = "a" * 250
         expect(food_record).to be_valid
       end
-
     end
 
     context 'total_score' do
-
       it 'is invalid with 6' do
         food_record.total_score = 6
         food_record.valid?
@@ -96,11 +88,9 @@ RSpec.describe FoodRecord, type: :model do
         food_record.valid?
         expect(food_record.errors.messages[:total_score]).to include("は0より大きい値にしてください")
       end
-
     end
 
     context 'healthy_score' do
-
       it 'is invalid with 5' do
         food_record.healthy_score = 5
         food_record.valid?
@@ -122,11 +112,9 @@ RSpec.describe FoodRecord, type: :model do
         food_record.valid?
         expect(food_record.errors.messages[:healthy_score]).to include("は-5より大きい値にしてください")
       end
-
     end
 
     context 'workload_score' do
-
       it 'is invalid with 5' do
         food_record.workload_score = 5
         food_record.valid?
@@ -148,9 +136,6 @@ RSpec.describe FoodRecord, type: :model do
         food_record.valid?
         expect(food_record.errors.messages[:workload_score]).to include("は-5より大きい値にしてください")
       end
-
     end
-
   end
-
 end

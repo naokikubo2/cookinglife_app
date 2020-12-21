@@ -7,7 +7,7 @@ FactoryBot.define do
     workload_score { 3 }
     food_timing { "朝" }
     memo { "memo" }
-    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image1.png')) }
+    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test-image1.jpg')) }
   end
 
   factory :food_record_other, class: FoodRecord do
@@ -18,7 +18,7 @@ FactoryBot.define do
     workload_score { 3 }
     food_timing { "朝" }
     memo { "memo_other" }
-    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image2.png')) }
+    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test-image2.jpg')) }
   end
 
   factory :food_record_noimage, class: FoodRecord do

@@ -16,8 +16,7 @@ RUN apt-get update -qq && apt-get install -y \
     libpq-dev \
     vim \
     less \
-    graphviz \
-    imagemagick
+    graphviz
 
 # install yarn
 RUN apt-get install apt-transport-https

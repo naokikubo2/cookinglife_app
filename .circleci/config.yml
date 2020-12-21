@@ -19,8 +19,8 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
-      - run: apt update
-      - run: apt install imagemagick
+      - run: sudo apt update
+      - run: sudo apt install imagemagick
 
   test:  # our next job, called "test"
     # we run "parallel job containers" to enable speeding up our tests;

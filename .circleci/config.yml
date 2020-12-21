@@ -6,7 +6,6 @@ orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2
 
-
 jobs:
   build: # our first job, named "build"
     docker:
@@ -20,13 +19,8 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
-  dependencies:
-    pre:
-      - sudo apt-get remove imagemagick
-      - wget http://www.imagemagick.org/download/ImageMagick.tar.gz
-      - tar -xvf ImageMagick.tar.gz
-      - cd ImageMagick-7.* && ./configure && make && sudo make install
-      - sudo ldconfig /usr/local/lib
+      - run: sudo apt-get update
+      - run: sudo apt-get -y install imagemagick
 
   test:  # our next job, called "test"
     # we run "parallel job containers" to enable speeding up our tests;

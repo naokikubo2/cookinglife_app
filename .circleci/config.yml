@@ -6,6 +6,7 @@ dependencies:
     - sudo apt-get install aptitude
     - DEBIAN_FRONTEND=noninteractive sudo aptitude -y install imagemagick libimagemagick libmagickcore libmagickcore-dev libmagickwand-dev
 
+
 # Declare the orbs that we'll use in our config.
 # read more about orbs: https://circleci.com/docs/2.0/using-orbs/
 orbs:
@@ -25,6 +26,7 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
+      - run: sudo apt-get install imagemagick
 
   test:  # our next job, called "test"
     # we run "parallel job containers" to enable speeding up our tests;

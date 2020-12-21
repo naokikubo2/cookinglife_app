@@ -20,7 +20,7 @@ jobs:
           pkg-manager: yarn
           cache-key: "yarn.lock"
       - run: sudo apt-get update
-      - run: sudo apt-get -y install GraphicsMagick
+      - run: sudo apt-get -y install graphicsmagick
 
   test:  # our next job, called "test"
     # we run "parallel job containers" to enable speeding up our tests;

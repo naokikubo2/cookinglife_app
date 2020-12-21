@@ -11,6 +11,7 @@ jobs:
     docker:
       - image: cimg/ruby:2.7-node # use a tailored CircleCI docker image.
     steps:
+      - run: sudo apt-get install pkg-config
       - checkout # pull down our git code.
       - ruby/install-deps # use the ruby orb to install dependencies
       # use the node orb to install our packages
@@ -19,7 +20,6 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
-      - run: sudo apt-get install pkg-config
 
   test:  # our next job, called "test"
     # we run "parallel job containers" to enable speeding up our tests;

@@ -37,6 +37,12 @@ RSpec.describe FoodRecord, type: :model do
       food_record_noimage.valid?
       expect(food_record_noimage.errors.messages[:image]).to include("を入力してください")
     end
+
+    it 'is invalid with wrong food_timing' do
+      food_record.food_timing = "あ"
+      food_record.valid?
+      expect(food_record.errors.messages[:food_timing]).to include("は一覧にありません")
+    end
   end
 
   describe '境界値分析' do

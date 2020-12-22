@@ -179,7 +179,6 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.4)
-    rmagick (4.1.2)
     rspec-core (3.10.0)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.0)
@@ -286,11 +285,11 @@ DEPENDENCIES
   factory_bot_rails
   jbuilder (~> 2.7)
   listen (~> 3.2)
+  mini_magick
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
   rails-i18n
-  rmagick
   rspec-rails
   rspec_junit_formatter
   rubocop

@@ -1,0 +1,165 @@
+require:
+  - rubocop-rails
+
+Rails:
+  Enabled: true
+
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+    - 'vendor/**/*'
+
+# 日本語でのコメントを許可
+AsciiComments:
+  Enabled: false
+
+HashSyntax:
+  EnforcedStyle: ruby19
+
+AllCops:
+  TargetRubyVersion: 2.7.2
+
+Documentation:
+  Enabled: false
+
+# Offense count: 11
+# Cop supports --auto-correct.
+# Configuration parameters: AllowDoxygenCommentStyle, AllowGemfileRubyComment.
+Layout/LeadingCommentSpace:
+  Exclude:
+    - 'Gemfile'
+    - 'spec/models/user_spec.rb'
+    - 'spec/requests/food_records_request_spec.rb'
+
+# Offense count: 1
+# Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
+Metrics/AbcSize:
+  Max: 19
+
+# Offense count: 4
+# Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
+# IgnoredMethods: refine
+Metrics/BlockLength:
+  Max: 120
+
+# Offense count: 1
+# Configuration parameters: IgnoredMethods.
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+# Offense count: 2
+# Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
+Metrics/MethodLength:
+  Max: 20
+
+# Offense count: 1
+# Configuration parameters: IgnoredMethods.
+Metrics/PerceivedComplexity:
+  Max: 11
+
+# Offense count: 1
+# Cop supports --auto-correct.
+Rails/ActiveRecordAliases:
+  Exclude:
+    - 'app/controllers/users/registrations_controller.rb'
+
+# Offense count: 6
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: slashes, arguments
+Rails/FilePath:
+  Exclude:
+    - 'config/application.rb'
+    - 'config/environments/development.rb'
+    - 'spec/factories/food_record.rb'
+    - 'spec/rails_helper.rb'
+    - 'spec/requests/food_records_request_spec.rb'
+
+# Offense count: 1
+# Configuration parameters: Include.
+# Include: app/models/**/*.rb
+Rails/UniqueValidationWithoutIndex:
+  Exclude:
+    - 'app/models/user.rb'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+Style/CaseLikeIf:
+  Exclude:
+    - 'app/helpers/food_record_helper.rb'
+
+# Offense count: 8
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: nested, compact
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'app/controllers/users/confirmations_controller.rb'
+    - 'app/controllers/users/omniauth_callbacks_controller.rb'
+    - 'app/controllers/users/passwords_controller.rb'
+    - 'app/controllers/users/registrations_controller.rb'
+    - 'app/controllers/users/sessions_controller.rb'
+    - 'app/controllers/users/unlocks_controller.rb'
+    - 'test/channels/application_cable/connection_test.rb'
+    - 'test/test_helper.rb'
+
+# Offense count: 53
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: always, always_true, never
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Offense count: 1
+# Cop supports --auto-correct.
+Style/GlobalStdStream:
+  Exclude:
+    - 'config/environments/production.rb'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, IgnoredMethods.
+# SupportedStyles: predicate, comparison
+Style/NumericPredicate:
+  Exclude:
+    - 'app/helpers/food_record_helper.rb'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+# Configuration parameters: PreferredDelimiters.
+Style/PercentLiteralDelimiters:
+  Exclude:
+    - 'app/uploaders/image_uploader.rb'
+
+# Offense count: 2
+# Cop supports --auto-correct.
+# Configuration parameters: SafeForConstants.
+Style/RedundantFetchBlock:
+  Exclude:
+    - 'config/puma.rb'
+
+# Offense count: 6
+# Cop supports --auto-correct.
+Style/StringConcatenation:
+  Exclude:
+    - 'app/helpers/food_record_helper.rb'
+
+# Offense count: 94
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
+# SupportedStyles: single_quotes, double_quotes
+Style/StringLiterals:
+  Enabled: false
+
+# Offense count: 4
+# Cop supports --auto-correct.
+# Configuration parameters: MinSize.
+# SupportedStyles: percent, brackets
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+# Offense count: 6
+# Cop supports --auto-correct.
+# Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
+# URISchemes: http, https
+Layout/LineLength:
+  Max: 173

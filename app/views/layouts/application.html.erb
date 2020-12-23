@@ -8,8 +8,10 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  <%= render 'layouts/header' %>
   <body>
+    <%= render 'layouts/flashes' %>
     <%= yield %>
   </body>
+  <%= render 'layouts/footer' %>
 </html>

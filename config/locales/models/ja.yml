@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    models:
+      food_record: 料理記録
+    attributes:
+      food_record:
+        food_name: 料理名
+        total_score: 総合得点
+        healthy_score: カロリー
+        workload_score: 調理の手間
+        food_timing: 時間帯
+        memo: メモ
+        image: 画像

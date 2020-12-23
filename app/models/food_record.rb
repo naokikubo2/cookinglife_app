@@ -1,7 +1,7 @@
 class FoodRecord < ApplicationRecord
   belongs_to :user
 
-  STATUS_VALUES = %w[朝 昼 夜 間食].freeze
+  STATUS_VALUES = %w[morning lunch dinner snack].freeze
 
   validates :user_id, presence: true
   validates :image, presence: true

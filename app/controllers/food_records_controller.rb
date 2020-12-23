@@ -10,7 +10,7 @@ class FoodRecordsController < ApplicationController
   def create
     @food_record = current_user.food_record.build(food_record_params)
     if @food_record.save
-      flash[:notice] = "画像のアップロードに成功しました"
+      flash[:notice] = "登録に成功しました"
       redirect_to root_url
     else
       render 'new'

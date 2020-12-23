@@ -5,7 +5,7 @@ FactoryBot.define do
     healthy_score { 1 }
     total_score { 2 }
     workload_score { 3 }
-    food_timing { "朝" }
+    food_timing { "morning" }
     memo { "memo" }
     image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test-image1.jpg')) }
   end
@@ -16,7 +16,7 @@ FactoryBot.define do
     healthy_score { 1 }
     total_score { 2 }
     workload_score { 3 }
-    food_timing { "朝" }
+    food_timing { "morning" }
     memo { "memo_other" }
     image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test-image2.jpg')) }
   end
@@ -27,7 +27,7 @@ FactoryBot.define do
     healthy_score { 1 }
     total_score { 2 }
     workload_score { 3 }
-    food_timing { "朝" }
+    food_timing { "morning" }
     memo { "memo_noimage" }
   end
 end

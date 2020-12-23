@@ -4,24 +4,35 @@ module FoodRecordHelper
   end
 
   def cov_score_to_adverb(adj_m, adj_p, score)
-    if score == 0
+    case score
+    when 0
       "普通"
-    elsif score == 1
+    when 1
       "少し" + adj_p
-    elsif score == 2
+    when 2
       "まぁまぁ" + adj_p
-    elsif score == 3
+    when 3
       adj_p
-    elsif score == 4
+    when 4
       "とても" + adj_p
-    elsif score == -1
+    when -1
       "少し" + adj_m
-    elsif score == -2
+    when -2
       "まぁまぁ" + adj_m
-    elsif score == -3
+    when -3
       adj_m
-    elsif score == -4
+    when -4
       "とても" + adj_m
     end
+  end
+
+  def cov_en_to_ja(eng)
+    lists = {
+      'morning' => '朝',
+      'lunch' => '昼',
+      'dinner' => '夜',
+      'snack' => '間食'
+    }
+    lists[eng]
   end
 end

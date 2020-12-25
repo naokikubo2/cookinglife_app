@@ -1,7 +1,7 @@
 class FoodRecordsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_food_record, only: [:show, :edit, :update, :destroy]
-  before_action :check_role, only: [:show, :edit, :update, :destroy]
+  before_action :check_role, only: [:edit, :update, :destroy]
 
   def new
     @food_record = current_user.food_record.build
@@ -17,10 +17,16 @@ class FoodRecordsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @tags = @food_record.tag_counts_on(:tags)
+    if @tag = params[:tag]   # タグ検索用
+      @food_record_tag = Post.tagged_with(params[:tag])   # タグに紐付く投稿
+    end
+  end
 
   def index
     @food_records = current_user.food_record
+    @tags = @food_records.tag_counts_on(:tags)
   end
 
   def edit; end
@@ -56,6 +62,6 @@ class FoodRecordsController < ApplicationController
   end
 
   def food_records_params
-    params.require(:food_record).permit(:food_name, :healthy_score, :total_score, :workload_score, :food_timing, :memo).merge({ user_id: current_user.id })
+    params.require(:food_record).permit(:food_name, :healthy_score, :total_score, :workload_score, :food_timing, :memo, :tag_list).merge({ user_id: current_user.id })
   end
 end

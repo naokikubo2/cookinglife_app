@@ -13,4 +13,5 @@ class FoodRecord < ApplicationRecord
   validates :food_timing, inclusion: { in: STATUS_VALUES }, allow_nil: true
 
   mount_uploader :image, ImageUploader
+  acts_as_taggable_on :tags
 end

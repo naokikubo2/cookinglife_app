@@ -37,6 +37,6 @@ module FoodRecordHelper
   end
 
   def tag_link(tag)
-        link_to "#{tag.name}(#{tag.taggings_count})", tags_path(tag: tag.name)
+    link_to "#{tag.name}(#{tag.taggings_count})", tags_path(tag: tag.name)
   end
 end

@@ -1,0 +1,7 @@
+<% if food_records.present? %>
+  <% food_records.each do |food_record|%>
+    <%= food_link(food_record) %>
+  <% end %>
+<% else %>
+  登録された料理はありません。
+<% end %>

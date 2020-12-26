@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   end
 
   resources :food_records
+  resources :tags, only: [:index]
 end

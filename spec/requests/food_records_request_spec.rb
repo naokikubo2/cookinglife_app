@@ -20,9 +20,10 @@ RSpec.describe "FoodRecords", type: :request do
   describe "GET /food_records/:id" do
     context 'other users food_record page' do
       it "render to show page" do
-        food_record = create(:food_record, food_name: "food #{timestamp}")
+        food_record = create(:food_record, user: current_user, food_name: "food #{timestamp}")
         get food_record_path(food_record)
-        expect(response).to redirect_to(root_path)
+        expect(response.status).to eq(200)
+        expect(response.body).to include("food #{timestamp}")
       end
     end
 

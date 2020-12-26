@@ -1,0 +1,10 @@
+<h1>Tags#index</h1>
+<p>Find me in app/views/tags/index.html.erb</p>
+
+<h2><%= @tag %>に紐づいた <%= current_user.name %>さんの料理</h2>
+
+<%= render partial: "food", locals: { food_records: @food_records_mine } %>
+
+<h2><%= @tag %>に紐づいた 他ユーザーの料理</h2>
+
+<%= render partial: "food", locals: { food_records: @food_records_others } %>

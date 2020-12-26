@@ -1,0 +1,7 @@
+<% if tags.present? %>
+    <% tags.each do |tag| %>
+      <%= tag_link(tag) %>
+    <% end %>
+  <% else %>
+    登録されているタグはありません
+<% end %>

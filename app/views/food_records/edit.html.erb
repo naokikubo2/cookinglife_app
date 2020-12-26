@@ -6,6 +6,9 @@
 <%= form_with(model: @food_record, local: true) do |f| %>
   <%= render 'layouts/error_messages', model: f.object %>
 
+  <%= f.label :tag_list %>
+  <%= f.text_field :tag_list, value: @food_record.tag_list.join(','), class: "form-control" %>
+
   <div class="form-group">
     <%= f.label :food_name, "料理名" %><br />
     <%= f.text_field :food_name, autofocus: true %>

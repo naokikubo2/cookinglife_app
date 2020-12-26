@@ -43,6 +43,18 @@ RSpec.describe FoodRecord, type: :model do
       food_record.valid?
       expect(food_record.errors.messages[:food_timing]).to include("は一覧にありません")
     end
+
+    it 'is invalid without food_date' do
+      food_record.food_date = ""
+      food_record.valid?
+      expect(food_record.errors.messages[:food_date]).to include("を入力してください")
+    end
+
+    it 'is invalid with food_date is after today' do
+      food_record.food_date = Date.today + 1
+      food_record.valid?
+      expect(food_record.errors.messages[:food_date]).to include("は、今日を含む過去の日付を入力して下さい")
+    end
   end
 
   describe '境界値分析' do

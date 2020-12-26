@@ -15,6 +15,11 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :food_date, "日付" %><br />
+    <%= f.date_field :food_date, autofocus: true %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :total_score, "総合得点" %><br />
     <%= f.select :total_score, [["☆", 1], ["☆☆", 2], ["☆☆☆", 3], ["☆☆☆☆", 4], ["☆☆☆☆☆", 5]], include_blank: "選択して下さい" %>
   </div>

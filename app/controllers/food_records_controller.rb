@@ -9,6 +9,7 @@ class FoodRecordsController < ApplicationController
 
   def create
     @food_record = current_user.food_record.build(food_record_params)
+    @food_record.food_date = Time.zone.today
     if @food_record.save
       flash[:notice] = "登録に成功しました"
       redirect_to root_url
@@ -62,6 +63,7 @@ class FoodRecordsController < ApplicationController
   end
 
   def food_records_params
-    params.require(:food_record).permit(:food_name, :healthy_score, :total_score, :workload_score, :food_timing, :memo, :tag_list).merge({ user_id: current_user.id })
+    params.require(:food_record).permit(:food_name, :healthy_score,
+      :total_score, :workload_score, :food_timing, :memo, :tag_list, :food_date).merge({ user_id: current_user.id })
   end
 end

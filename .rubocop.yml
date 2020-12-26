@@ -191,3 +191,8 @@ Style/IfUnlessModifier:
   Exclude:
     - 'db/migrate/20201223110713_change_collation_for_tag_names.acts_as_taggable_on_engine.rb'
     - 'db/migrate/20201223110714_add_missing_indexes_on_taggings.acts_as_taggable_on_engine.rb'
+
+# Offense count: 2
+Lint/UselessAssignment:
+  Exclude:
+    - 'spec/requests/tag_request_spec.rb'

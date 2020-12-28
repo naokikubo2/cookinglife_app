@@ -40,7 +40,7 @@ Metrics/AbcSize:
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 # IgnoredMethods: refine
 Metrics/BlockLength:
-  Max: 120
+  Max: 200
 
 # Offense count: 1
 # Configuration parameters: IgnoredMethods.
@@ -196,3 +196,12 @@ Style/IfUnlessModifier:
 Lint/UselessAssignment:
   Exclude:
     - 'spec/requests/tag_request_spec.rb'
+    - 'spec/requests/food_records_request_spec.rb'
+
+# Offense count: 15
+# Configuration parameters: EnforcedStyle, CheckMethodNames, CheckSymbols, AllowedIdentifiers.
+# SupportedStyles: snake_case, normalcase, non_integer
+# AllowedIdentifiers: capture3, iso8601, rfc1123_date, rfc822, rfc2822, rfc3339
+Naming/VariableNumber:
+  Exclude:
+    - 'spec/requests/food_records_request_spec.rb'

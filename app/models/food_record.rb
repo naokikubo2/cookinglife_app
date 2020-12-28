@@ -18,8 +18,6 @@ class FoodRecord < ApplicationRecord
   acts_as_taggable_on :tags
 
   def day_after_today
-    unless food_date.nil?
-      errors.add(:food_date, 'は、今日を含む過去の日付を入力して下さい') if food_date > Time.zone.today
-    end
+    errors.add(:food_date, 'は、今日を含む過去の日付を入力して下さい') if !food_date.nil? && (food_date > Time.zone.today)
   end
 end

@@ -41,6 +41,6 @@ module FoodRecordHelper
   end
 
   def date_format(date)
-    return l date, format: :long if date.present?
+    l date, format: :long if date.present?
   end
 end

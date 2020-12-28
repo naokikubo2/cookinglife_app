@@ -21,12 +21,13 @@
   </div>
 
   <div class="form-group">
+    <% array_food_timings = ["morning", "lunch", "dinner",  "snack"] %>
+    <% array_food_timings_ja = ["朝", "昼", "夜",  "間食"] %>
     <%= f.label :food_timing %>
     <%= f.radio_button :food_timing_eq, '', {:checked => true} %>指定なし
-    <%= f.radio_button :food_timing_eq, "morning" %>朝
-    <%= f.radio_button :food_timing_eq, "lunch" %>昼
-    <%= f.radio_button :food_timing_eq, "dinner" %>夜
-    <%= f.radio_button :food_timing_eq, "snack" %>間食
+    <% array_food_timings.each_with_index do |x, i|%>
+      <%= f.radio_button :food_timing_eq, x %><%= array_food_timings_ja[i] %>
+    <% end %>
   </div>
 
   <div class="form-group">

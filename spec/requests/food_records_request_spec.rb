@@ -16,6 +16,111 @@ RSpec.describe "FoodRecords", type: :request do
     end
   end
 
+  before do
+  end
+
+  describe "GET /food_records/:q" do
+    context 'when 料理名検索' do
+      it "曖昧検索される" do
+        food_record_1 = create(:food_record, user: current_user, food_name: "food1")
+        food_record_2 = create(:food_record, user: current_user, food_name: "food2")
+        @params = {}
+        @params[:q] = {}
+        @params[:q][:food_name_cont] = 'food1'
+        get food_records_path(@params)
+        expect(response.status).to eq(200)
+        expect(response.body).to include("food1")
+        expect(response.body).not_to include("food2")
+      end
+    end
+
+    context 'when 総合得点検索' do
+      it "総合得点のレンジ内の料理が検索される" do
+        food_record_1 = create(:food_record, user: current_user, total_score: 3, food_name: "food1")
+        food_record_2 = create(:food_record, user: current_user, total_score: 2, food_name: "food2")
+        @params = {}
+        @params[:q] = {}
+        @params[:q][:total_score_gteq] = 3
+        get food_records_path(@params)
+        expect(response.status).to eq(200)
+        expect(response.body).to include("food1")
+        expect(response.body).not_to include("food2")
+      end
+    end
+
+    context 'when カロリー検索' do
+      it "入力されたカロリーの料理が検索される" do
+        food_record_1 = create(:food_record, user: current_user, healthy_score: 3, food_name: "food1")
+        food_record_2 = create(:food_record, user: current_user, healthy_score: 2, food_name: "food2")
+        @params = {}
+        @params[:q] = {}
+        @params[:q][:healthy_score_eq] = 3
+        get food_records_path(@params)
+        expect(response.status).to eq(200)
+        expect(response.body).to include("food1")
+        expect(response.body).not_to include("food2")
+      end
+    end
+
+    context 'when 調理の手間検索' do
+      it "入力された手間の料理が検索される" do
+        food_record_1 = create(:food_record, user: current_user, workload_score: 3, food_name: "food1")
+        food_record_2 = create(:food_record, user: current_user, workload_score: 2, food_name: "food2")
+        @params = {}
+        @params[:q] = {}
+        @params[:q][:workload_score_eq] = 3
+        get food_records_path(@params)
+        expect(response.status).to eq(200)
+        expect(response.body).to include("food1")
+        expect(response.body).not_to include("food2")
+      end
+    end
+
+    context 'when 時間帯検索' do
+      it "入力された時間帯の料理が検索される" do
+        food_record_1 = create(:food_record, user: current_user, food_timing: "morning", food_name: "food1")
+        food_record_2 = create(:food_record, user: current_user, food_timing: "lunch", food_name: "food2")
+        @params = {}
+        @params[:q] = {}
+        @params[:q][:food_timing_eq] = "morning"
+        get food_records_path(@params)
+        expect(response.status).to eq(200)
+        expect(response.body).to include("food1")
+        expect(response.body).not_to include("food2")
+      end
+    end
+
+    context 'when 日付検索' do
+      it "日付のレンジ内の料理が検索される" do
+        food_record_1 = create(:food_record, user: current_user, food_date: Time.zone.today - 1, food_name: "food1")
+        food_record_2 = create(:food_record, user: current_user, food_date: Time.zone.today - 2, food_name: "food2")
+        @params = {}
+        @params[:q] = {}
+        @params[:q][:food_date_gteq ] = Time.zone.today - 1
+        @params[:q][:food_date_lt ] = Time.zone.today
+        get food_records_path(@params)
+        expect(response.status).to eq(200)
+        expect(response.body).to include("food1")
+        expect(response.body).not_to include("food2")
+      end
+    end
+
+    context 'when 複合検索' do
+      it "全ての検索条件に当てはまる料理が検索される" do
+        food_record_1 = create(:food_record, user: current_user, total_score: 3, healthy_score: 3, food_name: "food1")
+        food_record_2 = create(:food_record, user: current_user, total_score: 3, healthy_score: 1, food_name: "food2")
+        food_record_3 = create(:food_record, user: current_user, total_score: 1, healthy_score: 1, food_name: "food3")
+        @params = {}
+        @params[:q] = {}
+        @params[:q][:total_score_gteq ] = 3
+        @params[:q][:healthy_score_eq ] = 3
+        get food_records_path(@params)
+        expect(response.body).to include("food1")
+        expect(response.body).not_to include("food2", "food3")
+      end
+    end
+  end
+
   #show
   describe "GET /food_records/:id" do
     context 'other users food_record page' do

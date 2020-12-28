@@ -1,0 +1,13 @@
+<% if food_records.present? %>
+  <% food_records.each do |food_record| %>
+    <div>
+      日付：<%= date_format(food_record.food_date) %>
+      料理名：<%= food_record.food_name %>
+      <%= link_to "表示", food_record_path(food_record) %>
+      <%= link_to "編集", edit_food_record_path(food_record) %><br/>
+      <%= image_tag food_record.image.url %>
+    </div>
+  <% end %>
+<% else %>
+  <p>表示可能な料理がありません。</p>
+<% end %>

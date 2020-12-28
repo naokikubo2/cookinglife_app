@@ -8,6 +8,7 @@ FactoryBot.define do
     food_timing { "morning" }
     memo { "memo" }
     image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test-image1.jpg')) }
+    food_date { Time.zone.today }
   end
 
   factory :food_record_other, class: FoodRecord do
@@ -19,6 +20,7 @@ FactoryBot.define do
     food_timing { "morning" }
     memo { "memo_other" }
     image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test-image2.jpg')) }
+    food_date { Time.zone.today }
   end
 
   factory :food_record_noimage, class: FoodRecord do
@@ -29,5 +31,6 @@ FactoryBot.define do
     workload_score { 3 }
     food_timing { "morning" }
     memo { "memo_noimage" }
+    food_date { Time.zone.today }
   end
 end

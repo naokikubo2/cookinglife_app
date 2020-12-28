@@ -6,6 +6,7 @@
 <p><%= render partial: "tags", locals: { tags: @tags } %></p>
 
 <p>料理名：<%= @food_record.food_name %></p>
+<p>日付：<%= date_format(@food_record.food_date) %></p>
 <p>総合得点：<%= star(@food_record.total_score) %></p>
 <p>調理の手間：<%= cov_score_to_adverb("楽", "大変", @food_record.workload_score) %></p>
 <p>ヘルシー：<%= cov_score_to_adverb("こってり", "ヘルシー", @food_record.healthy_score) %></p>

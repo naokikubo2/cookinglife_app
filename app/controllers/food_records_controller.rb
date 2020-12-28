@@ -4,11 +4,11 @@ class FoodRecordsController < ApplicationController
   before_action :check_role, only: [:edit, :update, :destroy]
 
   def new
-    @food_record = current_user.food_record.build
+    @food_record = current_user.food_records.build
   end
 
   def create
-    @food_record = current_user.food_record.build(food_record_params)
+    @food_record = current_user.food_records.build(food_record_params)
     @food_record.food_date = Time.zone.today
     if @food_record.save
       flash[:notice] = "登録に成功しました"
@@ -26,9 +26,9 @@ class FoodRecordsController < ApplicationController
   end
 
   def index
-    @search = current_user.food_record.ransack(params[:q])
+    @search = current_user.food_records.ransack(params[:q])
     @food_records = @search.result(distinct: true)
-    @tags = current_user.food_record.tag_counts_on(:tags)
+    @tags = current_user.food_records.tag_counts_on(:tags)
   end
 
   def edit; end

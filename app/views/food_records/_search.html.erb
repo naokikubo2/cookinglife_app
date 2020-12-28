@@ -1,0 +1,42 @@
+<%= search_form_for search do |f| %>
+
+  <div class="form-group">
+    <%= f.label :food_name, "料理名" %>
+    <%= f.search_field :food_name_cont %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :total_score %>
+    <%= f.select :total_score_gteq, [["未選択", ""], ["☆", 1], ["☆☆", 2], ["☆☆☆", 3], ["☆☆☆☆", 4], ["☆☆☆☆☆", 5]] %>以上
+  </div>
+
+  <div class="form-group">
+    <%= f.label :healthy_score %>
+    <%= f.select :healthy_score_eq, [["未選択", ""], ["とてもこってり", -4], ["こってり", -3], ["まぁまぁこってり", -2], ["少しこってり", -1], ["普通", 0], ["少しヘルシー", 1], ["まぁまぁヘルシー", 2], ["ヘルシー", 3], ["とてもヘルシー", 4]] %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :workload_score %>
+    <%= f.select :workload_score_eq, [["未選択", ""], ["とても楽", -4], ["楽", -3], ["まぁまぁ楽", -2], ["少し楽", -1], ["普通", 0], ["少し大変", 1], ["まぁまぁ大変", 2], ["大変", 3], ["とても大変", 4]] %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :food_timing %>
+    <%= f.radio_button :food_timing_eq, '', {:checked => true} %>指定なし
+    <%= f.radio_button :food_timing_eq, "morning" %>朝
+    <%= f.radio_button :food_timing_eq, "lunch" %>昼
+    <%= f.radio_button :food_timing_eq, "dinner" %>夜
+    <%= f.radio_button :food_timing_eq, "snack" %>間食
+  </div>
+
+  <div class="form-group">
+    <%= f.label :food_date %>
+    <%= f.date_field :food_date_gteq %>〜
+    <%= f.date_field :food_date_lteq  %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "検索" %>
+  </div>
+<% end %>
+

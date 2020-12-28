@@ -26,8 +26,9 @@ class FoodRecordsController < ApplicationController
   end
 
   def index
-    @food_records = current_user.food_record
-    @tags = @food_records.tag_counts_on(:tags)
+    @search = current_user.food_record.ransack(params[:q])
+    @food_records = @search.result(distinct: true)
+    @tags = current_user.food_record.tag_counts_on(:tags)
   end
 
   def edit; end
@@ -64,6 +65,6 @@ class FoodRecordsController < ApplicationController
 
   def food_records_params
     params.require(:food_record).permit(:food_name, :healthy_score,
-      :total_score, :workload_score, :food_timing, :memo, :tag_list, :food_date).merge({ user_id: current_user.id })
+                                        :total_score, :workload_score, :food_timing, :memo, :tag_list, :food_date).merge({ user_id: current_user.id })
   end
 end

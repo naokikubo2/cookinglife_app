@@ -1,5 +1,6 @@
 class FoodRecord < ApplicationRecord
   belongs_to :user
+  has_many :food_shares
 
   STATUS_VALUES = %w[morning lunch dinner snack].freeze
 

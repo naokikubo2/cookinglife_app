@@ -7,4 +7,5 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true, length: { maximum: 20 }
 
   has_many :food_records, dependent: :destroy
+  has_many :food_shares, dependent: :destroy
 end

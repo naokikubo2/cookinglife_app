@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_01_084208) do
+ActiveRecord::Schema.define(version: 2021_01_02_150606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,9 @@ ActiveRecord::Schema.define(version: 2021_01_01_084208) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
+    t.datetime "give_time"
+    t.datetime "limit_time"
+    t.text "memo"
     t.index ["food_record_id"], name: "index_food_shares_on_food_record_id"
     t.index ["user_id"], name: "index_food_shares_on_user_id"
   end

@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       food_record: 料理記録
+      food_share: お裾分け
     attributes:
       food_record:
         food_name: 料理名
@@ -13,3 +14,5 @@ ja:
         image: 画像
         tag_list: タグ
         food_date: 料理の日付
+      food_share:
+        limit_number: 募集人数

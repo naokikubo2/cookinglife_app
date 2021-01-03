@@ -11,7 +11,6 @@ class FoodShare < ApplicationRecord
   validate :time_before_give
 
   mount_uploader :image, ImageUploader
-
 end
 
 def time_after_registration

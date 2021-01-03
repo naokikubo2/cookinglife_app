@@ -66,7 +66,6 @@ RSpec.describe FoodShare, type: :model do
       food_share.valid?
       expect(food_share.errors.messages[:limit_time]).to include("を入力してください")
     end
-
   end
 
   describe '境界値分析' do

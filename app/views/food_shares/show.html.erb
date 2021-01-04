@@ -1,0 +1,11 @@
+<h1>FoodShares#show</h1>
+<p>Find me in app/views/food_shares/show.html.erb</p>
+
+<p>料理名：<%= @food_share.food_name %></p>
+<p><%= image_tag @food_share.image.url %></p>
+<p>募集人数上限：<%= @food_share.limit_number %></p>
+<p>募集締め切り：<%= time_format(@food_share.limit_time) %></p>
+<p>受け渡し日：<%= time_format(@food_share.give_time) %></p>
+<p>メモ：<%= @food_share.memo %></p>
+
+<%= link_to "料理の投稿", food_record_path(@food_share.food_record_id) %>

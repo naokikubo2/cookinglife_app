@@ -73,6 +73,7 @@ Rails/FilePath:
     - 'spec/factories/food_record.rb'
     - 'spec/rails_helper.rb'
     - 'spec/requests/food_records_request_spec.rb'
+    - 'spec/factories/food_share.rb'
 
 # Offense count: 1
 # Configuration parameters: Include.
@@ -205,3 +206,18 @@ Lint/UselessAssignment:
 Naming/VariableNumber:
   Exclude:
     - 'spec/requests/food_records_request_spec.rb'
+
+# Offense count: 2
+# Configuration parameters: Database, Include.
+# SupportedDatabases: mysql, postgresql
+# Include: db/migrate/*.rb
+Rails/BulkChangeTable:
+  Exclude:
+    - 'db/migrate/20210101084208_remove_time_from_food_share.rb'
+    - 'db/migrate/20210101085241_add_date_time_to_food_shares.rb'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+Layout/EmptyLines:
+  Exclude:
+    - 'db/migrate/20201230094623_create_food_shares.rb'

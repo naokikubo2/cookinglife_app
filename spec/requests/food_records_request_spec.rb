@@ -16,9 +16,6 @@ RSpec.describe "FoodRecords", type: :request do
     end
   end
 
-  before do
-  end
-
   describe "GET /food_records/:q" do
     context 'when 料理名検索' do
       it "曖昧検索される" do

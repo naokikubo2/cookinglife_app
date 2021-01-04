@@ -1,0 +1,33 @@
+<h1>FoodShares#update</h1>
+<p>Find me in app/views/food_shares/update.html.erb</p>
+
+<p>料理名：<%= @food_share.food_name %></p>
+<p><%= image_tag @food_share.image.url %></p>
+
+<%= form_with(model: @food_share, local: true) do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+
+  <div class="form-group">
+    <%= f.label :limit_number, "募集人数上限" %><br />
+    <%= f.select :limit_number, options_for_select((1..5).to_a) %>人
+  </div>
+
+  <div class="form-group">
+    <%= f.label :limit_time, "募集期限" %><br />
+    <%= f.datetime_select :limit_time, autofocus: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :give_time, "引き渡し日時" %><br />
+    <%= f.datetime_select :give_time, autofocus: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :memo, "メモ" %><br />
+    <%= f.text_field :memo, autofocus: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "登録する" %>
+  </div>
+<% end %>

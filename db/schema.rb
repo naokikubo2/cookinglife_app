@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_26_050221) do
+ActiveRecord::Schema.define(version: 2021_01_02_150606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,21 @@ ActiveRecord::Schema.define(version: 2020_12_26_050221) do
     t.string "image"
     t.date "food_date"
     t.index ["user_id"], name: "index_food_records_on_user_id"
+  end
+
+  create_table "food_shares", force: :cascade do |t|
+    t.string "food_name"
+    t.integer "limit_number"
+    t.bigint "user_id", null: false
+    t.bigint "food_record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
+    t.datetime "give_time"
+    t.datetime "limit_time"
+    t.text "memo"
+    t.index ["food_record_id"], name: "index_food_shares_on_food_record_id"
+    t.index ["user_id"], name: "index_food_shares_on_user_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -71,5 +86,7 @@ ActiveRecord::Schema.define(version: 2020_12_26_050221) do
   end
 
   add_foreign_key "food_records", "users"
+  add_foreign_key "food_shares", "food_records"
+  add_foreign_key "food_shares", "users"
   add_foreign_key "taggings", "tags"
 end

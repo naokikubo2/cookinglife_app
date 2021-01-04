@@ -8,5 +8,6 @@
     <%= link_to 'Edit', edit_user_registration_path(current_user) %>
   <% else %>
     <%= render partial: 'follow' %>
+    <%= render partial: 'follow_count'%>
   <% end %>
 </div>

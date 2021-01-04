@@ -36,9 +36,9 @@ RSpec.describe User, type: :model do
     subject { user.following?(other_user) }
 
     context 'followed' do
-      before {
+      before do
         user.follow(other_user.id)
-      }
+      end
       it "true" do
         expect(subject).to eq(true)
       end

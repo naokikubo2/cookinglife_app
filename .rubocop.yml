@@ -221,3 +221,34 @@ Rails/BulkChangeTable:
 Layout/EmptyLines:
   Exclude:
     - 'db/migrate/20201230094623_create_food_shares.rb'
+    - 'db/migrate/20210104064312_create_relationships.rb'
+
+# Offense count: 1
+# Configuration parameters: Include.
+# Include: app/helpers/**/*.rb
+Rails/HelperInstanceVariable:
+  Exclude:
+    - 'app/helpers/application_helper.rb'
+
+# Offense count: 1
+# Configuration parameters: Include.
+# Include: app/models/**/*.rb
+Rails/InverseOf:
+  Exclude:
+    - 'app/models/user.rb'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+# Configuration parameters: ConvertCodeThatCanStartToReturnNil, AllowedMethods.
+# AllowedMethods: present?, blank?, presence, try, try!
+Style/SafeNavigation:
+  Exclude:
+    - 'app/models/user.rb'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: empty_lines, no_empty_lines
+Layout/EmptyLinesAroundBlockBody:
+  Exclude:
+    - 'db/migrate/20210104064312_create_relationships.rb'

@@ -25,4 +25,8 @@ class User < ApplicationRecord
   def following?(other_user)
     followings.include?(other_user)
   end
+
+  def friends
+    followings & followers
+  end
 end

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'users/index'
+  get 'users/show'
+  get 'users/edit'
   root 'homes#top'
 
   devise_for :users, controllers: {
@@ -15,4 +18,5 @@ Rails.application.routes.draw do
   resources :food_records
   resources :tags, only: [:index]
   resources :food_shares
+  resources :users, only: [:index, :show]
 end

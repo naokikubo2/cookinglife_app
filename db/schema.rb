@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_02_150606) do
+ActiveRecord::Schema.define(version: 2021_01_04_064312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,16 @@ ActiveRecord::Schema.define(version: 2021_01_02_150606) do
     t.text "memo"
     t.index ["food_record_id"], name: "index_food_shares_on_food_record_id"
     t.index ["user_id"], name: "index_food_shares_on_user_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "follow_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["follow_id"], name: "index_relationships_on_follow_id"
+    t.index ["user_id", "follow_id"], name: "index_relationships_on_user_id_and_follow_id", unique: true
+    t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -88,5 +98,7 @@ ActiveRecord::Schema.define(version: 2021_01_02_150606) do
   add_foreign_key "food_records", "users"
   add_foreign_key "food_shares", "food_records"
   add_foreign_key "food_shares", "users"
+  add_foreign_key "relationships", "users"
+  add_foreign_key "relationships", "users", column: "follow_id"
   add_foreign_key "taggings", "tags"
 end

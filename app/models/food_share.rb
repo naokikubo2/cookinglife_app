@@ -2,6 +2,8 @@ class FoodShare < ApplicationRecord
   belongs_to :user
   belongs_to :food_record
 
+  has_many :matchings, dependent: :destroy
+
   validates :food_name, presence: true, length: { maximum: 25 }
   validates :limit_number, numericality: { greater_than: 0, less_than: 6 }, presence: true
   validates :give_time, presence: true

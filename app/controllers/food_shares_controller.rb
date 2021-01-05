@@ -24,6 +24,7 @@ class FoodSharesController < ApplicationController
 
   def index
     @food_shares = current_user.food_shares
+    @food_shares_friends = current_user.food_shares_friends
   end
 
   def edit; end

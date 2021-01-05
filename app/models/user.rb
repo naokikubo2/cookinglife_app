@@ -29,4 +29,10 @@ class User < ApplicationRecord
   def friends
     followings & followers
   end
+
+  def food_shares_friends
+    friends_ids = User.where(id: reverse_of_relationships.select(:user_id))
+                      .where(id: relationships.select(:follow_id)).pluck(:id)
+    FoodShare.where(user_id: friends_ids)
+  end
 end

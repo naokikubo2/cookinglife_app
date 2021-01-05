@@ -7,6 +7,9 @@
     <%= link_to "ユーザ削除", user_registration_path, method: :delete, data: { confirm: "You sure?" } %>
   </div>
   <div>
+     <%= link_to("ユーザ一覧", users_url) %>
+  </div>
+  <div>
     <%= link_to "料理を登録する", new_food_record_path %>
     <%= link_to "料理一覧", food_records_path %>
   </div>

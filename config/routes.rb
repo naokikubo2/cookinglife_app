@@ -15,4 +15,7 @@ Rails.application.routes.draw do
   resources :food_records
   resources :tags, only: [:index]
   resources :food_shares
+  resources :users, only: %w[index show] do
+    post :follow
+  end
 end

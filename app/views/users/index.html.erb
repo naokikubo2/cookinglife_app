@@ -1,0 +1,16 @@
+<h1>Users#index</h1>
+<p>Find me in app/views/users/index.html.erb</p>
+
+<h2>全ユーザー</h2>
+<% @users.each do |user| %>
+  <div>
+    <%= link_to user.name, user %>
+  </div>
+<% end %>
+
+<h2>友達(相互フォロー)</h2>
+<% @users_friend.each do |user| %>
+  <div>
+    <%= link_to user.name, user %>
+  </div>
+<% end %>

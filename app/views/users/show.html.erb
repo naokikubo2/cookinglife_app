@@ -1,0 +1,13 @@
+<h1>Users#show</h1>
+<p>Find me in app/views/users/show.html.erb</p>
+
+<h2>ユーザー名：<%= @user.name %></h2>
+
+<div>
+  <% if @user.id == current_user.id %>
+    <%= link_to 'Edit', edit_user_registration_path(current_user) %>
+  <% else %>
+    <%= render partial: 'follow' %>
+    <%= render partial: 'follow_count'%>
+  <% end %>
+</div>

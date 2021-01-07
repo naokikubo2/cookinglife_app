@@ -13,6 +13,19 @@ class FoodShare < ApplicationRecord
   validate :time_before_give
 
   mount_uploader :image, ImageUploader
+
+  def takes?(take_user)
+    matchings.to_a.find { |matching| matching.user_id == take_user.id }.present?
+  end
+
+  def take(take_user_id)
+    matchings.new(user_id: take_user_id).save!
+  end
+
+  def untake(take_user_id)
+    matching_id = matchings.find_by(user_id: take_user_id).id
+    matchings.destroy(matching_id)
+  end
 end
 
 def time_after_registration

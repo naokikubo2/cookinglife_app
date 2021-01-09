@@ -66,4 +66,6 @@ RSpec.describe User, type: :model do
       expect(user.followings.size).to eq(0)
     end
   end
+
+  #お裾分けマッチング機能
 end

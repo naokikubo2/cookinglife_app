@@ -9,7 +9,11 @@
 
 <%= link_to "料理の投稿", food_record_path(@food_share.food_record_id) %>
 
-<% unless @food_share.user_id == current_user.id %>
-  <p><%= render partial: 'matching' %></p>
+<% if before_limit_time?(@food_share) %>
+  <% unless @food_share.user_id == current_user.id %>
+    <p><%= render partial: 'matching' %></p>
+  <% end %>
+<% else %>
+  <p>お裾分け募集は終了しました</p>
 <% end %>
 <p>募集人数上限：<%= @food_share.limit_number %></p>

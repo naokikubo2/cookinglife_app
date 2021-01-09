@@ -105,4 +105,32 @@ RSpec.describe "FoodShares", type: :request do
       end
     end
   end
+
+  # matching
+  describe "POST /food_shares/:id/matching" do
+    let(:other_user) { create(:user) }
+    let(:food_share) { create(:food_share, user: other_user)}
+
+    context "not taken" do
+      it "take" do
+        current_user.follow(other_user.id)
+        other_user.follow(current_user.id)
+        expect {
+          post food_share_matching_path(food_share.id), xhr: true
+        }.to change { Matching.count }.by(1)
+        expect(food_share.takes?(current_user)).to eq(true)
+      end
+    end
+
+    context "taken" do
+      it "untake" do
+        current_user.follow(other_user.id)
+        other_user.follow(current_user.id)
+        food_share.take(current_user.id)
+        expect {
+          post food_share_matching_path(food_share.id), xhr: true
+        }.to change { Matching.count }.by(-1)
+      end
+    end
+  end
 end

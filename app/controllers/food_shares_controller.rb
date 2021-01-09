@@ -45,6 +45,12 @@ class FoodSharesController < ApplicationController
     redirect_to food_shares_url
   end
 
+  def matching
+    @food_share = FoodShare.includes(:matchings).find(params[:food_share_id])
+    @food_share.takes?(current_user) ? @food_share.untake(current_user.id) : @food_share.take(current_user.id)
+    render :matching
+  end
+
   private
 
   def food_share_params

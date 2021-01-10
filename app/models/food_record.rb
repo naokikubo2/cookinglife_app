@@ -1,6 +1,7 @@
 class FoodRecord < ApplicationRecord
   belongs_to :user
   has_many :food_shares, dependent: :destroy
+  has_many :comment_foodrecords, dependent: :destroy
 
   STATUS_VALUES = %w[morning lunch dinner snack].freeze
 

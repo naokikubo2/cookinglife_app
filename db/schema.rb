@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_04_064312) do
+ActiveRecord::Schema.define(version: 2021_01_10_051906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comment_foodrecords", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "food_record_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["food_record_id"], name: "index_comment_foodrecords_on_food_record_id"
+    t.index ["user_id"], name: "index_comment_foodrecords_on_user_id"
+  end
 
   create_table "food_records", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -43,6 +53,16 @@ ActiveRecord::Schema.define(version: 2021_01_04_064312) do
     t.text "memo"
     t.index ["food_record_id"], name: "index_food_shares_on_food_record_id"
     t.index ["user_id"], name: "index_food_shares_on_user_id"
+  end
+
+  create_table "matchings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "food_share_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["food_share_id", "user_id"], name: "index_matchings_on_food_share_id_and_user_id", unique: true
+    t.index ["food_share_id"], name: "index_matchings_on_food_share_id"
+    t.index ["user_id"], name: "index_matchings_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -95,9 +115,13 @@ ActiveRecord::Schema.define(version: 2021_01_04_064312) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comment_foodrecords", "food_records"
+  add_foreign_key "comment_foodrecords", "users"
   add_foreign_key "food_records", "users"
   add_foreign_key "food_shares", "food_records"
   add_foreign_key "food_shares", "users"
+  add_foreign_key "matchings", "food_shares"
+  add_foreign_key "matchings", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
   add_foreign_key "taggings", "tags"

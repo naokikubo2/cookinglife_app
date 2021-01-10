@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     get "logout", to: "users/sessions#destroy"
   end
 
-  resources :food_records
+  resources :food_records do
+    resources :fr_comments, only: %w[create destroy]
+  end
   resources :tags, only: [:index]
   resources :food_shares
   resources :users, only: %w[index show] do

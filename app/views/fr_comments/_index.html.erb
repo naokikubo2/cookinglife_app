@@ -1,0 +1,13 @@
+<h4>コメント</h4>
+<div id="comments_body">
+  <% @food_record.fr_comments.each do |comment| %>
+    ユーザー名：<%= comment.user.name %>さん
+    <% if comment.user == current_user %>
+      <%= link_to "Delete", food_record_fr_comment_path(@food_record, comment), method: :delete, remote: true %>
+    <% end %>
+    <div>
+      <%= comment.content %>
+    </div>
+  <% end %>
+</div>
+

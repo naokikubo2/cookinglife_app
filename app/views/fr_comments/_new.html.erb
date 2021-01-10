@@ -1,0 +1,10 @@
+<div id="comments">
+  <%= render partial: 'fr_comments/index' %>
+</div>
+
+<%= form_for :fr_comment, url: food_record_fr_comments_path(@food_record), remote: true do |f| %>
+  <%= f.text_area :content, id: "comments_content" %>
+  <div>
+    <%= f.submit "コメント" %>
+  </div>
+<% end %>

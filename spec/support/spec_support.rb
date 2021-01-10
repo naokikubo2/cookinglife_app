@@ -12,9 +12,17 @@ module SpecSupport
     @current_user
   end
 
-  def log_in(user = create(:user))
+  def log_in(user = create(:user), type: :request)
     @current_user = user
-    sign_in(user)
+    case type
+    when :request
+      sign_in(user)
+    when :system
+      visit new_user_session_path
+      find("#user_email").set(user.email)
+      find("#user_password").set(user.password)
+      first("input[value='Log in']").click
+    end
   end
 
   def log_out
@@ -33,5 +41,12 @@ module SpecSupport
     @friend_user = create(:user)
     @current_user.follow(@friend_user.id)
     @friend_user.follow(@current_user.id)
+  end
+
+  # give me block return boolean
+  def wait_until(wait_time = Capybara.default_max_wait_time)
+    Timeout.timeout(wait_time) do
+      loop until yield
+    end
   end
 end

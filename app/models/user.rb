@@ -29,4 +29,9 @@ class User < ApplicationRecord
   def friends
     followings & followers
   end
+
+  def food_records_followings
+    user_ids = Relationship.where(user_id: id).pluck(:follow_id)
+    FoodRecord.where(user_id: user_ids)
+  end
 end

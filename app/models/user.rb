@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :user
   has_many :fr_comments, dependent: :destroy
+  has_many :fs_comments, dependent: :destroy
 
   def follow(other_user_id)
     relationships.find_or_create_by(follow_id: other_user_id) unless id == other_user_id.to_i

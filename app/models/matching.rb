@@ -6,6 +6,6 @@ class Matching < ApplicationRecord
   validate :safe_limit_number
 
   def safe_limit_number
-    return if (food_share.limit_number - food_share.matchings.count).positive?
+    errors.add(:food_share_id, 'は募集人数を超過しています') unless (food_share.limit_number - food_share.matchings.count).positive?
   end
 end

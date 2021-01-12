@@ -41,4 +41,16 @@ RSpec.describe Matching, type: :model do
       expect(matching).to be_valid
     end
   end
+
+  describe '異常系' do
+    it 'is invalid with 募集人数を超えたお裾分け希望' do
+      matching.food_share.limit_number = 2
+      user2 = create(:user)
+      user3 = create(:user)
+      matching.food_share.take(user2.id)
+      matching2 = build(:matching, food_share: matching.food_share, user: user3)
+      matching2.valid?
+      expect(matching2.errors.messages[:food_share_id]).to include("は募集人数を超過しています")
+    end
+  end
 end

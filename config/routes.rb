@@ -16,7 +16,9 @@ Rails.application.routes.draw do
     resources :fr_comments, only: %w[create destroy]
   end
   resources :tags, only: [:index]
-  resources :food_shares
+  resources :food_shares do
+    resources :fs_comments, only: %w[create destroy]
+  end
   resources :users, only: %w[index show] do
     post :follow
   end

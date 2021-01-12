@@ -9,3 +9,5 @@
 <p>メモ：<%= @food_share.memo %></p>
 
 <%= link_to "料理の投稿", food_record_path(@food_share.food_record_id) %>
+
+<%= render partial: 'fs_comments/new' %>

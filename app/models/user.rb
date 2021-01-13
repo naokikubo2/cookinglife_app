@@ -15,6 +15,7 @@ class User < ApplicationRecord
 
   has_many :matchings, dependent: :destroy
   has_many :fr_comments, dependent: :destroy
+  has_many :fs_comments, dependent: :destroy
 
   def follow(other_user_id)
     relationships.find_or_create_by(follow_id: other_user_id) unless id == other_user_id.to_i

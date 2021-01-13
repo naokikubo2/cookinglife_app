@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_07_161343) do
+ActiveRecord::Schema.define(version: 2021_01_13_121950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,16 @@ ActiveRecord::Schema.define(version: 2021_01_07_161343) do
     t.text "memo"
     t.index ["food_record_id"], name: "index_food_shares_on_food_record_id"
     t.index ["user_id"], name: "index_food_shares_on_user_id"
+  end
+
+  create_table "fr_comments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "food_record_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["food_record_id"], name: "index_fr_comments_on_food_record_id"
+    t.index ["user_id"], name: "index_fr_comments_on_user_id"
   end
 
   create_table "matchings", force: :cascade do |t|
@@ -108,6 +118,8 @@ ActiveRecord::Schema.define(version: 2021_01_07_161343) do
   add_foreign_key "food_records", "users"
   add_foreign_key "food_shares", "food_records"
   add_foreign_key "food_shares", "users"
+  add_foreign_key "fr_comments", "food_records"
+  add_foreign_key "fr_comments", "users"
   add_foreign_key "matchings", "food_shares"
   add_foreign_key "matchings", "users"
   add_foreign_key "relationships", "users"

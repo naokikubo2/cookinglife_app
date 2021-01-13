@@ -36,4 +36,9 @@ class User < ApplicationRecord
     friends_ids = reverse_of_relationships.select(:user_id) + relationships.select(:follow_id)
     FoodShare.where(user_id: friends_ids)
   end
+
+  def food_records_followings
+    user_ids = Relationship.where(user_id: id).pluck(:follow_id)
+    FoodRecord.where(user_id: user_ids)
+  end
 end

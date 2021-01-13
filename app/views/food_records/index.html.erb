@@ -9,3 +9,6 @@
 
 <h2>料理の絞り込み</h2>
 <p><%= render partial: "search", locals: { search: @search } %></p>
+
+<h2>フォロー中ユーザーの 料理一覧</h2>
+<p><%= render partial: "foods", locals: { food_records: @food_records_followings } %></p>

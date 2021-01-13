@@ -24,4 +24,14 @@ module SpecSupport
   def json_response
     @json_response ||= JSON.parse(response.body)
   end
+
+  def friend_user
+    @friend_user
+  end
+
+  def make_friend
+    @friend_user = create(:user)
+    @current_user.follow(@friend_user.id)
+    @friend_user.follow(@current_user.id)
+  end
 end

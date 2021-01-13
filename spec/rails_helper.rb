@@ -69,4 +69,25 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  # Capybara setting
+  config.before(:each, type: :system) do
+    Capybara.default_driver    = :selenium_chrome
+    Capybara.javascript_driver = :selenium_chrome
+    Capybara.server_host = Socket.ip_address_list.detect(&:ipv4_private?).ip_address
+    Capybara.server_port = 3001
+    Capybara.default_max_wait_time = 5
+    Capybara.ignore_hidden_elements = true
+
+    Capybara.register_driver :selenium_chrome do |app|
+      opts = {
+        desired_capabilities: :chrome,
+        browser: :remote,
+        url: ENV["SELENIUM_REMOTE_URL"]
+      }
+      Capybara::Selenium::Driver.new(app, opts)
+    end
+
+    driven_by Capybara.javascript_driver
+    host! "http://#{Capybara.server_host}:#{Capybara.server_port}"
+  end
 end

@@ -1,0 +1,4 @@
+<span id='matchings'>
+  <%= take_button(current_user, @food_share) %>
+  残り<%= @food_share.limit_number - @food_share.matchings.count %>人
+</span>

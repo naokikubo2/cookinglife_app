@@ -24,6 +24,7 @@ class FoodSharesController < ApplicationController
 
   def index
     @food_shares = current_user.food_shares
+    @food_shares_friends = current_user.food_shares_friends
   end
 
   def edit; end
@@ -42,6 +43,12 @@ class FoodSharesController < ApplicationController
     @food_share.destroy
     flash[:notice] = "削除に成功しました"
     redirect_to food_shares_url
+  end
+
+  def matching
+    @food_share = FoodShare.includes(:matchings).find(params[:food_share_id])
+    @food_share.takes?(current_user) ? @food_share.untake(current_user.id) : @food_share.take(current_user.id)
+    render :matching
   end
 
   private

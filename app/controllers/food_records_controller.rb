@@ -20,15 +20,13 @@ class FoodRecordsController < ApplicationController
 
   def show
     @tags = @food_record.tag_counts_on(:tags)
-    if @tag = params[:tag]   # タグ検索用
-      @food_record_tag = Post.tagged_with(params[:tag])   # タグに紐付く投稿
-    end
   end
 
   def index
     @search = current_user.food_records.ransack(params[:q])
     @food_records = @search.result(distinct: true)
     @tags = current_user.food_records.tag_counts_on(:tags)
+    @food_records_followings = current_user.food_records_followings
   end
 
   def edit; end

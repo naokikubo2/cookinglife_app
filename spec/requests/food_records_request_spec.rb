@@ -14,6 +14,16 @@ RSpec.describe "FoodRecords", type: :request do
         expect(response).to redirect_to(new_user_session_path)
       end
     end
+
+    context 'when logged in' do
+      it "show followings's food_record" do
+        make_friend
+        food_record_friend = create(:food_record, user: friend_user, food_name: "food_friend")
+        get food_records_path
+        expect(response.status).to eq(200)
+        expect(response.body).to include("food_friend")
+      end
+    end
   end
 
   describe "GET /food_records/:q" do

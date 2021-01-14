@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :user
 
   has_many :matchings, dependent: :destroy
+  has_many :fr_comments, dependent: :destroy
+  has_many :fs_comments, dependent: :destroy
 
   def follow(other_user_id)
     relationships.find_or_create_by(follow_id: other_user_id) unless id == other_user_id.to_i
@@ -33,7 +35,13 @@ class User < ApplicationRecord
   end
 
   def food_shares_friends
-    friends_ids = reverse_of_relationships.select(:user_id) + relationships.select(:follow_id)
+    friends_ids = User.where(id: reverse_of_relationships.select(:user_id))
+                      .where(id: relationships.select(:follow_id)).pluck(:id)
     FoodShare.where(user_id: friends_ids)
+  end
+
+  def food_records_followings
+    user_ids = Relationship.where(user_id: id).pluck(:follow_id)
+    FoodRecord.where(user_id: user_ids)
   end
 end

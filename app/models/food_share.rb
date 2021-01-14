@@ -1,6 +1,7 @@
 class FoodShare < ApplicationRecord
   belongs_to :user
   belongs_to :food_record
+  has_many :fs_comments, dependent: :destroy
 
   has_many :matchings, dependent: :destroy
 

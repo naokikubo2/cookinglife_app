@@ -16,3 +16,5 @@
 <% if @food_record.user_id == current_user.id %>
   <%= link_to "編集", edit_food_record_path(@food_record) %>
 <%end %>
+
+<%= render partial: 'fr_comments/new' %>

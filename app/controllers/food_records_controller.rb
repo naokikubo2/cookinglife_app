@@ -47,6 +47,12 @@ class FoodRecordsController < ApplicationController
     redirect_to food_records_url
   end
 
+  def favorite
+    @food_record = FoodRecord.includes(:favorites).find(params[:food_record_id])
+    @food_record.favorites?(current_user) ? @food_record.unlike(current_user.id) : @food_record.like(current_user.id)
+    render :favorite
+  end
+
   private
 
   def food_record_params

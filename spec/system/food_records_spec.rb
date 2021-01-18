@@ -46,4 +46,17 @@ RSpec.describe "food_records", type: :system do
       end
     end
   end
+
+  describe 'favorite' do
+    it 'like and unlike' do
+      page.first(".heart").click
+      wait_until(5) do
+        expect(all("#favorites span").last.text).to eq("1")
+      end
+      page.first(".heart").click
+      wait_until(5) do
+        expect(all("#favorites span").last.text).to eq("0")
+      end
+    end
+  end
 end

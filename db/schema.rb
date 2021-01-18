@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_16_091805) do
+ActiveRecord::Schema.define(version: 2021_01_18_145623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(version: 2021_01_16_091805) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
     t.date "food_date"
+    t.integer "weather_id"
+    t.string "weather_main"
+    t.string "weather_description"
+    t.string "weather_icon"
+    t.float "temp"
+    t.float "temp_max"
+    t.float "temp_min"
+    t.integer "pressure"
+    t.integer "humidity"
     t.index ["user_id"], name: "index_food_records_on_user_id"
   end
 

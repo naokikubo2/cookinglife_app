@@ -2,6 +2,7 @@ class FoodRecord < ApplicationRecord
   belongs_to :user
   has_many :food_shares, dependent: :destroy
   has_many :fr_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   STATUS_VALUES = %w[morning lunch dinner snack].freeze
 
@@ -21,5 +22,18 @@ class FoodRecord < ApplicationRecord
 
   def day_after_today
     errors.add(:food_date, 'は、今日を含む過去の日付を入力して下さい') if !food_date.nil? && (food_date > Time.zone.today)
+  end
+
+  def favorites?(favorite_user)
+    favorites.to_a.find { |favorite| favorite.user_id == favorite_user.id }.present?
+  end
+
+  def like(favorite_user_id)
+    favorites.new(user_id: favorite_user_id).save!
+  end
+
+  def unlike(favorite_user_id)
+    favorite_id = favorites.find_by(user_id: favorite_user_id).id
+    favorites.destroy(favorite_id)
   end
 end

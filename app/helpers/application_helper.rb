@@ -12,4 +12,9 @@ module ApplicationHelper
       '募集人数上限に達しました'
     end
   end
+
+  def heart_icon(food_record)
+    suffix = food_record.favorites?(current_user) ? "s" : "r"
+    tag.i("", class: "fa#{suffix} fa-heart")
+  end
 end

@@ -1,0 +1,6 @@
+<span id="favorites">
+  <%= link_to food_record_favorite_path(@food_record), method: :post, remote: true, class: "heart" do %>
+    <%= heart_icon(@food_record) %>
+  <% end %>
+  <%= @food_record.favorites.count %>
+</span>

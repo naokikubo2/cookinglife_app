@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :food_records do
     resources :fr_comments, only: %w[create destroy]
+    post :favorite
   end
   resources :tags, only: [:index]
   resources :food_shares do

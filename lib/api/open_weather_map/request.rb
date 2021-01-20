@@ -7,7 +7,7 @@ module Api
         @query = {
           id: location_id,
           units: 'metric',
-          appid: ENV['OPEN_WEATHER_MAP_API'],
+          appid: ENV['OPEN_WEATHER_MAP_API']
         }
       end
 
@@ -27,7 +27,7 @@ module Api
           temp_max: attrs['main']['temp_max'],
           temp_min: attrs['main']['temp_min'],
           humidity: attrs['main']['humidity'],
-          pressure: attrs['main']['pressure'],
+          pressure: attrs['main']['pressure']
         }
       end
     end

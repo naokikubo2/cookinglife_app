@@ -40,7 +40,7 @@ Metrics/AbcSize:
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 # IgnoredMethods: refine
 Metrics/BlockLength:
-  Max: 200
+  Max: 210
 
 # Offense count: 1
 # Configuration parameters: IgnoredMethods.
@@ -215,6 +215,7 @@ Rails/BulkChangeTable:
   Exclude:
     - 'db/migrate/20210101084208_remove_time_from_food_share.rb'
     - 'db/migrate/20210101085241_add_date_time_to_food_shares.rb'
+    - 'db/migrate/20210118145623_add_column_food_records.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -252,3 +253,10 @@ Style/SafeNavigation:
 Layout/EmptyLinesAroundBlockBody:
   Exclude:
     - 'db/migrate/20210104064312_create_relationships.rb'
+
+# Offense count: 1
+# Configuration parameters: Include.
+# Include: db/migrate/*.rb
+Rails/NotNullColumn:
+  Exclude:
+    - 'db/migrate/20210116091805_add_location_id_to_users.rb'

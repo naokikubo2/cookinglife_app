@@ -2,7 +2,7 @@ require 'rails_helper'
 require "webmock/rspec"  # webmockをrequire
 RSpec.describe "FoodRecords", type: :request do
   before do
-    WebMock.enable!  # webmockを有効化
+    WebMock.enable! # webmockを有効化
     set_response
     timestamp!
     log_in

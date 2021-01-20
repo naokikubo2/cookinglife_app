@@ -14,8 +14,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :prefecture %><br />
-    <%= f.text_field :prefecture, autofocus: true, autocomplete: "prefecture" %>
+    <%= f.label :location_id %><br />
+    <%= f.collection_select :location_id, City.all, :location_id, :name %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>

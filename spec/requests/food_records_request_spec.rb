@@ -1,6 +1,9 @@
 require 'rails_helper'
+require "webmock/rspec"  # webmockをrequire
 RSpec.describe "FoodRecords", type: :request do
   before do
+    WebMock.enable!  # webmockを有効化
+    set_response
     timestamp!
     log_in
   end
@@ -171,6 +174,16 @@ RSpec.describe "FoodRecords", type: :request do
         post food_records_path, params: { food_record: { user_id: current_user.id, image: "" } }
         expect(response.status).to eq(200)
         expect(response.body).to include("画像を入力してください")
+      end
+    end
+
+    context '404 error' do
+      it "render new page" do
+        set_error_response
+        post food_records_path, params: { food_record: { user_id: current_user.id, image: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image1.png')) } }
+        expect(response).to redirect_to(root_url)
+        follow_redirect!
+        expect(response.body).to include("天気情報の取得に失敗しましたが、登録に成功しました")
       end
     end
   end

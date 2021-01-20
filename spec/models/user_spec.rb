@@ -16,10 +16,10 @@ RSpec.describe User, type: :model do
     expect(user.errors.messages[:name]).to include("を入力してください")
   end
 
-  it 'is invalid without a prefecture' do
-    user.prefecture = ""
+  it 'is invalid without a location_id' do
+    user.location_id = ""
     user.valid?
-    expect(user.errors.messages[:prefecture]).to include("を入力してください")
+    expect(user.errors.messages[:location_id]).to include("を入力してください")
   end
 
   #境界値分析

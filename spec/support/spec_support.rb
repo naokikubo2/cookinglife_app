@@ -53,7 +53,7 @@ module SpecSupport
   def set_response
     # モックサーバーからのレスポンスのjsonファイルを読み込み
     external_api_response = ActiveSupport::JSON.decode(File.read("spec/fixtures/weather.json")).to_json
-    stub_request(:get, "https://api.openweathermap.org/data/2.5/weather?appid=5d1aa7dae23cd6383ab14ee524a9df33&id=1850147&units=metric").to_return(
+    stub_request(:get, "https://api.openweathermap.org/data/2.5/weather?appid=testkey&id=1850147&units=metric").to_return(
       body: external_api_response,
       status: 200
     )
@@ -62,7 +62,7 @@ module SpecSupport
   def set_error_response
     # モックサーバーからのレスポンスのjsonファイルを読み込み
     external_api_response = ActiveSupport::JSON.decode(File.read("spec/fixtures/weather_error.json")).to_json
-    stub_request(:get, "https://api.openweathermap.org/data/2.5/weather?appid=5d1aa7dae23cd6383ab14ee524a9df33&id=1850147&units=metric").to_return(
+    stub_request(:get, "https://api.openweathermap.org/data/2.5/weather?appid=testkey&id=1850147&units=metric").to_return(
       body: external_api_response,
       status: 404
     )

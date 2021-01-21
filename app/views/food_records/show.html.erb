@@ -19,4 +19,15 @@
 
 <%= render partial: 'favorite' %>
 
+<h2>天気情報</h2>
+<% if @food_record.weather_main.present? %>
+  <p>天気：<%= @food_record.weather_main %></p>
+  <p>気温：<%= "#{@food_record.temp} (#{@food_record.temp_min}~#{@food_record.temp_max})[℃]" %></p>
+  <p>気圧：<%= "#{@food_record.pressure}[hPa]" %></p>
+  <p>湿度：<%= "#{@food_record.humidity}[%]" %></p>
+  <%= image_tag "http://openweathermap.org/img/wn/#{@food_record.weather_icon.chop}d@2x.png" %>
+<% else %>
+  <p>登録された天気情報なし</p>
+<% end %>
+
 <%= render partial: 'fr_comments/new' %>

@@ -10,9 +10,18 @@ class FoodRecordsController < ApplicationController
   def create
     @food_record = current_user.food_records.build(food_record_params)
     @food_record.food_date = Time.zone.today
-    if @food_record.save
-      flash[:notice] = "登録に成功しました"
-      redirect_to root_url
+
+    open_weather = Api::OpenWeatherMap::Request.new(current_user.location_id)
+    response = open_weather.request
+    if response['cod'] == 200
+      params_weather = Api::OpenWeatherMap::Request.attributes_for(response)
+      @food_record.update(params_weather)
+      if @food_record.save
+        flash[:notice] = "登録に成功しました"
+        redirect_to root_url
+      else
+        render 'new'
+      end
     else
       render 'new'
     end
@@ -32,6 +41,18 @@ class FoodRecordsController < ApplicationController
   def edit; end
 
   def update
+    if food_records_params[:food_date].to_date != @food_record.food_date.to_date
+      @food_record.weather_main = ""
+      @food_record.weather_description = ""
+      @food_record.weather_icon = ""
+      @food_record.weather_id = ""
+      @food_record.temp = ""
+      @food_record.temp_max = ""
+      @food_record.temp_min = ""
+      @food_record.humidity = ""
+      @food_record.pressure = ""
+    end
+
     if @food_record.update(food_records_params)
       flash[:notice] = "登録に成功しました"
       redirect_to food_record_path(@food_record)

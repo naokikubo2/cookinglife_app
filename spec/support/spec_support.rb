@@ -49,4 +49,22 @@ module SpecSupport
       loop until yield
     end
   end
+
+  def set_response
+    # モックサーバーからのレスポンスのjsonファイルを読み込み
+    external_api_response = ActiveSupport::JSON.decode(File.read("spec/fixtures/weather.json")).to_json
+    stub_request(:get, "https://api.openweathermap.org/data/2.5/weather?appid=testkey&id=1850147&units=metric").to_return(
+      body: external_api_response,
+      status: 200
+    )
+  end
+
+  def set_error_response
+    # モックサーバーからのレスポンスのjsonファイルを読み込み
+    external_api_response = ActiveSupport::JSON.decode(File.read("spec/fixtures/weather_error.json")).to_json
+    stub_request(:get, "https://api.openweathermap.org/data/2.5/weather?appid=testkey&id=1850147&units=metric").to_return(
+      body: external_api_response,
+      status: 404
+    )
+  end
 end

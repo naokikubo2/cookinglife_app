@@ -38,3 +38,4 @@ yarn-debug.log*
 test/
 public/uploads
 .irb_history
+/.env

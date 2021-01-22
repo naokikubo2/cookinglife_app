@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_16_030656) do
+ActiveRecord::Schema.define(version: 2021_01_19_112153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.integer "location_id"
+    t.float "lon"
+    t.float "lat"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "favorites", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -37,6 +46,15 @@ ActiveRecord::Schema.define(version: 2021_01_16_030656) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
     t.date "food_date"
+    t.integer "weather_id"
+    t.string "weather_main"
+    t.string "weather_description"
+    t.string "weather_icon"
+    t.float "temp"
+    t.float "temp_max"
+    t.float "temp_min"
+    t.integer "pressure"
+    t.integer "humidity"
     t.index ["user_id"], name: "index_food_records_on_user_id"
   end
 
@@ -131,6 +149,7 @@ ActiveRecord::Schema.define(version: 2021_01_16_030656) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "location_id", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

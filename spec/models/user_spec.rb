@@ -16,6 +16,12 @@ RSpec.describe User, type: :model do
     expect(user.errors.messages[:name]).to include("を入力してください")
   end
 
+  it 'is invalid without a location_id' do
+    user.location_id = ""
+    user.valid?
+    expect(user.errors.messages[:location_id]).to include("を入力してください")
+  end
+
   #境界値分析
   it 'is valid with 20文字のname' do
     user.name = "a" * 20

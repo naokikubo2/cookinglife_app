@@ -42,15 +42,8 @@ class FoodRecordsController < ApplicationController
 
   def update
     if food_records_params[:food_date].present? && (food_records_params[:food_date].to_date != @food_record.food_date.to_date)
-      @food_record.weather_main = ""
-      @food_record.weather_description = ""
-      @food_record.weather_icon = ""
-      @food_record.weather_id = ""
-      @food_record.temp = ""
-      @food_record.temp_max = ""
-      @food_record.temp_min = ""
-      @food_record.humidity = ""
-      @food_record.pressure = ""
+      @food_record.assign_attributes(weather_main: "", weather_description: "", weather_icon: "", weather_id: "", temp: "", temp_max: "",
+                                     temp_min: "", humidity: "", pressure: "")
     end
 
     if @food_record.update(food_records_params)

@@ -8,6 +8,8 @@ RSpec.describe "FoodRecords", type: :request do
     log_in
   end
 
+  after { WebMock.disable! }
+
   #index
   describe "GET /food_records" do
     context 'when not loged in' do

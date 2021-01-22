@@ -13,7 +13,7 @@ module Api
 
       def request
         client = HTTPClient.new
-        request = client.get(ENV['URI'], query)
+        request = client.get(ENV['OPEN_WEATHER_MAP_URI'], query)
         JSON.parse(request.body)
       end
 

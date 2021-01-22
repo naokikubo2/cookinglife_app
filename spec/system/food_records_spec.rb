@@ -6,7 +6,6 @@ RSpec.describe "food_records", type: :system do
   let!(:food_record) { create(:food_record, user: user) }
 
   before do
-    WebMock.disable!
     log_in(login_user, type: :system)
     visit food_record_path(food_record)
   end

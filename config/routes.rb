@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :fr_comments, only: %w[create destroy]
     post :favorite
   end
+  post "food_records/check_cache_image"
   resources :tags, only: [:index]
   resources :food_shares do
     post :matching

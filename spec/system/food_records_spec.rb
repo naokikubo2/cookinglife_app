@@ -22,7 +22,7 @@ RSpec.describe "food_records", type: :system do
     context "food picture" do
       it 'OK' do
         allow_any_instance_of(FoodRecordsController).to receive(:set_vision).and_return(image_annotator.new)
-        allow_any_instance_of(FoodRecordsController).to receive(:set_label_list).and_return(%w[food noodle])
+        allow_any_instance_of(FoodRecordsController).to receive(:get_list).and_return(%w[food noodle])
         visit new_food_record_path
         attach_file "food_img", "spec/fixtures/image1.png"
         wait_until(7) do
@@ -34,7 +34,7 @@ RSpec.describe "food_records", type: :system do
     context "not food picture" do
       it 'NG' do
         allow_any_instance_of(FoodRecordsController).to receive(:set_vision).and_return(image_annotator.new)
-        allow_any_instance_of(FoodRecordsController).to receive(:set_label_list).and_return(%w[test test2])
+        allow_any_instance_of(FoodRecordsController).to receive(:get_list).and_return(%w[test test2])
         visit new_food_record_path
         attach_file "food_img", "spec/fixtures/image1.png"
         wait_until(7) do

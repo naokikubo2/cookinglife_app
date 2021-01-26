@@ -71,13 +71,7 @@ class FoodRecordsController < ApplicationController
     require "google/cloud/vision"
 
     # Vision APIの設定
-    image_annotator = Google::Cloud::Vision.image_annotator do |config|
-      config.credentials = ENV["GOOGLE_APPLICATION_CREDENTIALS"]
-    end
-
-    puts "----"
-    puts image_annotator
-    puts "----"
+    image_annotator = set_vision
 
     # キャッシュ情報を取得する
     image = params[:image_cache].path
@@ -86,16 +80,10 @@ class FoodRecordsController < ApplicationController
 
     # labelを配列に入れる
     label_list = []
-    response.responses.each do |res|
-      res.label_annotations.each do |label|
-        label_list.push(label.description.downcase)
-      end
-    end
-
-    #puts response
+    label_list = get_list(response)
 
     # 1.食べ物の写真かを判定する
-    @image_flag =  %w[food dish cuisine].any? { |i| label_list.include?(i) }
+    @image_flag = %w[food dish cuisine].any? { |i| label_list.include?(i) }
 
     @tag_list = []
     array = [%w[cake ケーキ], %w[rice 米], %w[fish 魚], %w[soup スープ], %w[noodle 麺], %w[meat 肉], %w[fruit フルーツ], %w[sweetness スイーツ], %w[curry カレー],
@@ -118,7 +106,7 @@ class FoodRecordsController < ApplicationController
   private
 
   def food_record_params
-    #params.fetch(:food_record, {}).permit(:image, :tag_list)
+    # params.fetch(:food_record, {}).permit(:image, :tag_list)
     params.fetch(:food_record, {}).permit(:image)
   end
 
@@ -133,5 +121,21 @@ class FoodRecordsController < ApplicationController
   def food_records_params
     params.require(:food_record).permit(:food_name, :healthy_score,
                                         :total_score, :workload_score, :food_timing, :memo, :tag_list, :food_date).merge({ user_id: current_user.id })
+  end
+
+  def set_vision
+    Google::Cloud::Vision.image_annotator do |config|
+      config.credentials = ENV["GOOGLE_APPLICATION_CREDENTIALS"]
+    end
+  end
+
+  def get_list(response)
+    list = []
+    response.responses.each do |res|
+      res.label_annotations.each do |label|
+        list.push(label.description.downcase)
+      end
+    end
+    list
   end
 end

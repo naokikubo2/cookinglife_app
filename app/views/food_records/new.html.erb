@@ -4,9 +4,19 @@
 <%= form_with(model: @food_record, local: true) do |f| %>
   <%= render 'layouts/error_messages', model: f.object %>
 
-  <div class="field">
-    <%= f.label :image %><br />
-    <%= f.file_field :image %>
+  <%= f.label :image, class: 'image' do %>
+      <%= f.file_field :image, id: 'food_img' %>
+  <% end %>
+
+  <div class="image-preview">
+    <img id="image_img_prev" src="#">
+  </div>
+
+  <div id="checkfood"></div>
+
+  <div class="foodrecord-tags-field">
+    <%= f.label :tag_list %>
+    <%= f.text_field :tag_list, value: @food_record.tag_list.join(','), id: "foodrecord_tags" %>
   </div>
 
   <div class="actions">

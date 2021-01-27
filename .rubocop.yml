@@ -260,3 +260,6 @@ Layout/EmptyLinesAroundBlockBody:
 Rails/NotNullColumn:
   Exclude:
     - 'db/migrate/20210116091805_add_location_id_to_users.rb'
+
+Metrics/ClassLength:
+  Max: 120

@@ -11,7 +11,7 @@ class FoodRecordsController < ApplicationController
     @food_record = current_user.food_records.build(food_record_params)
     @food_record.food_date = Time.zone.today
 
-    if @food_record.valid?
+    if @food_record.save
       open_weather = Api::OpenWeatherMap::Request.new(current_user.location_id)
       response = open_weather.request
       if response['cod'] == 200
@@ -21,7 +21,7 @@ class FoodRecordsController < ApplicationController
       else
         flash[:notice] = "天気情報の取得に失敗しましたが、登録に成功しました"
       end
-      redirect_to root_url
+      redirect_to food_record_path(@food_record)
     else
       render 'new'
     end

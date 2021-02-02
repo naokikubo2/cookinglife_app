@@ -10,6 +10,8 @@ class FoodShare < ApplicationRecord
   validates :give_time, presence: true
   validates :limit_time, presence: true
   validates :memo, length: { maximum: 250 }
+  validates :latitude, presence: true
+  validates :longitude, presence: true
   validate :time_after_registration
   validate :time_before_give
 

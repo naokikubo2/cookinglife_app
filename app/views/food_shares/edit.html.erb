@@ -27,6 +27,10 @@
     <%= f.text_field :memo, autofocus: true %>
   </div>
 
+  <%= render partial: "googlemap", locals: { map_user: @food_share } %>
+  <%= f.hidden_field :latitude, step: "0.000000000000001", id: "latitude", autofocus: true, value: @food_share.latitude %>
+  <%= f.hidden_field :longitude, step: "0.000000000000001", id: "longitude", autofocus: true, value: @food_share.longitude %>
+
   <div class="actions">
     <%= f.submit "登録する" %>
   </div>

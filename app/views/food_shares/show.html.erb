@@ -3,6 +3,10 @@
 
 <p>料理名：<%= @food_share.food_name %></p>
 <p><%= image_tag @food_share.image.url %></p>
+
+<h2>お裾分け待ち合わせ場所</h2>
+<%= render partial: "d_googlemap" %>
+
 <p>募集締め切り：<%= time_format(@food_share.limit_time) %></p>
 <p>受け渡し日：<%= time_format(@food_share.give_time) %></p>
 <p>メモ：<%= @food_share.memo %></p>

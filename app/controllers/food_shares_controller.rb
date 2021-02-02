@@ -55,7 +55,7 @@ class FoodSharesController < ApplicationController
 
   def food_share_params
     params.require(:food_share).permit(:limit_number, :give_time, :limit_time,
-                                       :food_record_id, :memo).merge({ user_id: current_user.id })
+                                       :food_record_id, :memo, :latitude, :longitude).merge({ user_id: current_user.id })
   end
 
   def set_food_share

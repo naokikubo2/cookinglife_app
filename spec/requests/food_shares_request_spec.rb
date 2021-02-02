@@ -1,9 +1,23 @@
 require 'rails_helper'
 RSpec.describe "FoodShares", type: :request do
   before do
+    Geocoder.configure(lookup: :test)
+    Geocoder::Lookup::Test.add_stub(
+        '東京都港区', [{
+        'coordinates'  => [35.7090259, 139.7319925]
+    }]
+    )
+    Geocoder::Lookup::Test.add_stub(
+        'ダメなキーワード', []
+    )
+    WebMock.enable! # webmockを有効化
+    set_distance_response
     timestamp!
     log_in
   end
+
+
+  after { WebMock.disable! }
 
   # index
   describe "GET /food_shares" do
@@ -24,6 +38,16 @@ RSpec.describe "FoodShares", type: :request do
         get food_share_path(food_share)
         expect(response.status).to eq(200)
         expect(response.body).to include("food #{timestamp}")
+      end
+    end
+
+    context 'other food_share page' do
+      it "render to show page" do
+        food_share = create(:food_share, memo: "food #{timestamp}")
+        get food_share_path(food_share)
+        expect(response.status).to eq(200)
+        expect(response.body).to include("food #{timestamp}")
+        expect(response.body).to include("あなたの自宅から徒歩 20 mins ,距離は1.3 kmです。")
       end
     end
   end

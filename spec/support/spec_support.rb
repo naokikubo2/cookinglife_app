@@ -67,4 +67,13 @@ module SpecSupport
       status: 404
     )
   end
+
+  def set_distance_response
+    # モックサーバーからのレスポンスのjsonファイルを読み込み
+    external_api_response = ActiveSupport::JSON.decode(File.read("spec/fixtures/distance_matrix/distance_matrix.json")).to_json
+    stub_request(:get, "https://maps.googleapis.com/maps/api/distancematrix/json").to_return(
+      body: external_api_response,
+      status: 200
+    )
+  end
 end

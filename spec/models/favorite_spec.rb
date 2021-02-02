@@ -3,6 +3,18 @@ require 'rails_helper'
 RSpec.describe Favorite, type: :model do
   let(:favorite) { create(:favorite) }
 
+  before do
+    Geocoder.configure(lookup: :test)
+    Geocoder::Lookup::Test.add_stub(
+        '東京都港区', [{
+        'coordinates'  => [35.7090259, 139.7319925]
+    }]
+    )
+    Geocoder::Lookup::Test.add_stub(
+        'ダメなキーワード', []
+    )
+  end
+
   # 関連付けのテスト
   describe 'Association' do
     let(:association) do

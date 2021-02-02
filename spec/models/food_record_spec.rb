@@ -5,6 +5,18 @@ RSpec.describe FoodRecord, type: :model do
   let(:food_record_other) { build(:food_record_other) }
   let(:food_record_noimage) { build(:food_record_noimage) }
 
+  before do
+    Geocoder.configure(lookup: :test)
+    Geocoder::Lookup::Test.add_stub(
+        '東京都港区', [{
+        'coordinates'  => [35.7090259, 139.7319925]
+    }]
+    )
+    Geocoder::Lookup::Test.add_stub(
+        'ダメなキーワード', []
+    )
+  end
+
   # 関連付けのテスト
   describe 'Association' do
     let(:association) do

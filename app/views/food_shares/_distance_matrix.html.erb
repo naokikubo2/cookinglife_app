@@ -1,0 +1,3 @@
+<% if current_user.id != @food_share.user_id %>
+  <%= "あなたの自宅から徒歩 #{@output_distance[:duration]} ,距離は#{@output_distance[:distance]}です。" %>
+<% end %>

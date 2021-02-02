@@ -20,7 +20,18 @@ class FoodSharesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    # 他ユーザのお裾分け料理を表示する場合、徒歩にかかる時間を表示
+    if current_user.id != @food_share.user_id
+      distance_matrix = Api::DistanceMatrix::Request.new(
+        current_user.latitude, current_user.longitude, @food_share.latitude, @food_share.longitude)
+      response = distance_matrix.request
+
+      if response['status'] == 'OK'
+        @output_distance = Api::DistanceMatrix::Request.attributes_for(response)
+      end
+    end
+  end
 
   def index
     @food_shares = current_user.food_shares

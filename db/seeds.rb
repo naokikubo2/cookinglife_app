@@ -6,10 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 if Rails.env.development?
-  User.create(name: 'a', email: 'a@a', password: 'aaaaaa', location_id: 1_850_147)
-  User.create(name: 'b', email: 'b@b', password: 'bbbbbb', location_id: 1_850_147)
-  User.create(name: 'c', email: 'c@c', password: 'cccccc', location_id: 1_850_147)
-  User.create(name: 'd', email: 'd@d', password: 'dddddd', location_id: 1_850_147)
+  User.create(name: 'a', email: 'a@a', password: 'aaaaaa', location_id: 1_850_147, address: '東京', latitude: 35.7090259, longitude: 139.7319925)
+  User.create(name: 'b', email: 'b@b', password: 'bbbbbb', location_id: 1_850_147, address: '東京', latitude: 35.7090259, longitude: 139.7319925)
+  User.create(name: 'c', email: 'c@c', password: 'cccccc', location_id: 1_850_147, address: '東京', latitude: 35.7090259, longitude: 139.7319925)
+  User.create(name: 'd', email: 'd@d', password: 'dddddd', location_id: 1_850_147, address: '東京', latitude: 35.7090259, longitude: 139.7319925)
 end
 
 require "csv"

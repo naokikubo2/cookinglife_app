@@ -71,7 +71,7 @@ module SpecSupport
   def set_distance_response
     # モックサーバーからのレスポンスのjsonファイルを読み込み
     external_api_response = ActiveSupport::JSON.decode(File.read("spec/fixtures/distance_matrix/distance_matrix.json")).to_json
-    stub_request(:get, "https://maps.googleapis.com/maps/api/distancematrix/json?destinations=35.7090259,139.7319925&key=AIzaSyAcWUcGy1HI2oKQEbFtZXmqyjv-_oGqzCk&language=ja-JA&mode=walking&origins=35.7090259,139.7319925").to_return(
+    stub_request(:get, "https://maps.googleapis.com/maps/api/distancematrix/json?destinations=35.7090259,139.7319925&key=testkey&language=ja-JA&mode=walking&origins=35.7090259,139.7319925").to_return(
       body: external_api_response,
       status: 200
     )

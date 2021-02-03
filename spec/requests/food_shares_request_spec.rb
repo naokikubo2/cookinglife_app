@@ -66,7 +66,7 @@ RSpec.describe "FoodShares", type: :request do
       it "redirect to root page" do
         food_record = create(:food_record, user: current_user)
         post food_shares_path, params: { food_share: { user_id: current_user.id, food_record_id: food_record.id, limit_number: 3,
-                                                       limit_time: Time.zone.now + 24 * 3600, give_time: Time.zone.now + 48 * 3600, memo: "memo" } }
+                                                       limit_time: Time.zone.now + 24 * 3600, give_time: Time.zone.now + 48 * 3600, memo: "memo", latitude: 35.7090259, longitude: 139.7319925 } }
         expect(response).to redirect_to(root_path)
       end
     end
@@ -75,7 +75,7 @@ RSpec.describe "FoodShares", type: :request do
       it "render to new page" do
         food_record = create(:food_record, user: current_user)
         post food_shares_path, params: { food_share: { user_id: current_user.id, food_record_id: food_record.id,
-                                                       limit_time: Time.zone.now + 24 * 3600, give_time: Time.zone.now + 48 * 3600, memo: "memo" } }
+                                                       limit_time: Time.zone.now + 24 * 3600, give_time: Time.zone.now + 48 * 3600, memo: "memo", latitude: 35.7090259, longitude: 139.7319925 } }
         expect(response.status).to eq(200)
         expect(response.body).to include("募集人数を入力してください")
       end

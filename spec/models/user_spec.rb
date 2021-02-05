@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let(:user) { build(:user) }
 
+  before do
+    set_geocoder
+  end
+
   #validation(nameカラムのみ)
   #正常系
   it "is valid with adequet name, email and password" do
@@ -20,6 +24,12 @@ RSpec.describe User, type: :model do
     user.location_id = ""
     user.valid?
     expect(user.errors.messages[:location_id]).to include("を入力してください")
+  end
+
+  it 'is invalid without an address' do
+    user.address = ""
+    user.valid?
+    expect(user.errors.messages[:address]).to include("を入力してください")
   end
 
   #境界値分析

@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe Favorite, type: :model do
   let(:favorite) { create(:favorite) }
 
+  before do
+    set_geocoder
+  end
+
   # 関連付けのテスト
   describe 'Association' do
     let(:association) do

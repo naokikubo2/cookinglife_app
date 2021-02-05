@@ -1,9 +1,14 @@
 require 'rails_helper'
 RSpec.describe "FoodShares", type: :request do
   before do
+    set_geocoder
+    WebMock.enable! # webmockを有効化
+    set_distance_response
     timestamp!
     log_in
   end
+
+  after { WebMock.disable! }
 
   # index
   describe "GET /food_shares" do
@@ -26,6 +31,16 @@ RSpec.describe "FoodShares", type: :request do
         expect(response.body).to include("food #{timestamp}")
       end
     end
+
+    context 'other food_share page' do
+      it "render to show page" do
+        food_share = create(:food_share, memo: "food #{timestamp}")
+        get food_share_path(food_share)
+        expect(response.status).to eq(200)
+        expect(response.body).to include("food #{timestamp}")
+        expect(response.body).to include("あなたの自宅から徒歩 20 mins ,距離は1.3 kmです。")
+      end
+    end
   end
 
   # new
@@ -42,7 +57,7 @@ RSpec.describe "FoodShares", type: :request do
       it "redirect to root page" do
         food_record = create(:food_record, user: current_user)
         post food_shares_path, params: { food_share: { user_id: current_user.id, food_record_id: food_record.id, limit_number: 3,
-                                                       limit_time: Time.zone.now + 24 * 3600, give_time: Time.zone.now + 48 * 3600, memo: "memo" } }
+                                                       limit_time: Time.zone.now + 24 * 3600, give_time: Time.zone.now + 48 * 3600, memo: "memo", latitude: 35.7090259, longitude: 139.7319925 } }
         expect(response).to redirect_to(root_path)
       end
     end
@@ -51,7 +66,7 @@ RSpec.describe "FoodShares", type: :request do
       it "render to new page" do
         food_record = create(:food_record, user: current_user)
         post food_shares_path, params: { food_share: { user_id: current_user.id, food_record_id: food_record.id,
-                                                       limit_time: Time.zone.now + 24 * 3600, give_time: Time.zone.now + 48 * 3600, memo: "memo" } }
+                                                       limit_time: Time.zone.now + 24 * 3600, give_time: Time.zone.now + 48 * 3600, memo: "memo", latitude: 35.7090259, longitude: 139.7319925 } }
         expect(response.status).to eq(200)
         expect(response.body).to include("募集人数を入力してください")
       end

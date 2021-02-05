@@ -1,0 +1,26 @@
+{
+  "destination_addresses": [
+    "2-chōme-3-21 Nihonbashi, Chuo City, Tokyo 103-0027, Japan"
+  ],
+  "origin_addresses": [
+    "3 Kokyogaien, Chiyoda City, Tokyo 100-0002, Japan"
+  ],
+  "rows": [
+    {
+      "elements": [
+        {
+          "distance": {
+            "text": "1.3 km",
+            "value": 1349
+          },
+          "duration": {
+            "text": "20 mins",
+            "value": 1181
+          },
+          "status": "OK"
+        }
+      ]
+    }
+  ],
+  "status": "OK"
+}

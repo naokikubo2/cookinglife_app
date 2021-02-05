@@ -5,6 +5,10 @@ RSpec.describe FoodRecord, type: :model do
   let(:food_record_other) { build(:food_record_other) }
   let(:food_record_noimage) { build(:food_record_noimage) }
 
+  before do
+    set_geocoder
+  end
+
   # 関連付けのテスト
   describe 'Association' do
     let(:association) do

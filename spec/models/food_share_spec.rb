@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe FoodShare, type: :model do
   let(:food_share) { create(:food_share) }
 
+  before do
+    set_geocoder
+  end
+
   # 関連付けのテスト
   describe 'Association' do
     let(:association) do
@@ -65,6 +69,18 @@ RSpec.describe FoodShare, type: :model do
       food_share.limit_time = nil
       food_share.valid?
       expect(food_share.errors.messages[:limit_time]).to include("を入力してください")
+    end
+
+    it 'is invalid without latitude' do
+      food_share.latitude = nil
+      food_share.valid?
+      expect(food_share.errors.messages[:latitude]).to include("を入力してください")
+    end
+
+    it 'is invalid without longitude' do
+      food_share.longitude = nil
+      food_share.valid?
+      expect(food_share.errors.messages[:longitude]).to include("を入力してください")
     end
   end
 

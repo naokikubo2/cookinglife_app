@@ -40,7 +40,7 @@ Metrics/AbcSize:
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 # IgnoredMethods: refine
 Metrics/BlockLength:
-  Max: 210
+  Max: 220
 
 # Offense count: 1
 # Configuration parameters: IgnoredMethods.
@@ -163,7 +163,7 @@ Style/SymbolArray:
 # Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
 Layout/LineLength:
-  Max: 173
+  Max: 200
 
 # Offense count: 2
 # Configuration parameters: AllowSafeAssignment.
@@ -185,6 +185,7 @@ Style/GuardClause:
     - 'app/controllers/tags_controller.rb'
     - 'db/migrate/20201223110713_change_collation_for_tag_names.acts_as_taggable_on_engine.rb'
     - 'db/migrate/20201223110714_add_missing_indexes_on_taggings.acts_as_taggable_on_engine.rb'
+    - 'app/controllers/food_shares_controller.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -216,6 +217,8 @@ Rails/BulkChangeTable:
     - 'db/migrate/20210101084208_remove_time_from_food_share.rb'
     - 'db/migrate/20210101085241_add_date_time_to_food_shares.rb'
     - 'db/migrate/20210118145623_add_column_food_records.rb'
+    - 'db/migrate/20210128113835_add_column_food_shares.rb'
+    - 'db/migrate/20210129024628_add_column_users.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -260,6 +263,8 @@ Layout/EmptyLinesAroundBlockBody:
 Rails/NotNullColumn:
   Exclude:
     - 'db/migrate/20210116091805_add_location_id_to_users.rb'
+    - 'db/migrate/20210128113835_add_column_food_shares.rb'
+    - 'db/migrate/20210129024628_add_column_users.rb'
 
 Metrics/ClassLength:
   Max: 120

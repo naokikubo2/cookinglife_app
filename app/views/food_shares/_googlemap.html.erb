@@ -1,0 +1,9 @@
+  <h2>お裾分け待ち合わせ場所</h2>
+  <p>待ち合わせ場所にピンを立てましょう。</p>
+  <div id='flag_address'></div>
+  <!-- 地名入力用のinputを追加 -->
+  <input id="address" type="textbox">
+  <!-- buttonをクリックしたらsearch_codeAddressを実行-->
+  <input type="button" value="地点検索" id="search_codeAddress">
+  <div id='map'></div>
+  <%= javascript_pack_tag "googlemap_api" %>

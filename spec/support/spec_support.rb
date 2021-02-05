@@ -50,6 +50,18 @@ module SpecSupport
     end
   end
 
+  def set_geocoder
+    Geocoder.configure(lookup: :test)
+    Geocoder::Lookup::Test.add_stub(
+        '東京都港区', [{
+        'coordinates'  => [35.7090259, 139.7319925]
+    }]
+    )
+    Geocoder::Lookup::Test.add_stub(
+        'ダメなキーワード', []
+    )
+  end
+
   def set_response
     # モックサーバーからのレスポンスのjsonファイルを読み込み
     external_api_response = ActiveSupport::JSON.decode(File.read("spec/fixtures/weather.json")).to_json

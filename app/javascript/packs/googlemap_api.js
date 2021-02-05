@@ -61,8 +61,7 @@ function deleteMakers() {
   marker = null;
 }
 
-document.getElementById("codeAddress").onclick = function () {
-  //function codeAddress() {
+document.getElementById("search_codeAddress").onclick = function () {
   // 入力を取得
   let inputAddress = document.getElementById('address').value;
 

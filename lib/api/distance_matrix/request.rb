@@ -5,8 +5,8 @@ module Api
 
       def initialize(o_lat, o_lng, d_lat, d_lng)
         @query = {
-          origins: o_lat.to_s + ',' + o_lng.to_s,
-          destinations: d_lat.to_s + ',' + d_lng.to_s,
+          origins: "#{o_lat},#{o_lng}",
+          destinations: "#{d_lat},#{d_lng}",
           mode: 'walking',
           language: 'ja-JA',
           key: ENV['GOOGLE_CLOUD_API']

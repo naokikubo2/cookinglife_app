@@ -4,15 +4,7 @@ RSpec.describe FoodShare, type: :model do
   let(:food_share) { create(:food_share) }
 
   before do
-    Geocoder.configure(lookup: :test)
-    Geocoder::Lookup::Test.add_stub(
-        '東京都港区', [{
-        'coordinates'  => [35.7090259, 139.7319925]
-    }]
-    )
-    Geocoder::Lookup::Test.add_stub(
-        'ダメなキーワード', []
-    )
+    set_geocoder
   end
 
   # 関連付けのテスト

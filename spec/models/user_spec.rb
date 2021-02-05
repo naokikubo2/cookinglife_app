@@ -4,15 +4,7 @@ RSpec.describe User, type: :model do
   let(:user) { build(:user) }
 
   before do
-    Geocoder.configure(lookup: :test)
-    Geocoder::Lookup::Test.add_stub(
-        '東京都港区', [{
-        'coordinates'  => [35.7090259, 139.7319925]
-    }]
-    )
-    Geocoder::Lookup::Test.add_stub(
-        'ダメなキーワード', []
-    )
+    set_geocoder
   end
 
   #validation(nameカラムのみ)

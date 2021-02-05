@@ -166,7 +166,9 @@ RSpec.describe "FoodRecords", type: :request do
   describe "POST /food_records/:id/create" do
     context 'valid params' do
       it "redirect to root page" do
-        post food_records_path, params: { food_record: { user_id: current_user.id, image: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image1.png')), tag_list: "tag_test#{timestamp}" } }
+        post food_records_path,
+             params: { food_record: { user_id: current_user.id, image: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image1.png')),
+                                      tag_list: "tag_test#{timestamp}" } }
         follow_redirect!
         expect(response.status).to eq(200)
         expect(response.body).to include("tag_test#{timestamp}")

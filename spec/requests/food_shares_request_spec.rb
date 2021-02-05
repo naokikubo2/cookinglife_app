@@ -8,7 +8,6 @@ RSpec.describe "FoodShares", type: :request do
     log_in
   end
 
-
   after { WebMock.disable! }
 
   # index

@@ -7,8 +7,8 @@ FactoryBot.define do
     limit_time { Time.zone.now + 24 * 3600 }
     give_time { Time.zone.now + 48 * 3600 }
     memo { "memo" }
-    latitude {35.7090259}
-    longitude {139.7319925}
+    latitude { 35.7090259 }
+    longitude { 139.7319925 }
     image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test-image1.jpg')) }
   end
 
@@ -20,8 +20,8 @@ FactoryBot.define do
     limit_time { Time.zone.now + 24 * 3600 }
     give_time { Time.zone.now + 48 * 3600 }
     memo { "memo_other" }
-    latitude {35.7090259}
-    longitude {139.7319925}
+    latitude { 35.7090259 }
+    longitude { 139.7319925 }
     image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test-image2.jpg')) }
   end
 end

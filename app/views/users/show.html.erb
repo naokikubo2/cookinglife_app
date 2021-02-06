@@ -3,6 +3,8 @@
 
 <h2>ユーザー名：<%= @user.name %></h2>
 
+<%= render partial: 'user_icon', locals: { user: @user } %>
+
 <div>
   <% if @user.id == current_user.id %>
     <%= link_to 'Edit', edit_user_registration_path(current_user) %>

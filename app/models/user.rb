@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true, length: { maximum: 20 }
   validates :location_id, presence: true
   validates :address, presence: true
+  validates :image, presence: true
 
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
@@ -22,6 +23,8 @@ class User < ApplicationRecord
   has_many :fr_comments, dependent: :destroy
   has_many :fs_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+
+  mount_uploader :image, ImageUploader
 
   def follow(other_user_id)
     relationships.find_or_create_by(follow_id: other_user_id) unless id == other_user_id.to_i

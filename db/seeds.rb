@@ -6,10 +6,31 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 if Rails.env.development?
-  User.create(name: 'a', email: 'a@a', password: 'aaaaaa', location_id: 1_850_147, address: '東京', latitude: 35.7090259, longitude: 139.7319925)
-  User.create(name: 'b', email: 'b@b', password: 'bbbbbb', location_id: 1_850_147, address: '東京', latitude: 35.7090259, longitude: 139.7319925)
-  User.create(name: 'c', email: 'c@c', password: 'cccccc', location_id: 1_850_147, address: '東京', latitude: 35.7090259, longitude: 139.7319925)
-  User.create(name: 'd', email: 'd@d', password: 'dddddd', location_id: 1_850_147, address: '東京', latitude: 35.7090259, longitude: 139.7319925)
+  1.upto(14) do |n|
+    User.create!(
+      name: "user#{n}",
+      email: "email#{n}@com",
+      password: "#{n}" * 6,
+      image:File.open("./db/fixtures/users/user#{n}.jpg"),
+      location_id: 1_850_147,
+      address: '東京',
+      latitude: 35.7090259 + 0.0001 * n,
+      longitude: 139.7319925 + 0.0001 * n
+    )
+  end
+
+  1.upto(12) do |n|
+    srand(n)
+    FoodRecord.create!(
+      user_id: 1,
+      food_name: "food#{n}",
+      image:File.open("./db/fixtures/foods/food#{n}.jpg"),
+      healthy_score: rand(-3..4),
+      workload_score: rand(-4..3),
+      total_score: rand(1..5),
+      food_date: Time.zone.today - n
+    )
+  end
 end
 
 require "csv"

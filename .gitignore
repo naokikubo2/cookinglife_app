@@ -40,3 +40,4 @@ public/uploads
 .irb_history
 /.env
 lib/api/vision/cookinglife-49f68bde9cbe.json
+db/fixtures

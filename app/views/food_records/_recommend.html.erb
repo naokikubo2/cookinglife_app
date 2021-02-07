@@ -1,0 +1,7 @@
+<% if food.present? %>
+  <p><%= food.food_name %></p>
+  <p>日付：<%= date_format(food.food_date) %></p>
+  <p><%= image_tag food.image.url %></p>
+<% else %>
+  <p>表示可能な料理がありません。</p>
+<% end %>

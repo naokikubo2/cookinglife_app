@@ -38,8 +38,7 @@ class FoodRecordsController < ApplicationController
     @food_records_followings = current_user.food_records_followings
 
     # 今日の料理レコメンドを受けとる
-    get_recommend
-
+    food_recommend
   end
 
   def edit; end
@@ -142,34 +141,32 @@ class FoodRecordsController < ApplicationController
     list
   end
 
-  def get_recommend
-    #ログインユーザの料理
+  def food_recommend
+    # ログインユーザの料理
     food_records_mine = current_user.food_records
-    #ログインユーザの昨日の料理
+    # ログインユーザの昨日の料理
     food_record_yesterday = food_records_mine.where(food_date: Time.zone.today - 1)
-    #ログインユーザの直近1週間の料理
-    food_record_week = food_records_mine.where(food_date: Time.zone.today-7..Time.zone.today-1)
+    # ログインユーザの直近1週間の料理
+    food_record_week = food_records_mine.where(food_date: Time.zone.today - 7..Time.zone.today - 1)
 
-    #今日〜1週間のデータを除く
-    food_record_past = food_records_mine.where(food_date: ..Time.zone.today-7)
+    # 今日〜1週間のデータを除く
+    food_record_past = food_records_mine.where(food_date: ..Time.zone.today - 7)
 
     # 前日の料理、麺かどうか判定
     flag_noodle = false
-    for food in food_record_yesterday
-      if !food.tags.nil?
-        for var in food.tags
-          flag_noodle = true if var.name.include?("麺")
-        end
+    food_record_yesterday.each do |food|
+      next if food.tags.nil?
+
+      food.tags.each do |var|
+        flag_noodle = true if var.name.include?("麺")
       end
     end
     # 麺料理がある場合は麺料理を除外
-    if flag_noodle
-      food_record_past = food_record_past.tagged_with("麺", :exclude => true)
-    end
+    food_record_past = food_record_past.tagged_with("麺", exclude: true) if flag_noodle
 
     # 直近1週間の料理名と一致するレコードを除外
     array_foodname = food_record_week.pluck(:food_name)
-    food_record_past = food_record_past.where.not("food_name IN (?)" ,array_foodname)
+    food_record_past = food_record_past.where.not("food_name IN (?)", array_foodname)
 
     # 料理の類似度を分析
     y_food = food_record_yesterday.pluck(:workload_score, :healthy_score)
@@ -177,11 +174,10 @@ class FoodRecordsController < ApplicationController
     max_distance = 0
     max_id = 0
     p_food.each do |p|
-      if max_distance < (p[0] - y_food[0][0])**2 + (p[1] - y_food[0][1])**2
-        max_distance = (p[0] - y_food[0][0])**2 + (p[1] - y_food[0][1])**2
-        max_id = p[2]
-        puts "max_id:#{p[2]}"
-      end
+      next unless max_distance < (p[0] - y_food[0][0])**2 + (p[1] - y_food[0][1])**2
+
+      max_distance = (p[0] - y_food[0][0])**2 + (p[1] - y_food[0][1])**2
+      max_id = p[2]
     end
     @food_recommend = FoodRecord.find_by(id: max_id)
   end

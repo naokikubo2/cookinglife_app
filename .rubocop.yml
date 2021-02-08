@@ -31,11 +31,6 @@ Layout/LeadingCommentSpace:
     - 'spec/models/user_spec.rb'
     - 'spec/requests/food_records_request_spec.rb'
 
-# Offense count: 1
-# Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
-Metrics/AbcSize:
-  Max: 19
-
 # Offense count: 4
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 # IgnoredMethods: refine
@@ -50,7 +45,7 @@ Metrics/CyclomaticComplexity:
 # Offense count: 2
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 Metrics/MethodLength:
-  Max: 20
+  Max: 30
 
 # Offense count: 1
 # Configuration parameters: IgnoredMethods.
@@ -175,7 +170,7 @@ Lint/AssignmentInCondition:
 # Offense count: 1
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
-  Max: 29
+  Max: 60
 
 # Offense count: 4
 # Configuration parameters: MinBodyLength.
@@ -267,4 +262,4 @@ Rails/NotNullColumn:
     - 'db/migrate/20210129024628_add_column_users.rb'
 
 Metrics/ClassLength:
-  Max: 120
+  Max: 140

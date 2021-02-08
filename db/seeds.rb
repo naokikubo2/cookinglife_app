@@ -10,8 +10,8 @@ if Rails.env.development?
     User.create!(
       name: "user#{n}",
       email: "email#{n}@com",
-      password: "#{n}" * 6,
-      image:File.open("./db/fixtures/users/user#{n}.jpg"),
+      password: n.to_s * 6,
+      image: File.open("./db/fixtures/users/user#{n}.jpg"),
       location_id: 1_850_147,
       address: '東京',
       latitude: 35.7090259 + 0.0001 * n,
@@ -24,7 +24,7 @@ if Rails.env.development?
     FoodRecord.create!(
       user_id: 1,
       food_name: "food#{n}",
-      image:File.open("./db/fixtures/foods/food#{n}.jpg"),
+      image: File.open("./db/fixtures/foods/food#{n}.jpg"),
       healthy_score: rand(-3..4),
       workload_score: rand(-4..3),
       total_score: rand(1..5),

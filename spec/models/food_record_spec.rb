@@ -34,10 +34,10 @@ RSpec.describe FoodRecord, type: :model do
   describe 'レコメンド機能' do
     context '昨日の料理が麺料理ではない場合' do
       it '麺料理がレコメンドされる可能性がある' do
-        food_record1 = create(:food_record, food_name: "food1", healthy_score: 4, workload_score: 4, food_date: Time.zone.yesterday, user_id: user.id)
-        food_record2 = create(:food_record, food_name: "food2", healthy_score: -4, workload_score: -4, food_date: Time.zone.today - 3, user_id: user.id)
-        food_record3 = create(:food_record, food_name: "food3", healthy_score: -4, workload_score: -4, food_date: Time.zone.today - 12, tag_list: ["麺"], user_id: user.id)
-        food_record4 = create(:food_record, food_name: "food4", healthy_score: -3, workload_score: -3, food_date: Time.zone.today - 12, user_id: user.id)
+        create(:food_record, food_name: "food1", healthy_score: 4, workload_score: 4, food_date: Time.zone.yesterday, user_id: user.id)
+        create(:food_record, food_name: "food2", healthy_score: -4, workload_score: -4, food_date: Time.zone.today - 3, user_id: user.id)
+        create(:food_record, food_name: "food3", healthy_score: -4, workload_score: -4, food_date: Time.zone.today - 12, tag_list: ["麺"], user_id: user.id)
+        create(:food_record, food_name: "food4", healthy_score: -3, workload_score: -3, food_date: Time.zone.today - 12, user_id: user.id)
         food_recommend = FoodRecord.food_recommend(user)
         expect(food_recommend.food_name).to eq 'food3'
       end
@@ -45,10 +45,10 @@ RSpec.describe FoodRecord, type: :model do
 
     context '昨日の料理が麺料理だった場合' do
       it '麺料理以外がレコメンドされる' do
-        food_record1 = create(:food_record, food_name: "food1", healthy_score: 4, workload_score: 4, food_date: Time.zone.yesterday, tag_list: ["麺"], user_id: user.id)
-        food_record2 = create(:food_record, food_name: "food2", healthy_score: -4, workload_score: -4, food_date: Time.zone.today - 3, user_id: user.id)
-        food_record3 = create(:food_record, food_name: "food3", healthy_score: -4, workload_score: -4, food_date: Time.zone.today - 12, tag_list: ["麺"], user_id: user.id)
-        food_record4 = create(:food_record, food_name: "food4", healthy_score: -3, workload_score: -3, food_date: Time.zone.today - 12, user_id: user.id)
+        create(:food_record, food_name: "food1", healthy_score: 4, workload_score: 4, food_date: Time.zone.yesterday, tag_list: ["麺"], user_id: user.id)
+        create(:food_record, food_name: "food2", healthy_score: -4, workload_score: -4, food_date: Time.zone.today - 3, user_id: user.id)
+        create(:food_record, food_name: "food3", healthy_score: -4, workload_score: -4, food_date: Time.zone.today - 12, tag_list: ["麺"], user_id: user.id)
+        create(:food_record, food_name: "food4", healthy_score: -3, workload_score: -3, food_date: Time.zone.today - 12, user_id: user.id)
         food_recommend = FoodRecord.food_recommend(user)
         expect(food_recommend.food_name).to eq 'food4'
       end
@@ -56,9 +56,9 @@ RSpec.describe FoodRecord, type: :model do
 
     context '昨日の料理が登録されていない場合' do
       it 'レコメンド料理は表示されない' do
-        food_record2 = create(:food_record, food_name: "food2", healthy_score: -4, workload_score: -4, food_date: Time.zone.today - 3, user_id: user.id)
-        food_record3 = create(:food_record, food_name: "food3", healthy_score: -4, workload_score: -4, food_date: Time.zone.today - 12, tag_list: ["麺"], user_id: user.id)
-        food_record4 = create(:food_record, food_name: "food4", healthy_score: -3, workload_score: -3, food_date: Time.zone.today - 12, user_id: user.id)
+        create(:food_record, food_name: "food2", healthy_score: -4, workload_score: -4, food_date: Time.zone.today - 3, user_id: user.id)
+        create(:food_record, food_name: "food3", healthy_score: -4, workload_score: -4, food_date: Time.zone.today - 12, tag_list: ["麺"], user_id: user.id)
+        create(:food_record, food_name: "food4", healthy_score: -3, workload_score: -3, food_date: Time.zone.today - 12, user_id: user.id)
         food_recommend = FoodRecord.food_recommend(user)
         expect(food_recommend).to eq nil
       end
@@ -66,7 +66,7 @@ RSpec.describe FoodRecord, type: :model do
 
     context '料理記録が昨日分の1件のみの場合' do
       it 'レコメンド料理は表示されない' do
-        food_record1 = create(:food_record, food_name: "food1", healthy_score: 4, workload_score: 4, food_date: Time.zone.yesterday, tag_list: ["麺"], user_id: user.id)
+        create(:food_record, food_name: "food1", healthy_score: 4, workload_score: 4, food_date: Time.zone.yesterday, tag_list: ["麺"], user_id: user.id)
         food_recommend = FoodRecord.food_recommend(user)
         expect(food_recommend).to eq nil
       end

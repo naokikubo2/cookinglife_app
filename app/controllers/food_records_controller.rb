@@ -38,9 +38,7 @@ class FoodRecordsController < ApplicationController
     @food_records_followings = current_user.food_records_followings
 
     # 今日の料理レコメンドを受けとる
-    if FoodRecord.food_recommend(current_user).present?
-      @food_recommend = FoodRecord.food_recommend(current_user)
-    end
+    @food_recommend = FoodRecord.food_recommend(current_user) if FoodRecord.food_recommend(current_user).present?
   end
 
   def edit; end

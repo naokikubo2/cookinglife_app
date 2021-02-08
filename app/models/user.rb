@@ -7,7 +7,6 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true, length: { maximum: 20 }
   validates :location_id, presence: true
   validates :address, presence: true
-  validates :image, presence: true
 
   geocoded_by :address
   after_validation :geocode, if: :address_changed?

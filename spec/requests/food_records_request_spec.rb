@@ -131,6 +131,27 @@ RSpec.describe "FoodRecords", type: :request do
         expect(response.body).not_to include("food2", "food3")
       end
     end
+
+    context 'when 料理が十分に記録されている' do
+      it "レコメンド料理が表示される" do
+        food_record1 = create(:food_record, food_name: "food1", healthy_score: 4, workload_score: 4, food_date: Time.zone.yesterday, tag_list: ["麺"], user: current_user)
+        food_record2 = create(:food_record, food_name: "food2", healthy_score: -4, workload_score: -4, food_date: Time.zone.today - 3, user: current_user)
+        food_record3 = create(:food_record, food_name: "food3", healthy_score: -4, workload_score: -4, food_date: Time.zone.today - 12, tag_list: ["麺"], user: current_user)
+        food_record4 = create(:food_record, food_name: "food4", healthy_score: -3, workload_score: -3, food_date: Time.zone.today - 12, user: current_user)
+        get food_records_path
+        expect(response.status).to eq(200)
+        expect(response.body).to include("food4").twice
+      end
+    end
+
+    context 'when 料理が十分に記録されていない' do
+      it "レコメンド料理が表示されない" do
+        food_record4 = create(:food_record, food_name: "food4", healthy_score: -3, workload_score: -3, food_date: Time.zone.today - 12, user: current_user)
+        get food_records_path
+        expect(response.status).to eq(200)
+        expect(response.body).to include("food4").once
+      end
+    end
   end
 
   #show

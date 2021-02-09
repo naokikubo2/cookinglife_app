@@ -36,6 +36,10 @@ class FoodRecordsController < ApplicationController
     @food_records = @search.result(distinct: true)
     @tags = current_user.food_records.tag_counts_on(:tags)
     @food_records_followings = current_user.food_records_followings
+
+    # 今日の料理レコメンドを受けとる
+    recommend = FoodRecord.food_recommend(current_user)
+    @food_recommend = recommend if recommend.present?
   end
 
   def edit; end

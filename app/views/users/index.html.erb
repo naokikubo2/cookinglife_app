@@ -4,6 +4,7 @@
 <h2>全ユーザー</h2>
 <% @users.each do |user| %>
   <div>
+    <%= render partial: 'user_icon', locals: { user: user } %>
     <%= link_to user.name, user %>
   </div>
 <% end %>

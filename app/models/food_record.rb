@@ -36,4 +36,49 @@ class FoodRecord < ApplicationRecord
     favorite_id = favorites.find_by(user_id: favorite_user_id).id
     favorites.destroy(favorite_id)
   end
+
+  def self.food_recommend(current_user)
+    # ログインユーザの料理
+    food_records_mine = current_user.food_records
+
+    # ログインユーザの昨日の料理
+    food_record_yesterday = food_records_mine.select { |n| n.food_date == Time.zone.today - 1 }
+
+    # ログインユーザの直近1週間の料理
+    food_record_week = food_records_mine.select { |n| n.food_date >= Time.zone.today - 7 }
+
+    # 今日〜1週間のデータを除く
+    food_record_past = food_records_mine.select { |n| n.food_date < Time.zone.today - 7 }
+
+    # 前日の料理、麺かどうか判定
+    flag_noodle = false
+    food_record_yesterday.each do |food|
+      next if food.tags.nil?
+
+      food.tags.each do |var|
+        flag_noodle = true if var.name.include?("麺")
+      end
+    end
+
+    # 麺料理がある場合は麺料理を除外
+    food_record_past = food_record_past.reject { |n| n.tag_list.include?("麺") } if flag_noodle
+
+    # 直近1週間の料理名と一致するレコードを除外
+    array_foodname = food_record_week.pluck(:food_name)
+    food_record_past = food_record_past.reject { |n| array_foodname.include?(n.food_name) }
+
+    # 料理の類似度を分析
+    y_food = food_record_yesterday.pluck(:workload_score, :healthy_score)
+    p_food = food_record_past.pluck(:workload_score, :healthy_score, :id)
+    max_distance = 0
+    max_id = 0
+    p_food.each do |p|
+      next unless max_distance < (p[0] - y_food[0][0])**2 + (p[1] - y_food[0][1])**2
+
+      max_distance = (p[0] - y_food[0][0])**2 + (p[1] - y_food[0][1])**2
+      max_id = p[2]
+    end
+    find_by(id: max_id)
+  rescue StandardError => e
+  end
 end

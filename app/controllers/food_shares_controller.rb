@@ -36,8 +36,13 @@ class FoodSharesController < ApplicationController
   end
 
   def index
-    @food_shares = current_user.food_shares
-    @food_shares_friends = current_user.food_shares_friends
+    # 自ユーザのお裾分け
+    @mine_before, @mine_done, @mine_undone = FoodShare.mine_sorting(current_user)
+
+    # 他ユーザのお裾分け
+    # 相互フォロ中のユーザ(友達)のfood_shareを抽出
+    food_share_friend = current_user.food_shares_friends
+    @friend_undone, @friend_before, @friend_done = food_share_friend.friend_sorting(current_user)
   end
 
   def edit; end

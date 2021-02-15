@@ -53,6 +53,75 @@ class FoodShare < ApplicationRecord
     end
     return flag_time
   end
+
+  def self.mine_sorting(current_user)
+    food_share_mine = current_user.food_shares
+
+    # お裾分け前のお裾分け料理を抽出
+    mine_before = food_share_mine.select { |n| n.limit_time > Time.zone.now }
+
+    # お裾分け未達成のお裾分け料理を抽出
+    array_undone = []
+    array_done = []
+
+    food_share_mine.each do |f|
+      all_count = f.matchings.count
+      comp_count = f.matchings.select { |n| n.status == "complete" }.count
+      if all_count == comp_count
+        array_done.push(f.id)
+      else
+        array_undone.push(f.id)
+      end
+    end
+    mine_done = FoodShare.select { |n| array_done.include?(n.id)}
+    mine_undone = FoodShare.select { |n| array_undone.include?(n.id)}
+
+    return mine_before, mine_done, mine_undone
+  end
+
+  def self.friend_sorting(current_user)
+    # ログインユーザのお裾分け希望しているマッチングを取得
+    matchings_mine = current_user.matchings
+
+    # マッチングからfood_share_idを射影
+    array_matchings = matchings_mine.pluck(:food_share_id)
+
+    # food_shareの中で、ログインユーザがお裾分け希望を出しているもののみ抽出
+    food_share_friend_matching = self.select { |n| array_matchings.include?(n.id) }
+
+    # お裾分け未達成のお裾分け料理を抽出
+    array_undone = []
+    for f in food_share_friend_matching.to_a do
+      if f.matchings.where(status: "not_achieved").any?
+        array_undone.push(f.id)
+      end
+    end
+    friend_undone = FoodShare.select { |n| array_undone.include?(n.id)}
+
+    # お裾分け前のお裾分け料理を抽出
+    # お裾分け期間前 かつ お裾分け希望を出していないもの
+    food_share_friend_unmatching = self.select { |n| !array_matchings.include?(n.id) }
+    array_before = []
+    for f in food_share_friend_unmatching.to_a do
+      if f.limit_time > Time.zone.now
+        array_before.push(f.id)
+      end
+    end
+    friend_before = FoodShare.select { |n| array_before.include?(n.id)}
+
+    # お裾分け実施済みのお裾分け料理を抽出
+    array_done = []
+    food_after = food_share_friend_matching.select { |n| n.limit_time < Time.zone.now }
+    for f in food_after.to_a do
+      match = f.matchings
+      unless match.where(status: "not_achieved").any? && match.exists?(food_share_id: f.id)
+        array_done.push(f.id)
+      end
+    end
+    friend_done = FoodShare.select { |n| array_done.include?(n.id)}
+
+    return friend_undone, friend_before, friend_done
+  end
 end
 
 def time_after_registration

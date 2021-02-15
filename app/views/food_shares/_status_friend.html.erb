@@ -1,8 +1,4 @@
-
 <% if @food_share.user_id != current_user.id %>
-  <% if @flag_time == "before" %>
-    <h3>お裾分け受付期間内</h3>
-  <% end %>
   <% if @food_share.takes?(current_user) %>
     <% case @flag_time %>
     <% when "before" %>

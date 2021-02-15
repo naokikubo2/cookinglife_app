@@ -64,6 +64,13 @@ class FoodSharesController < ApplicationController
     render :matching
   end
 
+  def complete
+    matching = Matching.find_by(food_share_id: params[:food_share_id], user_id: params[:user_id])
+    matching.update(status: "complete")
+    flash[:notice] = "お裾分けが完了しました。"
+    redirect_to root_url
+  end
+
   private
 
   def food_share_params

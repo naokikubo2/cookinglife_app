@@ -48,9 +48,15 @@ RSpec.describe Matching, type: :model do
       user2 = create(:user)
       user3 = create(:user)
       matching.food_share.take(user2.id)
-      matching2 = build(:matching, food_share: matching.food_share, user: user3)
+      matching2 = create(:matching, food_share: matching.food_share, user: user3)
       matching2.valid?
       expect(matching2.errors.messages[:food_share_id]).to include("は募集人数を超過しています")
+    end
+
+    it 'is invalid without status' do
+      matching.status = ""
+      matching.valid?
+      expect(matching.errors.messages[:status]).to include("を入力してください")
     end
   end
 end

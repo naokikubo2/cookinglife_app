@@ -31,17 +31,17 @@ class FoodShare < ApplicationRecord
   end
 
   def complete?(take_user)
-    self.matchings.select{|n| n.status == "complete" && n.user_id == take_user.id}.present?
+    matchings.select { |n| n.status == "complete" && n.user_id == take_user.id }.present?
   end
 
   def any_uncomplete?
     # matchingの全てがcompleteになっていること。
-    self.matchings.select{|n| n.status == "not_achieved" && n.food_share_id == self.id}.present?
+    matchings.select { |n| n.status == "not_achieved" && n.food_share_id == id }.present?
   end
 
   def time_judgment
-    l_time = self.limit_time
-    g_time = self.give_time
+    l_time = limit_time
+    g_time = give_time
     n_time = Time.zone.now
     flag_time = ""
     if n_time < l_time
@@ -51,7 +51,7 @@ class FoodShare < ApplicationRecord
     elsif g_time <= n_time
       flag_time = "after"
     end
-    return flag_time
+    flag_time
   end
 
   def self.mine_sorting(current_user)
@@ -73,10 +73,10 @@ class FoodShare < ApplicationRecord
         array_undone.push(f.id)
       end
     end
-    mine_done = FoodShare.select { |n| array_done.include?(n.id)}
-    mine_undone = FoodShare.select { |n| array_undone.include?(n.id)}
+    mine_done = FoodShare.select { |n| array_done.include?(n.id) }
+    mine_undone = FoodShare.select { |n| array_undone.include?(n.id) }
 
-    return mine_before, mine_done, mine_undone
+    [mine_before, mine_done, mine_undone]
   end
 
   def self.friend_sorting(current_user)
@@ -91,36 +91,30 @@ class FoodShare < ApplicationRecord
 
     # お裾分け未達成のお裾分け料理を抽出
     array_undone = []
-    for f in food_share_friend_matching.to_a do
-      if f.matchings.where(status: "not_achieved").any?
-        array_undone.push(f.id)
-      end
+    food_share_friend_matching.to_a.each do |f|
+      array_undone.push(f.id) if f.matchings.where(status: "not_achieved").any?
     end
-    friend_undone = FoodShare.select { |n| array_undone.include?(n.id)}
+    friend_undone = FoodShare.select { |n| array_undone.include?(n.id) }
 
     # お裾分け前のお裾分け料理を抽出
     # お裾分け期間前 かつ お裾分け希望を出していないもの
-    food_share_friend_unmatching = self.select { |n| !array_matchings.include?(n.id) }
+    food_share_friend_unmatching = reject { |n| array_matchings.include?(n.id) }
     array_before = []
-    for f in food_share_friend_unmatching.to_a do
-      if f.limit_time > Time.zone.now
-        array_before.push(f.id)
-      end
+    food_share_friend_unmatching.to_a.each do |f|
+      array_before.push(f.id) if f.limit_time > Time.zone.now
     end
-    friend_before = FoodShare.select { |n| array_before.include?(n.id)}
+    friend_before = FoodShare.select { |n| array_before.include?(n.id) }
 
     # お裾分け実施済みのお裾分け料理を抽出
     array_done = []
     food_after = food_share_friend_matching.select { |n| n.limit_time < Time.zone.now }
-    for f in food_after.to_a do
+    food_after.to_a.each do |f|
       match = f.matchings
-      unless match.where(status: "not_achieved").any? && match.exists?(food_share_id: f.id)
-        array_done.push(f.id)
-      end
+      array_done.push(f.id) unless match.where(status: "not_achieved").any? && match.exists?(food_share_id: f.id)
     end
-    friend_done = FoodShare.select { |n| array_done.include?(n.id)}
+    friend_done = FoodShare.select { |n| array_done.include?(n.id) }
 
-    return friend_undone, friend_before, friend_done
+    [friend_undone, friend_before, friend_done]
   end
 end
 

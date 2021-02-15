@@ -59,7 +59,7 @@ RSpec.describe "food_shares", type: :system do
       login_user.follow(user_other.id)
       user_other.follow(login_user.id)
       create(:matching, food_share: food_share_other, user_id: user.id)
-      food_share_other.limit_time = Time.zone.now - 10000
+      food_share_other.limit_time = Time.zone.now - 10_000
       food_share_other.save(validate: false)
       visit food_share_path(food_share_other)
     end

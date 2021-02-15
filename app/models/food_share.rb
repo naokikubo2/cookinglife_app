@@ -22,12 +22,36 @@ class FoodShare < ApplicationRecord
   end
 
   def take(take_user_id)
-    matchings.new(user_id: take_user_id).save!
+    matchings.new(user_id: take_user_id, status: 'not_achieved').save!
   end
 
   def untake(take_user_id)
     matching_id = matchings.find_by(user_id: take_user_id).id
     matchings.destroy(matching_id)
+  end
+
+  def complete?(take_user)
+    self.matchings.select{|n| n.status == "complete" && n.user_id == take_user.id}.present?
+  end
+
+  def any_uncomplete?
+    # matchingの全てがcompleteになっていること。
+    self.matchings.select{|n| n.status == "not_achieved" && n.food_share_id == self.id}.present?
+  end
+
+  def time_judgment
+    l_time = self.limit_time
+    g_time = self.give_time
+    n_time = Time.zone.now
+    flag_time = ""
+    if n_time < l_time
+      flag_time = "before"
+    elsif l_time <= n_time && n_time < g_time
+      flag_time = "active"
+    elsif g_time <= n_time
+      flag_time = "after"
+    end
+    return flag_time
   end
 end
 

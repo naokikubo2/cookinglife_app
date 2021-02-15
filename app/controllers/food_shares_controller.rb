@@ -30,6 +30,9 @@ class FoodSharesController < ApplicationController
 
       @output_distance = Api::DistanceMatrix::Request.attributes_for(response) if response['status'] == 'OK'
     end
+
+    # どの期間に当たるかでフラグを立てる⇨フラグでviewを変える
+    @flag_time = @food_share.time_judgment
   end
 
   def index

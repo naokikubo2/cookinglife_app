@@ -6,13 +6,12 @@
 <%= render partial: "shared_food", locals: { food_shares: @mine_undone } %>
 
 
-  <h3>お裾分け募集中の料理</h3>
-  <%= render partial: "shared_food", locals: { food_shares: @mine_before } %>
+<h3>お裾分け募集中の料理</h3>
+<%= render partial: "shared_food", locals: { food_shares: @mine_before } %>
 
-<div id="hoge">
+
 <h3>お裾分け終了後の料理</h3>
 <%= render partial: "shared_food", locals: { food_shares: @mine_done } %>
-</div>
 
 <h2>友達のお裾分け料理</h2>
 <h3>応募済みのお裾分け料理</h3>

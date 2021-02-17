@@ -59,12 +59,13 @@ class FoodShare < ApplicationRecord
 
     # お裾分け前のお裾分け料理を抽出
     mine_before = food_share_mine.select { |n| n.limit_time > Time.zone.now }
+    mine_notbefore = food_share_mine.select { |n| n.limit_time <= Time.zone.now }
 
     # お裾分け未達成のお裾分け料理を抽出
     array_undone = []
     array_done = []
 
-    food_share_mine.each do |f|
+    mine_notbefore.each do |f|
       all_count = f.matchings.count
       comp_count = f.matchings.select { |n| n.status == "complete" }.count
       if all_count == comp_count
@@ -76,7 +77,7 @@ class FoodShare < ApplicationRecord
     mine_done = FoodShare.select { |n| array_done.include?(n.id) }
     mine_undone = FoodShare.select { |n| array_undone.include?(n.id) }
 
-    [mine_before, mine_done, mine_undone]
+    [mine_before, mine_undone, mine_done ]
   end
 
   def self.friend_sorting(current_user)
@@ -92,13 +93,13 @@ class FoodShare < ApplicationRecord
     # お裾分け未達成のお裾分け料理を抽出
     array_undone = []
     food_share_friend_matching.to_a.each do |f|
-      array_undone.push(f.id) if f.matchings.where(status: "not_achieved").any?
+      array_undone.push(f.id) if f.matchings.where(status: "not_achieved", user_id: current_user.id).any?
     end
     friend_undone = FoodShare.select { |n| array_undone.include?(n.id) }
 
     # お裾分け前のお裾分け料理を抽出
     # お裾分け期間前 かつ お裾分け希望を出していないもの
-    food_share_friend_unmatching = reject { |n| array_matchings.include?(n.id) }
+    food_share_friend_unmatching = select { |n| !array_matchings.include?(n.id) }
     array_before = []
     food_share_friend_unmatching.to_a.each do |f|
       array_before.push(f.id) if f.limit_time > Time.zone.now
@@ -110,11 +111,11 @@ class FoodShare < ApplicationRecord
     food_after = food_share_friend_matching.select { |n| n.limit_time < Time.zone.now }
     food_after.to_a.each do |f|
       match = f.matchings
-      array_done.push(f.id) unless match.where(status: "not_achieved").any? && match.exists?(food_share_id: f.id)
+      array_done.push(f.id) unless match.where(status: "not_achieved", user_id: current_user.id).any? && match.exists?(food_share_id: f.id)
     end
     friend_done = FoodShare.select { |n| array_done.include?(n.id) }
 
-    [friend_undone, friend_before, friend_done]
+    [friend_before, friend_undone, friend_done]
   end
 end
 

@@ -1,0 +1,23 @@
+<% if @food_share.user_id != current_user.id %>
+  <% if @food_share.takes?(current_user) %>
+    <% case @flag_time %>
+    <% when "before" %>
+      <h3>お裾分け受付期間内</h3>
+    <% when "active" %>
+      <% if @food_share.complete?(current_user) %>
+        <h3>お裾分け済み</h3>
+      <% else %>
+        <h3>お裾分け完了通知をする</h3>
+        <%= link_to "お裾分け完了",  food_share_complete_url(food_share_id: @food_share.id, user_id: current_user.id), method: :post %>
+      <% end %>
+    <% when "after" %>
+      <% if @food_share.complete?(current_user) %>
+        <h3>お裾分け済み</h3>
+      <% else %>
+        <h3>お裾分け完了時間を超過しています</h3>
+        <h3>お裾分け完了通知をする</h3>
+        <%= link_to "お裾分け完了",  food_share_complete_url(food_share_id: @food_share.id, user_id: current_user.id), method: :post %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

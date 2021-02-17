@@ -4,6 +4,9 @@
 <p>料理名：<%= @food_share.food_name %></p>
 <p><%= image_tag @food_share.image.url %></p>
 
+<%= render partial: 'status_friend' %>
+<%= render partial: 'status_mine' %>
+
 <h2>お裾分け待ち合わせ場所</h2>
 <%= render partial: "d_googlemap" %>
 

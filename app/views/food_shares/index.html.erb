@@ -2,7 +2,23 @@
 <p>Find me in app/views/food_shares/index.html.erb</p>
 
 <h2>ログインユーザーのお裾分け料理</h2>
-<%= render partial: "shared_food", locals: { food_shares: @food_shares } %>
+<h3>お裾分け直近の料理</h3>
+<%= render partial: "shared_food", locals: { food_shares: @mine_undone } %>
+
+
+<h3>お裾分け募集中の料理</h3>
+<%= render partial: "shared_food", locals: { food_shares: @mine_before } %>
+
+
+<h3>お裾分け終了後の料理</h3>
+<%= render partial: "shared_food", locals: { food_shares: @mine_done } %>
 
 <h2>友達のお裾分け料理</h2>
-<%= render partial: "shared_food", locals: { food_shares: @food_shares_friends } %>
+<h3>応募済みのお裾分け料理</h3>
+<%= render partial: "shared_food", locals: { food_shares: @friend_undone } %>
+
+<h3>募集中のお裾分け料理</h3>
+<%= render partial: "shared_food", locals: { food_shares: @friend_before } %>
+
+<h3>終了したお裾分け料理</h3>
+<%= render partial: "shared_food", locals: { food_shares: @friend_done } %>

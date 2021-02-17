@@ -30,11 +30,19 @@ class FoodSharesController < ApplicationController
 
       @output_distance = Api::DistanceMatrix::Request.attributes_for(response) if response['status'] == 'OK'
     end
+
+    # どの期間に当たるかでフラグを立てる⇨フラグでviewを変える
+    @flag_time = @food_share.time_judgment
   end
 
   def index
-    @food_shares = current_user.food_shares
-    @food_shares_friends = current_user.food_shares_friends
+    # 自ユーザのお裾分け
+    @mine_before, @mine_undone, @mine_done = FoodShare.mine_sorting(current_user)
+
+    # 他ユーザのお裾分け
+    # 相互フォロ中のユーザ(友達)のfood_shareを抽出
+    food_share_friend = current_user.food_shares_friends
+    @friend_before, @friend_undone, @friend_done = food_share_friend.friend_sorting(current_user)
   end
 
   def edit; end
@@ -59,6 +67,17 @@ class FoodSharesController < ApplicationController
     @food_share = FoodShare.includes(:matchings).find(params[:food_share_id])
     @food_share.takes?(current_user) ? @food_share.untake(current_user.id) : @food_share.take(current_user.id)
     render :matching
+  end
+
+  def complete
+    matching = Matching.find_by(food_share_id: params[:food_share_id], user_id: params[:user_id])
+    if matching.present?
+      matching.update(status: "complete")
+      flash[:notice] = "お裾分けが完了しました。"
+    else
+      flash[:error] = "お裾分け完了操作に失敗しました"
+    end
+    redirect_to root_url
   end
 
   private

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :tags, only: [:index]
   resources :food_shares do
     post :matching
+    post :complete
     resources :fs_comments, only: %w[create destroy]
   end
   resources :users, only: %w[index show] do

@@ -31,6 +31,23 @@ if Rails.env.development?
       food_date: Time.zone.today - n
     )
   end
+
+  # user1 は全ユーザをフォロし、他ユーザはuser1をフォロー
+  2.upto(14) do |n|
+    srand(n)
+    Relationship.create!(
+      user_id: 1,
+      follow_id: n
+    )
+  end
+
+  2.upto(14) do |n|
+    srand(n)
+    Relationship.create!(
+      user_id: n,
+      follow_id: 1
+    )
+  end
 end
 
 require "csv"

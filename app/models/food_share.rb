@@ -77,7 +77,7 @@ class FoodShare < ApplicationRecord
     mine_done = FoodShare.select { |n| array_done.include?(n.id) }
     mine_undone = FoodShare.select { |n| array_undone.include?(n.id) }
 
-    [mine_before, mine_undone, mine_done ]
+    [mine_before, mine_undone, mine_done]
   end
 
   def self.friend_sorting(current_user)

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe FoodShare, type: :model do
-  let(:user){ create(:user) }
+  let(:user) { create(:user) }
   let(:user_other) { create(:user) }
   let(:user_other2) { create(:user) }
   let(:current_user) { create(:user) }
@@ -209,13 +209,13 @@ RSpec.describe FoodShare, type: :model do
       end
 
       it 'is active' do
-        food_share.limit_time = Time.zone.now - 10000
+        food_share.limit_time = Time.zone.now - 10_000
         expect(food_share.time_judgment).to eq "active"
       end
 
       it 'is after' do
-        food_share.limit_time = Time.zone.now - 200000
-        food_share.give_time = Time.zone.now - 10000
+        food_share.limit_time = Time.zone.now - 200_000
+        food_share.give_time = Time.zone.now - 10_000
         expect(food_share.time_judgment).to eq "after"
       end
     end
@@ -226,15 +226,15 @@ RSpec.describe FoodShare, type: :model do
       end
 
       it 'is valid with undone mathcning' do
-        food_share.update(limit_time: Time.zone.now - 200000)
-        expect(FoodShare.mine_sorting(user)).to eq [[], [food_share],[]]
+        food_share.update(limit_time: Time.zone.now - 200_000)
+        expect(FoodShare.mine_sorting(user)).to eq [[], [food_share], []]
       end
 
       it 'is valid with done mathcning' do
-        food_share.update(limit_time: Time.zone.now - 200000)
+        food_share.update(limit_time: Time.zone.now - 200_000)
         matching.update(status: "complete")
         matching2.update(status: "complete")
-        expect(FoodShare.mine_sorting(user)).to eq [[], [],[food_share]]
+        expect(FoodShare.mine_sorting(user)).to eq [[], [], [food_share]]
       end
     end
 
@@ -251,15 +251,15 @@ RSpec.describe FoodShare, type: :model do
 
       it 'is valid with undone mathcning' do
         food_share_friend = user_other.food_shares_friends
-        food_share.update(limit_time: Time.zone.now - 200000)
-        expect(food_share_friend.friend_sorting(user_other)).to eq [[], [food_share],[]]
+        food_share.update(limit_time: Time.zone.now - 200_000)
+        expect(food_share_friend.friend_sorting(user_other)).to eq [[], [food_share], []]
       end
 
       it 'is valid with done mathcning' do
-        food_share.update(limit_time: Time.zone.now - 200000)
+        food_share.update(limit_time: Time.zone.now - 200_000)
         matching.update(status: "complete")
         food_share_friend = user_other.food_shares_friends
-        expect(food_share_friend.friend_sorting(user_other)).to eq [[], [],[food_share]]
+        expect(food_share_friend.friend_sorting(user_other)).to eq [[], [], [food_share]]
       end
     end
   end

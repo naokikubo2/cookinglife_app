@@ -1,7 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe FoodShare, type: :model do
-  let(:food_share) { create(:food_share) }
+  let(:user){ create(:user) }
+  let(:user_other) { create(:user) }
+  let(:user_other2) { create(:user) }
+  let(:current_user) { create(:user) }
+  let!(:food_share) { create(:food_share, user_id: user.id) }
+  let!(:matching) { create(:matching, food_share: food_share, user_id: user_other.id) }
+  let!(:matching2) { create(:matching, food_share: food_share, user_id: user_other2.id) }
 
   before do
     set_geocoder
@@ -162,6 +168,98 @@ RSpec.describe FoodShare, type: :model do
         food_share.limit_time = Time.zone.now + 12 * 3600 + 1
         food_share.valid?
         expect(food_share.errors.messages[:limit_time]).to include("は、お裾分け時間より12時間以上前の日時を入力して下さい")
+      end
+    end
+  end
+
+  describe 'model method' do
+    context 'complete?' do
+      it 'is true' do
+        matching.status = "complete"
+        matching.save
+        expect(food_share.complete?(user_other)).to eq true
+      end
+
+      it 'is false' do
+        expect(food_share.complete?(user_other)).to eq false
+      end
+    end
+
+    context 'any_uncomplete?' do
+      it 'is false' do
+        matching.status = "complete"
+        matching.save
+        matching2.status = "complete"
+        matching2.save
+        expect(food_share.any_uncomplete?).to eq false
+      end
+
+      it 'is true' do
+        matching.status = "not_achieved"
+        matching.save
+        matching2.status = "not_achieved"
+        matching2.save
+        expect(food_share.any_uncomplete?).to eq true
+      end
+    end
+
+    context 'time_judgment' do
+      it 'is before' do
+        expect(food_share.time_judgment).to eq "before"
+      end
+
+      it 'is active' do
+        food_share.limit_time = Time.zone.now - 10000
+        expect(food_share.time_judgment).to eq "active"
+      end
+
+      it 'is after' do
+        food_share.limit_time = Time.zone.now - 200000
+        food_share.give_time = Time.zone.now - 10000
+        expect(food_share.time_judgment).to eq "after"
+      end
+    end
+
+    context 'mine_sorting' do
+      it 'is valid with before mathcning' do
+        expect(FoodShare.mine_sorting(user)).to eq [[food_share], [], []]
+      end
+
+      it 'is valid with undone mathcning' do
+        food_share.update(limit_time: Time.zone.now - 200000)
+        expect(FoodShare.mine_sorting(user)).to eq [[], [food_share],[]]
+      end
+
+      it 'is valid with done mathcning' do
+        food_share.update(limit_time: Time.zone.now - 200000)
+        matching.update(status: "complete")
+        matching2.update(status: "complete")
+        expect(FoodShare.mine_sorting(user)).to eq [[], [],[food_share]]
+      end
+    end
+
+    context 'friend_sorting' do
+      before do
+        user.follow(user_other.id)
+        user_other.follow(user.id)
+      end
+      it 'is valid with before mathcning' do
+        matching.destroy
+        food_share_friend = user_other.food_shares_friends
+        expect(food_share_friend.friend_sorting(user_other)).to eq [[food_share], [], []]
+      end
+
+      it 'is valid with undone mathcning' do
+        food_share_friend = user_other.food_shares_friends
+        food_share.update(limit_time: Time.zone.now - 200000)
+        expect(food_share_friend.friend_sorting(user_other)).to eq [[], [food_share],[]]
+      end
+
+      it 'is valid with done mathcning' do
+        food_share.update(limit_time: Time.zone.now - 200000)
+        matching.update(status: "complete")
+        food_share_friend = user_other.food_shares_friends
+        expect(food_share_friend.friend_sorting(user_other)).to eq [[], [],[food_share]]
       end
     end
   end

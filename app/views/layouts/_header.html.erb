@@ -1,13 +1,32 @@
 <header>
-  <%= link_to "cookingLife", root_path %>
-  <% if user_signed_in? %>
     <div>
-      <a>username: </a>
-      <%= current_user.name %>
-      <%= link_to "ログアウトする", logout_path %>
-    </div>
-  <% else %>
-    <%= link_to "新規登録する", signup_path %>
-    <%= link_to "ログインする", login_path %>
-  <% end %>
+    <nav class="navbar navbar-expand-lg bg-white fixed-top">
+      <%= link_to ('#') do %>
+        <i class="far fa-calendar-alt fa-lg" style="color:dimgray;"></i>
+      <% end %>
+      <button class="navbar-toggler navbar-toggler" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        <ul class="navbar navbar-nav">
+          <% if user_signed_in? %>
+            <li class="nav-item list-unstyled">
+                <%= link_to("ユーザー情報を編集", edit_user_registration_path, class: "nav-link") %>
+            </li>
+            <li class="nav-item list-unstyled">
+                <%= link_to("ログアウト", logout_path,
+                data: {confirm: "本当にログアウトしますか？"}, class: "nav-link") %>
+            </li>
+          <% else %>
+            <li class="nav-item list-unstyled">
+                <%= link_to("会員登録", signup_path, class: "nav-link") %>
+            </li>
+            <li class="nav-item list-unstyled">
+                <%= link_to("ログイン", login_path, class: "nav-link") %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </header>

@@ -62,7 +62,7 @@ $(document).on('turbolinks:load', function () {
               if (getData == "undefined") {
                 getData = ""
               }
-              $('#foodrecord_tags').val(getData + tag + ",");
+              $('input[name="food_record[tag_list]"]').val(getData + tag + ",");
             })
             $('#checkfood').html('解析結果：OK');
             $('.actions input').prop("disabled", false);

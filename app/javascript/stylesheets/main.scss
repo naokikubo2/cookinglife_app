@@ -65,3 +65,20 @@ footer #footer-text{
 .navbar-toggler .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(105,105,105,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
+
+.container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 500px;
+}
+
+img#comment_user_img {
+  width:  30px;       /* ※縦横を同値に */
+  height: 30px;       /* ※縦横を同値に */
+  border-radius: 50%;
+}
+
+.bootstrap-tagsinput .badge {
+  margin: 2px 2px;
+  padding:5px 8px;
+}

@@ -1,33 +1,66 @@
-<h1>FoodRecords#show</h1>
-<p>Find me in app/views/food_records/show.html.erb</p>
+<main id="nottop" class="text-center mt-3">
+  <div class="container">
+    <div class="h5 text-muted">
+      <%= date_format(@food_record.food_date) %><br/>
+      <%= day_format(@food_record.food_date) %>
+    </div>
+    <div class="h3">
+      <%= @food_record.food_name %>
+    </div>
+      <% if @food_record.user_id == current_user.id %>
+        <div class="text-right">
+        <%= link_to edit_food_record_path(@food_record) do %>
+          <i class="far fa-edit"></i>
+        <% end %>
+        </div>
+      <%end %>
+    <div>
+    <div class="card mx-auto" style="max-width: 400px;">
+      <%= image_tag @food_record.image.url, class: "card-img" %>
+      <div class="card-img-overlay text-left">
+        <%= render partial: "tags", locals: { tags: @tags } %>
+      </div>
+      <div class="card-body row">
+        <div class="col"><%= star(@food_record.total_score) %></div>
+        <div class="col"><%= render partial: 'favorite' %></div>
+      </div>
+    </div>
 
-<%= image_tag @food_record.image.url %>
+    <div class="d-none" id="workload_score" ><%= @food_record.workload_score %></div>
+    <div class="d-none" id="healthy_score"><%= @food_record.healthy_score %></div>
+    <div class="d-flex justify-content-between text-danger">
+      <div class="p-2">楽(調理)</div>
+      <div class="p-2"></div>
+      <div class="p-2">大変(調理)</div>
+    </div>
+    <canvas id="myChart"></canvas>
+    <div class="d-flex justify-content-between text-primary">
+      <div class="p-2">オイリー</div>
+      <div class="p-2"></div>
+      <div class="p-2">ヘルシー</div>
+    </div>
+    <%= javascript_pack_tag "graph" %>
 
-<p><%= render partial: "tags", locals: { tags: @tags } %></p>
+    <div><%= "#{cov_score_to_adverb("楽", "大変", @food_record.workload_score)} / #{cov_score_to_adverb("こってり", "ヘルシー", @food_record.healthy_score)}" %></div>
+    <p>時間帯：<%= cov_en_to_ja(@food_record.food_timing) %></p>
+    <p>メモ：<%= @food_record.memo %></p>
 
-<p>料理名：<%= @food_record.food_name %></p>
-<p>日付：<%= date_format(@food_record.food_date) %></p>
-<p>総合得点：<%= star(@food_record.total_score) %></p>
-<p>調理の手間：<%= cov_score_to_adverb("楽", "大変", @food_record.workload_score) %></p>
-<p>ヘルシー：<%= cov_score_to_adverb("こってり", "ヘルシー", @food_record.healthy_score) %></p>
-<p>時間帯：<%= cov_en_to_ja(@food_record.food_timing) %></p>
-<p>メモ：<%= @food_record.memo %></p>
+    <% if @food_record.weather_main.present? %>
+      <div class="row border-top">
+      <div class="col text-right"><%= image_tag "http://openweathermap.org/img/wn/#{@food_record.weather_icon.chop}d@2x.png" %></div>
+      <div class="col text-left d-flex align-items-center">
+        <div class="h4"><%= @food_record.temp %></div>
+        <div>℃</div>
+      </div>
+    </div>
+    <div class="text-muted">気圧：<%= "#{@food_record.pressure}hPa" %></div>
+    <div class="text-muted">湿度：<%= "#{@food_record.humidity}%" %></div>
+    <% else %>
+      <p>登録された天気情報なし</p>
+    <% end %>
 
-<% if @food_record.user_id == current_user.id %>
-  <%= link_to "編集", edit_food_record_path(@food_record) %>
-<%end %>
-
-<%= render partial: 'favorite' %>
-
-<h2>天気情報</h2>
-<% if @food_record.weather_main.present? %>
-  <p>天気：<%= @food_record.weather_main %></p>
-  <p>気温：<%= "#{@food_record.temp} (#{@food_record.temp_min}~#{@food_record.temp_max})[℃]" %></p>
-  <p>気圧：<%= "#{@food_record.pressure}[hPa]" %></p>
-  <p>湿度：<%= "#{@food_record.humidity}[%]" %></p>
-  <%= image_tag "http://openweathermap.org/img/wn/#{@food_record.weather_icon.chop}d@2x.png" %>
-<% else %>
-  <p>登録された天気情報なし</p>
-<% end %>
-
-<%= render partial: 'fr_comments/new' %>
+    <div class="border-top">
+      <%= render partial: 'fr_comments/new' %>
+    </div>
+  </div>
+</main>

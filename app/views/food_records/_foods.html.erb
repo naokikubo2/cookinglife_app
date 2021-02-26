@@ -1,11 +1,14 @@
 <% if food_records.present? %>
   <% food_records.each do |food_record| %>
-    <div>
-      日付：<%= date_format(food_record.food_date) %>
-      料理名：<%= food_record.food_name %>
-      <%= link_to "表示", food_record_path(food_record) %>
-      <%= link_to "編集", edit_food_record_path(food_record) %><br/>
-      <%= image_tag food_record.image.url %>
+    <div class="mb-2 text-center">
+      <%= date_format(food_record.food_date) %>
+      <%= food_record.food_name %>
+      <%= link_to edit_food_record_path(food_record) do %>
+        <i class="far fa-edit"></i>
+      <% end %><br>
+      <%= link_to food_record_path(food_record) do %>
+        <%= image_tag food_record.image.url %>
+      <% end %>
     </div>
   <% end %>
 <% else %>

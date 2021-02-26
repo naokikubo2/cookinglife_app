@@ -8,12 +8,22 @@
 
   </div>
   <div class="container-fluid">
-
-    <%= render partial: "tags", locals: { tags: @tags } %>
-
-    <p><%= render partial: "foods", locals: { food_records: @food_records } %></p>
-
-    <h2>フォロー中ユーザーの 料理一覧</h2>
-    <p><%= render partial: "foods", locals: { food_records: @food_records_followings } %></p>
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="item1-tab" data-toggle="tab" href="#item1" role="tab" aria-controls="item1" aria-selected="true">私の料理</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="item2-tab" data-toggle="tab" href="#item2" role="tab" aria-controls="item2" aria-selected="false">フォローユーザーの料理</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="item1" role="tabpanel" aria-labelledby="item1-tab">
+        <%= render partial: "tags", locals: { tags: @tags } %>
+        <p><%= render partial: "foods", locals: { food_records: @food_records } %></p>
+      </div>
+      <div class="tab-pane fade" id="item2" role="tabpanel" aria-labelledby="item2-tab">
+        <p><%= render partial: "foods", locals: { food_records: @food_records_followings } %></p>
+      </div>
+    </div>
   </div>
 </main>

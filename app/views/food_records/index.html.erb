@@ -1,17 +1,19 @@
-<h1>FoodRecords#index</h1>
-<p>Find me in app/views/food_records/index.html.erb</p>
+<main id="nottop" class="mb-5 pb-5">
+  <div class="container-fluid jumbotron">
 
-<h2>今日のおすすめ料理</h2>
-<%= render partial: "recommend", locals: { food: @food_recommend } %>
+    <div>
+      <div class="h3 text-center border-bottom">料理の絞り込み</div>
+      <%= render partial: "search", locals: { search: @search } %>
+    </div>
 
-<h2><%= current_user.name %>さんの タグ一覧</h2>
-<%= render partial: "tags", locals: { tags: @tags } %>
+  </div>
+  <div class="container-fluid">
 
-<h2><%= current_user.name %>さんの 料理一覧</h2>
-<p><%= render partial: "foods", locals: { food_records: @food_records } %></p>
+    <%= render partial: "tags", locals: { tags: @tags } %>
 
-<h2>料理の絞り込み</h2>
-<p><%= render partial: "search", locals: { search: @search } %></p>
+    <p><%= render partial: "foods", locals: { food_records: @food_records } %></p>
 
-<h2>フォロー中ユーザーの 料理一覧</h2>
-<p><%= render partial: "foods", locals: { food_records: @food_records_followings } %></p>
+    <h2>フォロー中ユーザーの 料理一覧</h2>
+    <p><%= render partial: "foods", locals: { food_records: @food_records_followings } %></p>
+  </div>
+</main>

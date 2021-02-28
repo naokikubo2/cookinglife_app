@@ -23,3 +23,4 @@ import "../stylesheets/application.scss"
 // import JavaScript files
 import "./food_record"
 import "./user"
+import "./flash"

@@ -1,0 +1,5 @@
+<%= javascript_pack_tag "tagsinput" %>
+<div class="foodrecord-tags-field mx-auto w-75">
+  <%= f.label :tag_list %>
+  <%= f.text_field :tag_list, value: @food_record.tag_list.join(','), id: "foodrecord_tags", "data-role": "tagsinput" %>
+</div>

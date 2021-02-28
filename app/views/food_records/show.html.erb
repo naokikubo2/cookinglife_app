@@ -7,13 +7,13 @@
     <div class="h3">
       <%= @food_record.food_name %>
     </div>
-      <% if @food_record.user_id == current_user.id %>
-        <div class="text-right">
-        <%= link_to edit_food_record_path(@food_record) do %>
-          <i class="far fa-edit"></i>
-        <% end %>
-        </div>
-      <%end %>
+    <% if @food_record.user_id == current_user.id %>
+      <div class="text-right">
+      <%= link_to edit_food_record_path(@food_record) do %>
+        <i class="far fa-edit fa-lg"></i>
+      <% end %>
+      </div>
+    <%end %>
     <div>
     <div class="card mx-auto" style="max-width: 400px;">
       <%= image_tag @food_record.image.url, class: "card-img" %>

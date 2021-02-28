@@ -15,11 +15,7 @@
 
         <div id="checkfood"></div>
 
-        <%= javascript_pack_tag "tagsinput" %>
-        <div class="foodrecord-tags-field mx-auto w-50">
-          <%= f.label :tag_list %>
-          <%= f.text_field :tag_list, value: @food_record.tag_list.join(','), id: "foodrecord_tags", "data-role": "tagsinput" %>
-        </div>
+       <%= render partial: "input_tags", locals: { f: f } %>
 
         <div class="actions mt-3">
           <%= f.submit "登録する", class: "btn btn-primary" %>

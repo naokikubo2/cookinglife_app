@@ -1,15 +1,19 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<main id="nottop" class="text-center mt-4 pt-4 mt-3 mb-5 pb-5">
+  <div class="container-fluid">
+    <h2 class="border-bottom text-muted mb-3">ユーザー情報</h2>
 
-<h2>ユーザー名：<%= @user.name %></h2>
+    <h2>ユーザー名：<%= @user.name %></h2>
 
-<%= render partial: 'user_icon', locals: { user: @user } %>
+    <%= render partial: 'user_icon', locals: { user: @user } %>
 
-<div>
-  <% if @user.id == current_user.id %>
-    <%= link_to 'Edit', edit_user_registration_path(current_user) %>
-  <% else %>
-    <%= render partial: 'follow' %>
-    <%= render partial: 'follow_count'%>
-  <% end %>
-</div>
+    <div>
+      <% if @user.id == current_user.id %>
+        <%= link_to '編集する', edit_user_registration_path(current_user) %>
+      <% else %>
+        <%= render partial: 'follow' %>
+        <%= render partial: 'follow_count'%>
+      <% end %>
+    </div>
+
+  </div>
+</main>

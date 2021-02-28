@@ -1,0 +1,6 @@
+<% users.each do |user| %>
+  <div class="border-bottom pt-2 pb-2" >
+    <%= render partial: 'index_user_icon', locals: { user: user } %>
+    <%= link_to user.name, user %>
+  </div>
+<% end %>

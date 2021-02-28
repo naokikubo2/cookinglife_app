@@ -1,17 +1,20 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<main id="nottop" class="text-center mt-4 pt-4 mt-3 mb-5 pb-5">
+  <div class="container-fluid">
+    <h2 class="border-bottom text-muted mb-3">ユーザー一覧</h2>
 
-<h2>全ユーザー</h2>
-<% @users.each do |user| %>
-  <div>
-    <%= render partial: 'user_icon', locals: { user: user } %>
-    <%= link_to user.name, user %>
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="item1-tab" data-toggle="tab" href="#item1" role="tab" aria-controls="item1" aria-selected="true">全ユーザ</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="item2-tab" data-toggle="tab" href="#item2" role="tab" aria-controls="item2" aria-selected="false">友達(相互フォロー)</a>
+  </li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane fade show active" id="item1" role="tabpanel" aria-labelledby="item1-tab">
+    <p><%= render partial: "index_user", locals: { users: @users } %></p>
   </div>
-<% end %>
-
-<h2>友達(相互フォロー)</h2>
-<% @users_friend.each do |user| %>
-  <div>
-    <%= link_to user.name, user %>
+  <div class="tab-pane fade" id="item2" role="tabpanel" aria-labelledby="item2-tab">
+    <p><%= render partial: "index_user", locals: { users: @users_friend } %></p>
   </div>
-<% end %>
+</div>

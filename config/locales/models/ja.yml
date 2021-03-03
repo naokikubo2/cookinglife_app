@@ -16,3 +16,5 @@ ja:
         food_date: 料理の日付
       food_share:
         limit_number: 募集人数
+        give_time: 受け渡し時間
+        limit_time: 応募期限

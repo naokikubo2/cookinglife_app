@@ -1,5 +1,5 @@
 <main>
-  <div class="container">
+  <div class="container mb-5 pb-5">
     <% if user_signed_in? %>
     <div class="row">
       <div class="col-sm-4 d-none d-sm-block">
@@ -56,23 +56,6 @@
           </div>
         <% end %>
       </div>
-
-      <div>
-        <%= link_to "登録情報を変更する", edit_user_registration_path %>
-        <%= link_to "ユーザ削除", user_registration_path, method: :delete, data: { confirm: "You sure?" } %>
-      </div>
-      <div>
-        <%= link_to("ユーザ一覧", users_url) %>
-      </div>
-      <div>
-        <%= link_to "料理を登録する", new_food_record_path %>
-        <%= link_to "料理一覧", food_records_path %>
-      </div>
-      <div>
-        <%= link_to "お裾分けを募集する", new_food_share_path %>
-        <%= link_to "お裾分け料理の一覧", food_shares_path %>
-      </div>
-
     </div>
     <% end %>
   </div>

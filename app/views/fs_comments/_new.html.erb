@@ -1,10 +1,17 @@
-<div id="comments">
+<div id="comments" class="my-3">
   <%= render partial: 'fs_comments/index' %>
 </div>
 
-<%= form_for :fs_comment, url: food_share_fs_comments_path(@food_share), remote: true do |f| %>
-  <%= f.text_area :content, id: "comments_content" %>
-  <div>
-    <%= f.submit "コメント" %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= form_for :fs_comment, url: food_share_fs_comments_path(@food_share), remote: true do |f| %>
+      <%= f.text_area :content, id: "comments_content", class: 'w-75' %>
+
+      <div class="float-right mx-5">
+        <%= f.button :type => "submit", style: 'border-style: none;' do %>
+          <i class="fas fa-paper-plane"></i>
+        <% end %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

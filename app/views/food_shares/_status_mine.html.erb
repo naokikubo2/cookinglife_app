@@ -1,18 +1,18 @@
 <% if current_user.id == @food_share.user_id %>
   <% case @flag_time %>
   <% when "before" %>
-    <h3>お裾分け受付期間内</h3>
+    <div class="bg-info">募集中</div>
   <% when "active" %>
     <% if @food_share.any_uncomplete? %>
-      <h3>お裾分け可能期間です。時間厳守で、お裾分けをしましょう。</h3>
+      <div class="bg-danger">お裾分け可能期間です。時間厳守で、お裾分けをしましょう。</div>
     <% else %>
-      <h3>お裾分け済み。お疲れ様でした。</h3>
+      <div class="bg-secondary">お裾分け完了</div>
     <% end %>
   <% when "after" %>
     <% if @food_share.any_uncomplete? %>
-      <h3>お裾分け完了時間を超過しています。お裾分けが完了通知が押されていません。</h3>
+      <div class="bg-danger">お裾分け完了時間を超過しています。全員のお裾分けが完了通知が押されていません。</div>
     <% else %>
-      <h3>お裾分け済み。お疲れ様でした。</h3>
+      <div class="bg-secondary">お裾分け完了</div>
     <% end %>
   <% end %>
 <% end %>

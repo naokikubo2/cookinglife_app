@@ -6,8 +6,8 @@ module ApplicationHelper
 
   def take_button(user, food_share)
     if food_share.takes?(user) || food_share.limit_number > @food_share.matchings.count
-      label = food_share.takes?(user) ? "申請済み" : "お裾分け希望する"
-      link_to(label, food_share_matching_path(food_share), method: :post, remote: true)
+      label, key = food_share.takes?(user) ? %w[申請済み secondary] : %w[お裾分けを希望する primary]
+      link_to(label, food_share_matching_path(food_share), method: :post, remote: true, class: "btn btn-#{key} rounded-pill")
     else
       '募集人数上限に達しました'
     end

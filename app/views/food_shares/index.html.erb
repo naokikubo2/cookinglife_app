@@ -15,7 +15,7 @@
           <% @friend_undone.each do |food_share| %>
             <%= link_to food_share_path(food_share) do %>
               <%= food_share.food_name %>
-              <%= time_short(food_share.give_time) %>
+              <%= time_short(food_share.give_time) %><br/>
             <% end %>
           <% end %>
         </div>
@@ -27,7 +27,7 @@
           <% @mine_undone.each do |food_share| %>
             <%= link_to food_share_path(food_share) do %>
               <%= food_share.food_name %>
-              <%= time_short(food_share.give_time) %>
+              <%= time_short(food_share.give_time) %><br/>
             <% end %>
           <% end %>
         </div>

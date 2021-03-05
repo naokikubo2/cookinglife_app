@@ -68,7 +68,6 @@ RSpec.describe "food_shares", type: :system do
       it 'not_achieve to complete' do
         click_link 'お裾分け完了'
         page.driver.browser.switch_to.alert.accept
-        visit food_share_path(food_share_other)
         wait_until(7) do
           expect(page).to have_content 'お裾分け完了'
         end

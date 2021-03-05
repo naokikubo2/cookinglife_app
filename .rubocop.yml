@@ -181,6 +181,7 @@ Style/GuardClause:
     - 'db/migrate/20201223110713_change_collation_for_tag_names.acts_as_taggable_on_engine.rb'
     - 'db/migrate/20201223110714_add_missing_indexes_on_taggings.acts_as_taggable_on_engine.rb'
     - 'app/controllers/food_shares_controller.rb'
+    - 'app/controllers/homes_controller.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -269,3 +270,7 @@ Metrics/ClassLength:
 Lint/SuppressedException:
   Exclude:
     - 'app/models/food_record.rb'
+
+Style/HashLikeCase:
+  Exclude:
+    - 'app/helpers/devise_helper.rb'

@@ -140,7 +140,7 @@ RSpec.describe "FoodRecords", type: :request do
         food_record4 = create(:food_record, food_name: "food4", healthy_score: -3, workload_score: -3, food_date: Time.zone.today - 12, user: current_user)
         get root_path
         expect(response.status).to eq(200)
-        expect(response.body).to include("#{food_record4.image.url}").twice
+        expect(response.body).to include(food_record4.image.url.to_s).twice
       end
     end
 
@@ -150,8 +150,8 @@ RSpec.describe "FoodRecords", type: :request do
         food_record4 = create(:food_record, food_name: "food4", healthy_score: -3, workload_score: -3, food_date: Time.zone.today - 12, user: current_user)
         get root_path
         expect(response.status).to eq(200)
-        expect(response.body).to include("#{food_record2.image.url}").twice
-        expect(response.body).to include("#{food_record4.image.url}").once
+        expect(response.body).to include(food_record2.image.url.to_s).twice
+        expect(response.body).to include(food_record4.image.url.to_s).once
       end
     end
   end

@@ -10,9 +10,7 @@ class HomesController < ApplicationController
       # 天気情報を受け取る
       open_weather = Api::OpenWeatherMap::Request.new(current_user.location_id)
       response = open_weather.request
-      if response['cod'] == 200
-        @weather = Api::OpenWeatherMap::Request.attributes_for(response)
-      end
+      @weather = Api::OpenWeatherMap::Request.attributes_for(response) if response['cod'] == 200
     end
   end
 end

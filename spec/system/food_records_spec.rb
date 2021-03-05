@@ -52,7 +52,7 @@ RSpec.describe "food_records", type: :system do
       it 'post and deletable' do
         first("#comments_content").set("Comment#{timestamp}")
 
-        first('input[value="コメント"]').click
+        find('.fa-paper-plane').click
 
         wait_until(5) do
           all("#comments_body div").last.present?
@@ -60,7 +60,7 @@ RSpec.describe "food_records", type: :system do
 
         expect(all("#comments div").last.text).to eq("Comment#{timestamp}")
 
-        find('a', text: 'Delete').click
+        find('.fa-trash-alt').click
         wait_until(7) do
           # check deleted
           all("#comments_body div").last.nil?

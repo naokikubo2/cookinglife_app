@@ -4,7 +4,11 @@
     <% @food_record.fr_comments.each do |comment| %>
       <div class="border-top row">
         <div class="col-2 d-flex align-items-center">
-          <%= image_tag comment.user.image.url, id: "comment_user_img" %>
+          <% if comment.user.image.present? %>
+            <%= image_tag comment.user.image.url, id: "comment_user_img" %>
+          <% else %>
+            <%= image_pack_tag "user_default.png", id: "comment_user_img" %>
+          <% end %>
         </div>
         <div class="col-10">
           <div class="small text-muted text-left"><%= comment.user.name %></div>

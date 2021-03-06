@@ -1,25 +1,26 @@
-<h1>FoodRecords#new</h1>
-<p>Find me in app/views/food_records/new.html.erb</p>
+<main id="nottop" class="text-center mt-5 pt-5 mb-5 pb-5">
+  <div class="jumbotron">
+    <div class="container">
 
-<%= form_with(model: @food_record, local: true) do |f| %>
-  <%= render 'layouts/error_messages', model: f.object %>
+      <%= form_with(model: @food_record, local: true) do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
 
-  <%= f.label :image, class: 'image' do %>
-      <%= f.file_field :image, id: 'food_img' %>
-  <% end %>
+        <%= f.label :image, class: 'image' do %>
+            <%= f.file_field :image, id: 'food_img', class: 'btn-primary' %>
+        <% end %>
 
-  <div class="image-preview">
-    <img id="image_img_prev" src="#">
+        <div class="image-preview">
+          <%= image_pack_tag "image_default.png", id: "image_img_prev" %>
+        </div>
+
+        <div id="checkfood"></div>
+
+       <%= render partial: "input_tags", locals: { f: f } %>
+
+        <div class="actions mt-3">
+          <%= f.submit "登録する", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <div id="checkfood"></div>
-
-  <div class="foodrecord-tags-field">
-    <%= f.label :tag_list %>
-    <%= f.text_field :tag_list, value: @food_record.tag_list.join(','), id: "foodrecord_tags" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "登録する" %>
-  </div>
-<% end %>
+</main>

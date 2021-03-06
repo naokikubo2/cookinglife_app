@@ -11,6 +11,7 @@ RSpec.describe "food_shares", type: :system do
     log_in(login_user, type: :system)
     WebMock.enable! # webmockを有効化
     set_distance_response
+    set_response
   end
 
   after { WebMock.disable! }
@@ -24,7 +25,7 @@ RSpec.describe "food_shares", type: :system do
       it 'post and deletable' do
         first("#comments_content").set("Comment#{timestamp}")
 
-        first('input[value="コメント"]').click
+        find('.fa-paper-plane').click
 
         wait_until(5) do
           all("#comments_body div").last.present?
@@ -32,7 +33,7 @@ RSpec.describe "food_shares", type: :system do
 
         expect(all("#comments div").last.text).to eq("Comment#{timestamp}")
 
-        find('a', text: 'Delete').click
+        find('.fa-trash-alt').click
         wait_until(7) do
           # check deleted
           all("#comments_body div").last.nil?
@@ -66,9 +67,9 @@ RSpec.describe "food_shares", type: :system do
     context "when click complete button" do
       it 'not_achieve to complete' do
         click_link 'お裾分け完了'
-        visit food_share_path(food_share_other)
-        wait_until(5) do
-          expect(page).to have_content 'お裾分け済み'
+        page.driver.browser.switch_to.alert.accept
+        wait_until(7) do
+          expect(page).to have_content 'お裾分け完了'
         end
       end
     end

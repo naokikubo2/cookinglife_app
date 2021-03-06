@@ -1,61 +1,70 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<main id="nottop" class="text-center mt-4 pt-4 mt-3 mb-5 pb-5">
+  <div class="container-fluid">
+    <h2 class="border-bottom text-muted mb-3">ユーザーの編集</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
 
-  <%= f.label :image, class: 'image' do %>
-    <%= f.file_field :image, id: 'user_img' %>
-  <% end %>
+      <div class="form-group">
+        <%= f.label :image, class: 'image' do %>
+          <%= f.file_field :image, id: 'user_img', class: 'btn-primary' %>
+        <% end %>
 
-  <div class="image-preview">
-    <img id="user_img_prev" src="#">
-  </div>
+        <div class="image-preview">
+          <% if current_user.image.present? %>
+            <%= image_tag current_user.image.url, id: "user_img_prev" %>
+          <% else %>
+            <%= image_pack_tag "user_default.png", id: "user_img_prev" %>
+          <% end %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
+      <div class="form-group">
+        <%= f.label :name %><br />
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'w-75' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="form-group">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'w-75' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :location_id %><br />
-    <%= f.collection_select :location_id, City.all, :location_id, :name %>
-  </div>
+      <div class="form-group">
+        <%= f.label :location_id %><br />
+        <%= f.collection_select :location_id, City.all, :location_id, :name, {}, class: 'form-control w-75 mx-auto' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
-  </div>
+      <div class="form-group">
+        <%= f.label :address %><br />
+        <%= f.text_field :address, autofocus: true, autocomplete: "address", class: 'w-75' %>
+      </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+      <div class="form-group">
+        <%= f.label :password, "パスワード" %> <i>(パスワードを更新しない場合は、空欄可)</i><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: 'w-75' %>
+        <% if @minimum_password_length %>
+          <br />
+          <em>最小文字数：<%= @minimum_password_length %> 文字</em>
+        <% end %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, "パスワード（確認）" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'w-75' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit "更新する", class: "btn btn-primary" %>
+      </div>
     <% end %>
+
+    <div class="border-top mb-5">
+      <%= link_to registration_path(resource_name), method: :delete, data: { confirm: "本当に退会しますか?" },
+          class: 'btn btn-danger mt-3 float-right' do %> 退会する<% end %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</main>

@@ -1,17 +1,29 @@
-<h1>FoodRecords#index</h1>
-<p>Find me in app/views/food_records/index.html.erb</p>
+<main id="nottop" class="mb-5 pb-5">
+  <div class="container-fluid jumbotron">
 
-<h2>今日のおすすめ料理</h2>
-<%= render partial: "recommend", locals: { food: @food_recommend } %>
+    <div>
+      <div class="h3 text-center border-bottom mt-2 pt-2">料理の絞り込み</div>
+      <%= render partial: "search", locals: { search: @search } %>
+    </div>
 
-<h2><%= current_user.name %>さんの タグ一覧</h2>
-<%= render partial: "tags", locals: { tags: @tags } %>
-
-<h2><%= current_user.name %>さんの 料理一覧</h2>
-<p><%= render partial: "foods", locals: { food_records: @food_records } %></p>
-
-<h2>料理の絞り込み</h2>
-<p><%= render partial: "search", locals: { search: @search } %></p>
-
-<h2>フォロー中ユーザーの 料理一覧</h2>
-<p><%= render partial: "foods", locals: { food_records: @food_records_followings } %></p>
+  </div>
+  <div class="container-fluid">
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="item1-tab" data-toggle="tab" href="#item1" role="tab" aria-controls="item1" aria-selected="true">私の料理</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="item2-tab" data-toggle="tab" href="#item2" role="tab" aria-controls="item2" aria-selected="false">フォローユーザーの料理</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="item1" role="tabpanel" aria-labelledby="item1-tab">
+        <%= render partial: "tags", locals: { tags: @tags } %>
+        <p><%= render partial: "foods", locals: { food_records: @food_records } %></p>
+      </div>
+      <div class="tab-pane fade" id="item2" role="tabpanel" aria-labelledby="item2-tab">
+        <p><%= render partial: "foods", locals: { food_records: @food_records_followings } %></p>
+      </div>
+    </div>
+  </div>
+</main>

@@ -37,10 +37,14 @@ module FoodRecordHelper
   end
 
   def tag_link(tag)
-    link_to "#{tag.name}(#{tag.taggings_count})", tags_path(tag: tag.name)
+    link_to "#{tag.name}(#{tag.taggings_count})", tags_path(tag: tag.name), class: "badge badge-primary"
   end
 
   def date_format(date)
-    l date, format: :long if date.present?
+    l date, format: :default if date.present?
+  end
+
+  def day_format(date)
+    date.strftime("%a") if date.present?
   end
 end

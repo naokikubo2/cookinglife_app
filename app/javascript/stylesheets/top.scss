@@ -1,0 +1,43 @@
+img#fr_index{
+  /*画像表示の仕方*/
+  object-fit: cover;
+}
+
+img#img_background {
+  width:  100%;
+  max-width: 500px;
+  max-height: 300px;
+  background-size:cover;
+  margin : 0 auto;
+  filter: blur(2px);
+  z-index: -1;
+}
+
+#food_date{
+  position: absolute;/*絶対配置*/
+  color: white;/*文字は白に*/
+  top: 0;
+  left: 0;
+  font-size: 5px;
+}
+
+.bg_text{
+  position: relative;/*相対配置*/
+}
+
+ .bg_text p {
+  position: absolute;/*絶対配置*/
+  color: white;/*文字は白に*/
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  margin:0;
+  padding:0;
+  z-index: 1;
+ }
+
+ .col-4{
+  padding:1px 1px 1px 1px;
+}

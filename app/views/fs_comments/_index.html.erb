@@ -1,12 +1,29 @@
-<h4>コメント</h4>
-<div id="comments_body">
-  <% @food_share.fs_comments.each do |comment| %>
-    ユーザー名：<%= comment.user.name %>さん
-    <% if comment.user == current_user %>
-      <%= link_to "Delete", food_share_fs_comment_path(@food_share, comment), method: :delete, remote: true %>
+<div class="my-5">
+  <div class="h4">コメント</div>
+  <div class="border-bottom" id="comments_body">
+    <% @food_share.fs_comments.each do |comment| %>
+      <div class="border-top row">
+        <div class="col-2 d-flex align-items-center">
+          <% if comment.user.image.present? %>
+            <%= image_tag comment.user.image.url, id: "comment_user_img" %>
+          <% else %>
+            <%= image_pack_tag "user_default.png", id: "comment_user_img" %>
+          <% end %>
+        </div>
+        <div class="col-10">
+          <div class="small text-muted text-left"><%= comment.user.name %></div>
+          <div class="float-right">
+            <% if comment.user == current_user %>
+              <%= link_to  food_share_fs_comment_path(@food_share, comment), method: :delete, remote: true do %>
+                <i class="far fa-trash-alt"></i>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="text-left text-break">
+            <%= comment.content %>
+          </div>
+        </div>
+      </div>
     <% end %>
-    <div>
-      <%= comment.content %>
-    </div>
-  <% end %>
+  </div>
 </div>

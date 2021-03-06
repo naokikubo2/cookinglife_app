@@ -38,7 +38,8 @@ RSpec.describe "FoodShares", type: :request do
         get food_share_path(food_share)
         expect(response.status).to eq(200)
         expect(response.body).to include("food #{timestamp}")
-        expect(response.body).to include("あなたの自宅から徒歩 20 mins ,距離は1.3 kmです。")
+        expect(response.body).to include("あなたの自宅から徒歩 20 mins")
+        expect(response.body).to include("距離は1.3 kmです。")
       end
     end
   end

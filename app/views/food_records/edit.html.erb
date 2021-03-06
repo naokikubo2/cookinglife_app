@@ -1,55 +1,75 @@
-<h1>FoodRecords#edit</h1>
-<p>Find me in app/views/food_records/edit.html.erb</p>
+<main id="nottop" class="text-center mt-3 mb-5 pb-5">
+  <div class="container-fluid">
+    <h2 class="border-bottom text-muted mb-3">料理編集</h2>
 
-<%= image_tag @food_record.image.url %>
+    <div class="text-right">
+      <%= link_to food_record_path(@food_record), method: :delete, data: {confirm: "本当に削除しますか？"} do %>
+        <i class="fas fa-trash-alt fa-lg"></i>
+      <% end %>
+    </div>
+    <div class="card mx-auto" style="max-width: 400px;">
+      <%= image_tag @food_record.image.url, class: "card-img" %>
+    </div>
 
-<%= form_with(model: @food_record, local: true) do |f| %>
-  <%= render 'layouts/error_messages', model: f.object %>
+    <%= form_with(model: @food_record, local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
 
-  <%= f.label :tag_list %>
-  <%= f.text_field :tag_list, value: @food_record.tag_list.join(','), class: "form-control" %>
+      <%= render partial: "input_tags", locals: { f: f } %>
 
-  <div class="form-group">
-    <%= f.label :food_name, "料理名" %><br />
-    <%= f.text_field :food_name, autofocus: true %>
-  </div>
+      <div class="form-group">
+        <%= f.label :food_name, "料理名" %><br />
+        <%= f.text_field :food_name, autofocus: true, class: 'form-control w-75  mx-auto' %>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :food_date, "日付" %><br />
-    <%= f.date_field :food_date, autofocus: true %>
-  </div>
+      <div class="form-group">
+        <%= f.label :food_date, "日付" %><br />
+        <%= f.date_field :food_date, autofocus: true, class: 'form-control w-75  mx-auto' %>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :total_score, "総合得点" %><br />
-    <%= f.select :total_score, [["☆", 1], ["☆☆", 2], ["☆☆☆", 3], ["☆☆☆☆", 4], ["☆☆☆☆☆", 5]], include_blank: "選択して下さい" %>
-  </div>
+      <div class="form-group">
+        <%= f.label :total_score, "総合得点" %><br />
+        <%= f.select :total_score, Constants::TOTAL_SCORE, {}, class: "form-control  w-75 mx-auto" %>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :workload_score, "調理の手間" %><br />
-    <%= f.select :workload_score, [["とても楽", -4], ["楽", -3], ["まぁまぁ楽", -2], ["少し楽", -1], ["普通", 0], ["少し大変", 1], ["まぁまぁ大変", 2], ["大変", 3], ["とても大変", 4]], include_blank: "選択して下さい" %>
-  </div>
+      <div class="form-group">
+        <%= f.label :workload_score, "調理の手間" %><br />
+        <%= f.select :workload_score, Constants::WORKLOAD_SCORE, {}, class: "form-control w-75 mx-auto" %>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :healthy_score, "カロリー" %><br />
-    <%= f.select :healthy_score, [["とてもこってり", -4], ["こってり", -3], ["まぁまぁこってり", -2], ["少しこってり", -1], ["普通", 0], ["少しヘルシー", 1], ["まぁまぁヘルシー", 2], ["ヘルシー", 3], ["とてもヘルシー", 4]], include_blank: "選択して下さい" %>
-  </div>
+      <div class="form-group">
+        <%= f.label :healthy_score, "カロリー" %><br />
+        <%= f.select :healthy_score, Constants::HEALTHY_SCORE, {}, class: "form-control w-75 mx-auto" %>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :food_timing, "時間帯" %><br />
-    <%= f.select :food_timing, [["朝", "morning"], ["昼", "lunch"], ["夜", "dinner"], ["間食", "snack"]], include_blank: "選択して下さい" %>
-  </div>
+      <div class="form-group text-center w-100">
+        <%= f.label :food_timing %>
+        <div class="btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-outline-secondary active">
+            <%= f.radio_button :food_timing, "" %> 未選択
+          </label>
+          <label class="btn btn-outline-secondary">
+            <%= f.radio_button :food_timing, "morning", {} %> 朝
+          </label>
+          <label class="btn btn-outline-secondary">
+            <%= f.radio_button :food_timing, "lunch", {} %> 昼
+          </label>
+          <label class="btn btn-outline-secondary">
+            <%= f.radio_button :food_timing, "dinner", {} %> 夜
+          </label>
+          <label class="btn btn-outline-secondary">
+            <%= f.radio_button :food_timing, "snack", {} %> 間食
+          </label>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :memo, "メモ" %><br />
-    <%= f.text_field :memo, autofocus: true %>
-  </div>
+      <div class="form-group">
+        <%= f.label :memo, "メモ" %><br />
+        <textarea class="form-control w-75 mx-auto" rows="3" name="item[memo]" id="item_memo"></textarea>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "登録する" %>
-  </div>
-
-<% end %>
-
-<%= link_to "削除する", food_record_path(@food_record), method: :delete %>
-
-
+      <div class="actions">
+        <%= f.submit "登録", class: "btn btn-outline-primary w-25" %>
+      </div>
+    <% end %>
+    </div>
+</main>

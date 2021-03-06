@@ -1,24 +1,79 @@
-<h1>FoodShares#index</h1>
-<p>Find me in app/views/food_shares/index.html.erb</p>
+<main id="nottop" class="text-center mt-4 pt-4 mt-3 mb-5 pb-5">
+  <div class="container-fluid">
+    <h2 class="border-bottom text-muted mb-3">お裾分け</h2>
 
-<h2>ログインユーザーのお裾分け料理</h2>
-<h3>お裾分け直近の料理</h3>
-<%= render partial: "shared_food", locals: { food_shares: @mine_undone } %>
+    <%= link_to new_food_share_path, class: "btn btn-outline-primary mb-3" do %>
+      <i class="fas fa-hands fa-3x"></i>
+      <div>お裾分けする</div>
+    <% end %>
+
+    <% if @friend_undone.present? || @mine_undone.present? %>
+
+      <% if @friend_undone.present? %>
+        <div class="border" >
+          <div class="h4">直近の<strong>もらう</strong></div>
+          <% @friend_undone.each do |food_share| %>
+            <%= link_to food_share_path(food_share) do %>
+              <%= food_share.food_name %>
+              <%= time_short(food_share.give_time) %><br/>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if @mine_undone.present? %>
+        <div class="border mb-3" >
+          <div class="h4">直近の<strong>あげる</strong></div>
+          <% @mine_undone.each do |food_share| %>
+            <%= link_to food_share_path(food_share) do %>
+              <%= food_share.food_name %>
+              <%= time_short(food_share.give_time) %><br/>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="h2">直近の予定なし</div>
+    <% end %>
 
 
-<h3>お裾分け募集中の料理</h3>
-<%= render partial: "shared_food", locals: { food_shares: @mine_before } %>
 
-
-<h3>お裾分け終了後の料理</h3>
-<%= render partial: "shared_food", locals: { food_shares: @mine_done } %>
-
-<h2>友達のお裾分け料理</h2>
-<h3>応募済みのお裾分け料理</h3>
-<%= render partial: "shared_food", locals: { food_shares: @friend_undone } %>
-
-<h3>募集中のお裾分け料理</h3>
-<%= render partial: "shared_food", locals: { food_shares: @friend_before } %>
-
-<h3>終了したお裾分け料理</h3>
-<%= render partial: "shared_food", locals: { food_shares: @friend_done } %>
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="item1-tab" data-toggle="tab" href="#item1" role="tab" aria-controls="item1" aria-selected="true">探す</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="item2-tab" data-toggle="tab" href="#item2" role="tab" aria-controls="item2" aria-selected="false">もらう</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="item3-tab" data-toggle="tab" href="#item3" role="tab" aria-controls="item3" aria-selected="false">あげる</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane fade show active mt-3" id="item1" role="tabpanel" aria-labelledby="item1-tab">
+        <% if @friend_before.present? %>
+          <%= render partial: "shared_food", locals: { food_shares: @friend_before, status: "before" } %>
+        <% else %>
+          <p>該当する料理がありません。</p>
+        <% end %>
+      </div>
+      <div class="tab-pane fade  mt-3" id="item2" role="tabpanel" aria-labelledby="item2-tab">
+        <% if @friend_undone.present? || @friend_done.present? %>
+          <%= render partial: "shared_food", locals: { food_shares: @friend_undone, status: "undone" } %>
+          <%= render partial: "shared_food", locals: { food_shares: @friend_done, status: "done" } %>
+        <% else %>
+          <p>該当する料理がありません。</p>
+        <% end %>
+      </div>
+      <div class="tab-pane fade  mt-3" id="item3" role="tabpanel" aria-labelledby="item3-tab">
+        <% if @mine_undone.present? || @mine_before.present? || @mine_done.present? %>
+          <%= render partial: "shared_food", locals: { food_shares: @mine_undone, status: "undone" } %>
+          <%= render partial: "shared_food", locals: { food_shares: @mine_before, status: "before" } %>
+          <%= render partial: "shared_food", locals: { food_shares: @mine_done, status: "done" } %>
+        <% else %>
+          <p>該当する料理がありません。</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</main>

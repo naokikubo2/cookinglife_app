@@ -70,6 +70,7 @@ class FoodSharesController < ApplicationController
   end
 
   def complete
+    food_share = FoodShare.find(params[:food_share_id])
     matching = Matching.find_by(food_share_id: params[:food_share_id], user_id: params[:user_id])
     if matching.present?
       matching.update(status: "complete")
@@ -77,7 +78,7 @@ class FoodSharesController < ApplicationController
     else
       flash[:error] = "お裾分け完了操作に失敗しました"
     end
-    redirect_to root_url
+    redirect_back(fallback_location: food_share_path(food_share))
   end
 
   private

@@ -2,21 +2,21 @@
   <% if @food_share.takes?(current_user) %>
     <% case @flag_time %>
     <% when "before" %>
-      <h3>お裾分け受付期間内</h3>
+      <div class="bg-info">募集中</div>
     <% when "active" %>
       <% if @food_share.complete?(current_user) %>
-        <h3>お裾分け済み</h3>
+        <div class="bg-secondary">お裾分け完了</div>
       <% else %>
-        <h3>お裾分け完了通知をする</h3>
-        <%= link_to "お裾分け完了",  food_share_complete_url(food_share_id: @food_share.id, user_id: current_user.id), method: :post %>
+        <div class="h5">受け渡し完了後に押してください</div>
+        <%= link_to "お裾分け完了ボタン",  food_share_complete_url(food_share_id: @food_share.id, user_id: current_user.id), method: :post,data: {confirm: "本当にお裾分けをもらいましたか？"}, class: "bg-white btn btn-outline-primary" %>
       <% end %>
     <% when "after" %>
       <% if @food_share.complete?(current_user) %>
-        <h3>お裾分け済み</h3>
+        <div class="bg-secondary">お裾分け完了</div>
       <% else %>
-        <h3>お裾分け完了時間を超過しています</h3>
-        <h3>お裾分け完了通知をする</h3>
-        <%= link_to "お裾分け完了",  food_share_complete_url(food_share_id: @food_share.id, user_id: current_user.id), method: :post %>
+        <div class="bg-danger">お裾分け完了時間を超過しています</div>
+        <div class="h5">受け渡し完了後に押してください</div>
+        <%= link_to "お裾分け完了ボタン",  food_share_complete_url(food_share_id: @food_share.id, user_id: current_user.id), method: :post,data: {confirm: "本当にお裾分けをもらいましたか？"}, class: "bg-white btn btn-outline-primary" %>
       <% end %>
     <% end %>
   <% end %>

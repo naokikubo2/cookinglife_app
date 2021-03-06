@@ -1,6 +1,7 @@
-
 <% flash.each do |key, value| %>
-  <strong>
-    <%= value %>
-  </strong>
+  <div class="flash alert alert-<%= bootstrap_alert(key) %>">
+    <strong>
+      <%= value %>
+    </strong>
+  </div>
 <% end %>

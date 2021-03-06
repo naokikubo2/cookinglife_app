@@ -1,6 +1,6 @@
 // Create the script tag, set the appropriate attributes
 var script = document.createElement('script');
-script.src = 'https://maps.googleapis.com/maps/api/js?key=' + process.env.GOOGLE_CLOUD_API + '&callback=initMap';
+script.src = 'https://maps.googleapis.com/maps/api/staticmap?key=' + process.env.GOOGLE_CLOUD_API + '&callback=initMap';
 script.defer = true;
 var map;
 var marker;

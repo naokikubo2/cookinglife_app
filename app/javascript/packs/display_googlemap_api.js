@@ -17,7 +17,9 @@ window.initMap = function () {
     map = new google.maps.Map(document.getElementById('map'), {
       center: ps,
       zoom: 15,
-      navigationControl: false
+      streetViewControl: false,
+      zoomControl: false,
+      mapTypeControl: false
     });
 
     marker = new google.maps.Marker({

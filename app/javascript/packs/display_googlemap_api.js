@@ -16,7 +16,8 @@ window.initMap = function () {
     // JS API is loaded and available
     map = new google.maps.Map(document.getElementById('map'), {
       center: ps,
-      zoom: 15
+      zoom: 15,
+      navigationControl: false
     });
 
     marker = new google.maps.Marker({

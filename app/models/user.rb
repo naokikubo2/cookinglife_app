@@ -52,4 +52,15 @@ class User < ApplicationRecord
     user_ids = Relationship.where(user_id: id).pluck(:follow_id)
     FoodRecord.where(user_id: user_ids)
   end
+
+  def self.guest
+    find_or_create_by!(email: 'email1@com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
+      user.location_id = 1_850_147
+      user.address = '東京'
+      user.latitude = 35.7090259
+      user.longitude = 139.7319925
+    end
+  end
 end

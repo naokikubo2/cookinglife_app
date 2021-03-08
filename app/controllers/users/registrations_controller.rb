@@ -3,6 +3,8 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  before_action :check_guest, only: :destroy
+
 
   # GET /resource/sign_up
   # def new
@@ -45,6 +47,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.update_attributes(params)
     else
       resource.update_without_password(params)
+    end
+  end
+
+  def check_guest
+    if resource.email == User.guest.email
+      redirect_to root_path, alert: 'ゲストユーザーは削除できません。'
     end
   end
 

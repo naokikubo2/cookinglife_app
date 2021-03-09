@@ -1,6 +1,8 @@
 img#fr_index{
   /*画像表示の仕方*/
-  object-fit: cover;
+  //object-fit: cover;
+  width: 100%;
+  height: auto;
 }
 
 img#img_background {

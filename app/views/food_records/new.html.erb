@@ -6,7 +6,7 @@
         <%= render 'layouts/error_messages', model: f.object %>
 
         <%= f.label :image, class: 'image' do %>
-            <%= f.file_field :image, id: 'food_img', class: 'btn-primary' %>
+            <%= f.file_field :image, id: 'food_img', class: 'btn-info' %>
         <% end %>
 
         <div class="image-preview">
@@ -18,7 +18,7 @@
        <%= render partial: "input_tags", locals: { f: f } %>
 
         <div class="actions mt-3">
-          <%= f.submit "登録する", class: "btn btn-primary" %>
+          <%= f.submit "登録する", class: "btn btn-info" %>
         </div>
       <% end %>
     </div>

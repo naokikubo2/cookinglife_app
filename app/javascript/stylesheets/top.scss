@@ -33,14 +33,13 @@ img#img_howtouse {
   color: white;/*文字は白に*/
   top: 0;
   left: 0;
-  font-size: 5px;
 }
 
-.bg_text{
+#bg-all{
   position: relative;/*相対配置*/
 }
 
- .bg_text p {
+ #bg-all #bg-text {
   position: absolute;/*絶対配置*/
   color: white;/*文字は白に*/
   top: 50%;

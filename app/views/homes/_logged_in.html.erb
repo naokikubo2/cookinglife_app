@@ -28,12 +28,12 @@
   </div>
   <div class="col-sm-8 col-xs-12">
     <div class = "row">
-      <div class="col-12 bg_text border-bottom pb-2 text-center px-0">
+      <div class="col-12 border-bottom pb-2 text-center px-0" id="bg-all">
         <% if @food_recommend.present? %>
-          <p>今日のおすすめ料理</p>
+          <div class="h4" id="bg-text">今日のおすすめ料理</div>
           <%= image_tag @food_recommend.image.url, id:"img_background" %>
         <% else %>
-          <p>作った料理  <%= @food_records.count %>品</p>
+          <div class="h4" id="bg-text">記録した料理  <%= @food_records.count %>品</div>
           <% if @food_records.first.present? %>
             <%= image_tag @food_records.first.image.url, id:"img_background" %>
           <% end %>
@@ -45,7 +45,7 @@
           <%= link_to food_record_path(fr), class: "card border-0" do %>
             <div class = "card mb-1">
               <%= image_tag fr.image.url, id: "fr_index" %>
-              <div id="food_date">
+              <div id="food_date" class="small">
                 <div><%= l fr.food_date, format: :short %></div>
                 <div><%= fr.food_date.strftime("%a") %></div>
               </div>

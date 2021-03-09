@@ -4,7 +4,7 @@
       <%= date_format(food_record.food_date) %>
       <%= food_record.food_name %>
       <%= link_to edit_food_record_path(food_record) do %>
-        <i class="far fa-edit"></i>
+        <i class="far fa-edit text-info"></i>
       <% end %><br>
       <%= link_to food_record_path(food_record) do %>
         <%= image_tag food_record.image.url %>

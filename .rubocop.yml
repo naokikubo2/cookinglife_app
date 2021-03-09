@@ -274,3 +274,11 @@ Lint/SuppressedException:
 Style/HashLikeCase:
   Exclude:
     - 'app/helpers/devise_helper.rb'
+
+Style/MutableConstant:
+  Exclude:
+    - 'config/initializers/constants.rb'
+
+Rails/LexicallyScopedActionFilter:
+  Exclude:
+    - 'app/controllers/users/registrations_controller.rb'

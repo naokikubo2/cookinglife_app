@@ -26,7 +26,7 @@ RSpec.describe "FoodRecords", type: :request do
         food_record_friend = create(:food_record, user: friend_user, food_name: "food_friend")
         get food_records_path
         expect(response.status).to eq(200)
-        expect(response.body).to include("food_friend")
+        expect(response.body).to include(food_record_friend.image.url.to_s)
       end
     end
   end
@@ -55,8 +55,8 @@ RSpec.describe "FoodRecords", type: :request do
         @params[:q][:total_score_gteq] = 3
         get food_records_path(@params)
         expect(response.status).to eq(200)
-        expect(response.body).to include("food1")
-        expect(response.body).not_to include("food2")
+        expect(response.body).to include(food_record_1.image.url.to_s)
+        expect(response.body).not_to include(food_record_2.image.url.to_s)
       end
     end
 
@@ -69,8 +69,8 @@ RSpec.describe "FoodRecords", type: :request do
         @params[:q][:healthy_score_eq] = 3
         get food_records_path(@params)
         expect(response.status).to eq(200)
-        expect(response.body).to include("food1")
-        expect(response.body).not_to include("food2")
+        expect(response.body).to include(food_record_1.image.url.to_s)
+        expect(response.body).not_to include(food_record_2.image.url.to_s)
       end
     end
 
@@ -83,8 +83,8 @@ RSpec.describe "FoodRecords", type: :request do
         @params[:q][:workload_score_eq] = 3
         get food_records_path(@params)
         expect(response.status).to eq(200)
-        expect(response.body).to include("food1")
-        expect(response.body).not_to include("food2")
+        expect(response.body).to include(food_record_1.image.url.to_s)
+        expect(response.body).not_to include(food_record_2.image.url.to_s)
       end
     end
 
@@ -97,8 +97,8 @@ RSpec.describe "FoodRecords", type: :request do
         @params[:q][:food_timing_eq] = "morning"
         get food_records_path(@params)
         expect(response.status).to eq(200)
-        expect(response.body).to include("food1")
-        expect(response.body).not_to include("food2")
+        expect(response.body).to include(food_record_1.image.url.to_s)
+        expect(response.body).not_to include(food_record_2.image.url.to_s)
       end
     end
 
@@ -112,8 +112,8 @@ RSpec.describe "FoodRecords", type: :request do
         @params[:q][:food_date_lt ] = Time.zone.today
         get food_records_path(@params)
         expect(response.status).to eq(200)
-        expect(response.body).to include("food1")
-        expect(response.body).not_to include("food2")
+        expect(response.body).to include(food_record_1.image.url.to_s)
+        expect(response.body).not_to include(food_record_2.image.url.to_s)
       end
     end
 
@@ -127,8 +127,8 @@ RSpec.describe "FoodRecords", type: :request do
         @params[:q][:total_score_gteq ] = 3
         @params[:q][:healthy_score_eq ] = 3
         get food_records_path(@params)
-        expect(response.body).to include("food1")
-        expect(response.body).not_to include("food2", "food3")
+        expect(response.body).to include(food_record_1.image.url.to_s)
+        expect(response.body).not_to include(food_record_2.image.url.to_s, food_record_3.image.url.to_s)
       end
     end
 

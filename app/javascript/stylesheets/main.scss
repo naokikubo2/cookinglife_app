@@ -1,3 +1,7 @@
+body {
+  min-width: 375px;
+}
+
 #logged_out{
   background-image:url("../images/background.jpg");
   background-repeat: repeat;
@@ -10,12 +14,15 @@ a.heart {
 }
 
 img#image_img_prev {
-  width: 250px;
+  width: 300px;
+  height: 300px;
+  object-fit: cover; /* この一行を追加するだけ！ */
 }
 
 img#user_img_prev {
   width:  180px;       /* ※縦横を同値に */
   height: 180px;       /* ※縦横を同値に */
+  object-fit: cover;
   border-radius: 50%;
 }
 

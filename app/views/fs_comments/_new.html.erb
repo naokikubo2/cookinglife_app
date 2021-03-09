@@ -2,7 +2,7 @@
   <%= render partial: 'fs_comments/index' %>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-default mb-5">
   <div class="panel-body">
     <%= form_for :fs_comment, url: food_share_fs_comments_path(@food_share), remote: true do |f| %>
       <%= f.text_area :content, id: "comments_content", class: 'w-75' %>

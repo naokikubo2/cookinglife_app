@@ -3,9 +3,12 @@
     <div class="mb-2 text-center">
       <%= date_format(food_record.food_date) %>
       <%= food_record.food_name %>
-      <%= link_to edit_food_record_path(food_record) do %>
-        <i class="far fa-edit text-info"></i>
-      <% end %><br>
+      <% if loginuser_flag == "true" %>
+        <%= link_to edit_food_record_path(food_record) do %>
+          <i class="far fa-edit text-info"></i>
+        <% end %>
+      <% end %>
+      <br/>
       <%= link_to food_record_path(food_record) do %>
         <%= image_tag food_record.image.url %>
       <% end %>

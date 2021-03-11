@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function () {
+$(document).ready(function () {
 
   /* ------------------------------
   Loading イメージ表示関数

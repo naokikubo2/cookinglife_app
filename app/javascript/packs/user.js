@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function () {
+$(document).ready(function () {
 
   function readURL(input) {
     $('#user_img_prev').attr('src', '');

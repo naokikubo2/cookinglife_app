@@ -1,0 +1,61 @@
+<div class="container-fluid mb-5 pb-5">
+<div class = "row">
+  <div class="col-12 bg_text border-bottom text-center mt-5 px-0 bg-light">
+    <div>
+      <%= image_pack_tag "top_page.jpg", id:"img_toppage" %>
+    </div>
+  </div>
+  <div class="col-12 text-center h5">
+     <div class="h5 text-muted my-3"><strong>料理する人</strong>も<strong>料理しない人</strong>もサポート<br/> 全人類のためのアプリケーション</div>
+  </div>
+  <div class="col-12 text-center h3 bg-info text-white">
+     使い方
+  </div>
+  <div class="col-12 card border-0">
+    <%= image_pack_tag "food_record.png", id:"img_howtouse", class: "card-img text-center" %>
+    <div class="text-muted py-auto card-body">
+      <div class="text-info h4">毎日の料理を記録する</div>
+      <div class="text-muted h5">
+        料理は基本1日3食。全て記録するなら楽な方がいいですよね？CookingLifeは、AI解析により写真を投稿するだけで、「日付」「関連タグ」「当日の天気」を自動的に記録します。<br/>
+        料理の詳細情報も後から追加できるので、自分のライフスタイルに合わせた記録ができます。
+      </div>
+    </div>
+  </div>
+  <div class="col-12 card border-0">
+    <%= image_pack_tag "food_recommend.jpg", id:"img_howtouse", class: "card-img text-center" %>
+    <div class="text-muted py-auto card-body">
+      <div class="text-info h4">今日の料理のレコメンドと過去の料理を検索</div>
+      <div class="text-muted h5">
+        家族に「今日何食べたい？」と聞かれたことはありませんか？そんな時は、アプリを開いてみてください。独自のアルゴリズムにより、今日に最適な料理をレコメンドするので、堂々とその料理の名前を伝えてみましょう。
+      </div>
+    </div>
+  </div>
+  <div class="col-12 card border-0">
+    <%= image_pack_tag "food_share.png", id:"img_howtouse", class: "card-img text-center " %>
+    <div class="text-muted py-auto card-body">
+      <div class="text-info h4">ご近所間のお裾分けサポート</div>
+      <div class="text-muted h5">
+        料理もシェアする時代です。ご近所の友人と、本アプリを通して、お裾分けの募集や、応募ができます。
+      </div>
+    </div>
+  </div>
+  <div class="h2 text-center mx-auto my-3">\ログインはこちら/</div>
+  <div class="row mx-auto">
+    <div class="text-center col-12">
+      <%= link_to signup_path, class: 'btn btn-primary w-75' do %>
+        <i class="fas fa-user-plus"></i>新規登録
+      <% end %>
+    </div>
+    <div class="text-center mt-2 col-12">
+      <%= link_to login_path, class: 'btn btn-success w-75' do %>
+        <i class="fas fa-sign-in-alt"></i>ログイン
+      <% end %>
+    </div>
+    <div class="text-center mt-2 col-12">
+      <%= link_to guest_login_path, method: :post, class: 'btn btn-warning w-75' do %>
+        <i class="fas fa-sign-in-alt"></i>ゲストログイン<br>（閲覧用）
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>

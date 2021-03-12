@@ -15,7 +15,7 @@ RSpec.describe "FoodRecords", type: :request do
         food_record_other = create(:food_record, food_name: "food #{timestamp}", tag_list: "tag1")
         get tags_path, params: { tag: "tag1" }
         expect(response.status).to eq(200)
-        expect(response.body).to include(food_record_mine.food_name, food_record_other.food_name)
+        expect(response.body).to include(food_record_mine.image.url.to_s, food_record_other.image.url.to_s)
       end
     end
 
@@ -26,7 +26,7 @@ RSpec.describe "FoodRecords", type: :request do
         food_record_other = create(:food_record, food_name: "", tag_list: "tag1")
         get tags_path, params: { tag: "tag1" }
         expect(response.status).to eq(200)
-        expect(response.body).to include("料理名未設定", food_record_mine.food_name)
+        expect(response.body).to include(food_record_mine.image.url.to_s)
       end
     end
 
@@ -36,7 +36,7 @@ RSpec.describe "FoodRecords", type: :request do
         food_record_other = create(:food_record, food_name: "food #{timestamp}", tag_list: "tag1")
         get tags_path, params: { tag: "tag1" }
         expect(response.status).to eq(200)
-        expect(response.body).to include("料理名未設定", food_record_other.food_name)
+        expect(response.body).to include(food_record_other.image.url.to_s)
       end
     end
   end

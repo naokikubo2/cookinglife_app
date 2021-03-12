@@ -8,17 +8,17 @@
 
     <div class="form-group col-4">
       <%= f.label :total_score %>
-      <%= f.select :total_score_gteq, [["未選択", ""], ["☆", 1], ["☆☆", 2], ["☆☆☆", 3], ["☆☆☆☆", 4], ["☆☆☆☆☆", 5]], {}, class: "form-control", id: "select1a" %>以上
+      <%= f.select :total_score_gteq, Constants::TOTAL_SCORE, {}, class: "form-control", id: "select1a" %>以上
     </div>
 
     <div class="form-group col-4">
       <%= f.label :healthy_score %>
-      <%= f.select :healthy_score_eq, [["未選択", ""], ["とてもこってり", -4], ["こってり", -3], ["まぁまぁこってり", -2], ["少しこってり", -1], ["普通", 0], ["少しヘルシー", 1], ["まぁまぁヘルシー", 2], ["ヘルシー", 3], ["とてもヘルシー", 4]], {}, class: "form-control", id: "select1a" %>以上
+      <%= f.select :healthy_score_eq, Constants::HEALTHY_SCORE, {}, class: "form-control", id: "select1a" %>以上
     </div>
 
     <div class="form-group col-4">
       <%= f.label :workload_score %>
-      <%= f.select :workload_score_eq, [["未選択", ""], ["とても楽", -4], ["楽", -3], ["まぁまぁ楽", -2], ["少し楽", -1], ["普通", 0], ["少し大変", 1], ["まぁまぁ大変", 2], ["大変", 3], ["とても大変", 4]], {}, class: "form-control", id: "select1a" %>以上
+      <%= f.select :workload_score_eq, Constants::WORKLOAD_SCORE, {}, class: "form-control", id: "select1a" %>以上
     </div>
 
     <div class="form-group text-center w-100">
@@ -42,15 +42,25 @@
       </div>
     </div>
 
-    <div class="form-group text-center">
+    <div class="form-group text-center col-12">
       <%= f.label :food_date %><br/>
-      <%= f.date_field :food_date_gteq %>〜
-      <%= f.date_field :food_date_lteq  %>
+      <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"  name="q[food_date_gteq]" id="q_food_date_gteq"/>
+        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+        </div>
+      </div>
+      <div>~</div>
+      <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"  name="q[food_date_lteq]" id="q_food_date_lteq"/>
+        <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+        </div>
+      </div>
     </div>
 
     <div class="actions mx-auto">
-      <%= f.submit "検索", class: "btn btn-primary" %>
+      <%= f.submit "検索", class: "btn btn-info" %>
     </div>
   </div>
 <% end %>
-

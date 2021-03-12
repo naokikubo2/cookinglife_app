@@ -3,7 +3,7 @@
   <% food_shares.each do |food_share| %>
 
     <div class="mx-4">
-      <div class="row">
+      <div class="row bg-light mx-2">
         <div class="col h4 my-auto"><strong><%= food_share.food_name %></strong></div>
         <div class="col"><%= food_share.user.name %>
           <%= link_to user_path(food_share.user) do %>
@@ -12,7 +12,7 @@
         </div>
         <% if food_share.user.id == current_user.id %>
           <%= link_to edit_food_share_path(food_share) do %>
-            <i class="far fa-edit fa-lg"></i>
+            <i class="far fa-edit fa-lg text-info"></i>
           <% end %>
         <% end %>
       </div>

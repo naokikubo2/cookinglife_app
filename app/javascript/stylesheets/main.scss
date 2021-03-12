@@ -1,15 +1,28 @@
+body {
+  min-width: 375px;
+}
+
+#logged_out{
+  background-image:url("../images/background.jpg");
+  background-repeat: repeat;
+  background-size: cover;
+}
+
 a.heart {
   color: #e91e63;
   text-decoration: none;
 }
 
 img#image_img_prev {
-  width: 250px;
+  width: 300px;
+  height: 300px;
+  object-fit: cover; /* この一行を追加するだけ！ */
 }
 
 img#user_img_prev {
   width:  180px;       /* ※縦横を同値に */
   height: 180px;       /* ※縦横を同値に */
+  object-fit: cover;
   border-radius: 50%;
 }
 
@@ -62,10 +75,6 @@ img#index_user_img {
 
 #flag_address{
   color: #e91e63;
-}
-
-footer #footer-text{
-  font-size: 5px;
 }
 
 .navbar-toggler .navbar-toggler-icon {

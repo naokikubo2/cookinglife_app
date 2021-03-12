@@ -1,6 +1,8 @@
 img#fr_index{
   /*画像表示の仕方*/
-  object-fit: cover;
+  //object-fit: cover;
+  width: 100%;
+  height: auto;
 }
 
 img#img_background {
@@ -13,19 +15,33 @@ img#img_background {
   z-index: -1;
 }
 
+img#img_toppage {
+  width:  100%;
+  max-width: 600px;
+  max-height: 400px;
+  background-size:cover;
+  margin : 0 auto;
+}
+
+img#img_howtouse {
+  width:  60%;
+  max-width: 500px;
+  max-height: 500px;
+  margin : 0 auto;
+}
+
 #food_date{
   position: absolute;/*絶対配置*/
   color: white;/*文字は白に*/
   top: 0;
   left: 0;
-  font-size: 5px;
 }
 
-.bg_text{
+#bg-all{
   position: relative;/*相対配置*/
 }
 
- .bg_text p {
+ #bg-all #bg-text {
   position: absolute;/*絶対配置*/
   color: white;/*文字は白に*/
   top: 50%;

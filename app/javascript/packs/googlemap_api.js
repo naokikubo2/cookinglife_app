@@ -1,43 +1,42 @@
-// Create the script tag, set the appropriate attributes
-var script = document.createElement('script');
-script.src = 'https://maps.googleapis.com/maps/api/js?key=' + process.env.GOOGLE_CLOUD_API + '&callback=initMap';
-script.defer = true;
+import { Loader } from '@googlemaps/js-api-loader';
 var map;
 var marker;
 let geocoder
-// Attach your callback function to the `window` object
-window.initMap = function () {
-  try {
-    var lat = 35.6432274;
-    var lng = 139.7400553;
-    if (document.getElementById('latitude').value != "") {
-      lat = parseFloat(document.getElementById('latitude').value);
-      lng = parseFloat(document.getElementById('longitude').value);
-    } else {
-      //Userの住所が正しく入力されていない場合
-      document.getElementById('flag_address').textContent = "ユーザーの住所がマップに反映できませんでした。登録された住所に誤りがある可能性があります。";
-    }
 
+const loader = new Loader({
+  apiKey: process.env.GOOGLE_CLOUD_API,
+  version: "weekly",
+  libraries: ["places"]
+});
 
-    let ps = { lat: lat, lng: lng };
-    // geocoderを初期化
-    geocoder = new google.maps.Geocoder()
-    // JS API is loaded and available
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: ps,
-      zoom: 15
-    });
-
-    marker = new google.maps.Marker({
-      position: ps,
-      map: map,
-    });
-
-    google.maps.event.addListener(map, 'click', event => clickListener(event, map));
-  } catch (e) {
-    console.log(e.message);
+loader.load().then(() => {
+  var lat = 35.6432274;
+  var lng = 139.7400553;
+  if (document.getElementById('latitude').value != "") {
+    lat = parseFloat(document.getElementById('latitude').value);
+    lng = parseFloat(document.getElementById('longitude').value);
+  } else {
+    //Userの住所が正しく入力されていない場合
+    document.getElementById('flag_address').textContent = "ユーザーの住所がマップに反映できませんでした。登録された住所に誤りがある可能性があります。";
   }
-};
+
+
+  let ps = { lat: lat, lng: lng };
+  // geocoderを初期化
+  geocoder = new google.maps.Geocoder()
+  // JS API is loaded and available
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: ps,
+    zoom: 15,
+  });
+
+  marker = new google.maps.Marker({
+    position: ps,
+    map: map,
+  });
+
+  google.maps.event.addListener(map, 'click', event => clickListener(event, map));
+});
 
 function clickListener(event, map) {
   const lat = event.latLng.lat();
@@ -46,7 +45,7 @@ function clickListener(event, map) {
   deleteMakers();
   marker = new google.maps.Marker({
     position: { lat, lng },
-    map
+    map,
   });
   const input_lat = document.getElementById("latitude");
   const input_lng = document.getElementById("longitude");
@@ -75,7 +74,3 @@ document.getElementById("search_codeAddress").onclick = function () {
     }
   });
 };
-
-
-// Append the 'script' element to 'head'
-document.head.appendChild(script);

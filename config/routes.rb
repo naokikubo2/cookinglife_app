@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get "signup", to: "users/registrations#new"
     get "login", to: "users/sessions#new"
     get "logout", to: "users/sessions#destroy"
+    post 'guest_login', to: 'users/sessions#new_guest'
   end
 
   resources :food_records do

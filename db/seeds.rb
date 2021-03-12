@@ -6,7 +6,17 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 if Rails.env.development?
-  1.upto(14) do |n|
+  User.create!(
+    name: "ゲスト",
+    email: "email@guest.com",
+    password: "0000guest",
+    location_id: 1_850_147,
+    address: '東京',
+    latitude: 35.7090259,
+    longitude: 139.7319925
+  )
+
+  2.upto(14) do |n|
     User.create!(
       name: "user#{n}",
       email: "email#{n}@com",
@@ -14,8 +24,8 @@ if Rails.env.development?
       image: File.open("./db/fixtures/users/user#{n}.jpg"),
       location_id: 1_850_147,
       address: '東京',
-      latitude: 35.7090259 + 0.0001 * n,
-      longitude: 139.7319925 + 0.0001 * n
+      latitude: 35.7090259 + 0.001 * n,
+      longitude: 139.7319925 + 0.001 * n
     )
   end
 

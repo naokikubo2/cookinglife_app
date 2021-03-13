@@ -1,0 +1,9 @@
+<% if @food_recommend.present? %>
+  <div class="h4" id="bg-text">今日のおすすめ料理</div>
+  <%= image_tag @food_recommend.image.url, id:"img_background" %>
+<% else %>
+  <div class="h4" id="bg-text">記録した料理 <br/> <strong><%= @food_records.count %></strong>品</div>
+  <% if @food_records.first.present? %>
+    <%= image_tag @food_records.first.image.url, id:"img_background" %>
+  <% end %>
+<% end %>

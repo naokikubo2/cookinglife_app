@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-sm-4 d-none d-sm-block bg-light">
+  <div class="row pt-5">
+    <div class="col-12 text-center pt-5" id="top_googolemap">
+      <h5 class="text-muted">居住地</h5>
+      <%= render partial: "googlemap" %>
+    </div>
+    <div class="col-12 text-center pt-5">
+      <% if @weather.present? %>
+        <h5 class="text-muted">現在の天気</h5>
+        <%= image_tag "http://openweathermap.org/img/wn/#{@weather[:weather_icon].chop}d@2x.png" %>
+        <%= "#{@weather[:temp]}[℃]" %>
+        <%= "#{@weather[:pressure]}[hPa]" %>
+        <%= "#{@weather[:humidity]}[%]" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -9,6 +9,7 @@ environment.plugins.prepend(
     jQuery: 'jquery/src/jquery',
     Popper: 'popper.js',
     moment: 'moment/moment',
+    IScroll: 'iscroll',
   })
 )
 

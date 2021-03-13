@@ -10,8 +10,9 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <%= render 'layouts/header' %>
-  <body>
+
+  <body class="drawer drawer--left">
+    <%= render 'layouts/header' %>
     <%= render 'layouts/flashes' %>
     <%= yield %>
   </body>

@@ -28,9 +28,9 @@ if Rails.env.development?
       longitude: 139.7319925 + 0.001 * n
     )
   end
-
+  weather = [["clear sky", "01d"], ["few clouds", "02d"]]
   1.upto(12) do |n|
-    srand(n)
+    srand(n+1)
     FoodRecord.create!(
       user_id: 1,
       food_name: "food#{n}",
@@ -38,7 +38,12 @@ if Rails.env.development?
       healthy_score: rand(-3..4),
       workload_score: rand(-4..3),
       total_score: rand(1..5),
-      food_date: Time.zone.today - n
+      food_date: Time.zone.today - n,
+      temp: rand(1..30),
+      pressure: rand(900..1000),
+      humidity: rand(10..90),
+      weather_main: weather[rand(0..1)][0],
+      weather_icon: weather[rand(0..1)][1]
     )
   end
 

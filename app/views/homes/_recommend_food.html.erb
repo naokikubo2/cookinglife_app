@@ -1,7 +1,7 @@
 <div id="rec_foods" class="carousel slide bg-secondary" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <div class="h5 p-2" id="bg-text">記録した料理 <br/> <strong><%= @food_records.count %></strong> 品</div>
+      <div class="h5 p-2" id="bg-text">記録した料理 <br/> <strong><%= @food_count %></strong> 品</div>
       <%= image_tag @food_records.first.image.url, id:"img_background", alt:"First slide" %>
     </div>
     <div class="carousel-item">

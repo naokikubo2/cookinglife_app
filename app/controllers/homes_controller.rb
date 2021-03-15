@@ -3,7 +3,7 @@ class HomesController < ApplicationController
     if user_signed_in?
       fr = current_user.food_records.order(food_date: "DESC")
       @food_count = fr.count
-      @food_records = fr.page(params[:page]).per(5)
+      @food_records = fr.page(params[:foods_page]).per(18)
 
       # 今日の料理レコメンドを受けとる
       recommend = FoodRecord.food_recommend(current_user)
@@ -17,6 +17,11 @@ class HomesController < ApplicationController
       # 気温が今日に近い日の料理を探す
       recommend_weather = FoodRecord.weather_recommend(current_user, @weather[:temp])
       @weather_recommend = recommend_weather if recommend_weather.present?
+
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
   end
 end

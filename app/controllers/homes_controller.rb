@@ -3,7 +3,7 @@ class HomesController < ApplicationController
     if user_signed_in?
       fr = current_user.food_records.order(food_date: "DESC")
       @food_count = fr.count
-      @food_records = fr.page(params[:foods_page]).per(18)
+      @food_records = fr.page(params[:foods_page]).per(24)
 
       # 今日の料理レコメンドを受けとる
       recommend = FoodRecord.food_recommend(current_user)

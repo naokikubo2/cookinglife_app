@@ -1,7 +1,9 @@
 class HomesController < ApplicationController
   def top
     if user_signed_in?
-      @food_records = current_user.food_records.order(food_date: "DESC")
+      fr = current_user.food_records.order(food_date: "DESC")
+      @food_count = fr.count
+      @food_records = fr.page(params[:page]).per(5)
 
       # 今日の料理レコメンドを受けとる
       recommend = FoodRecord.food_recommend(current_user)

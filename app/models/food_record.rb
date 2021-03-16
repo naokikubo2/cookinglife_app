@@ -82,22 +82,19 @@ class FoodRecord < ApplicationRecord
   rescue StandardError => e
   end
 
-  def self.weather_recommend(current_user, temp_today)
-    food_records_mine = current_user.food_records
-    if food_records_mine.present?
-      temp_min = 999
-      f_id = 0
-      food_records_mine.each do |f|
-        temp = f.temp
-        if temp.present?
-          diff = (temp - temp_today)**2
-          if diff < temp_min
-            f_id = f.id
-            temp_min = diff
-          end
-        end
+  def self.weather_recommend(food_records_mine, temp_today)
+    temp_min = 999
+    f_id = 0
+    food_records_mine.each do |f|
+      temp = f.temp
+      next if temp.blank?
+
+      diff = (temp - temp_today)**2
+      if diff < temp_min
+        f_id = f.id
+        temp_min = diff
       end
-      find_by(id: f_id) unless f_id == 0
     end
+    find_by(id: f_id) unless f_id.zero?
   end
 end

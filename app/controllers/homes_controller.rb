@@ -15,13 +15,22 @@ class HomesController < ApplicationController
       @weather = Api::OpenWeatherMap::Request.attributes_for(response) if response['cod'] == 200
 
       # 気温が今日に近い日の料理を探す
-      recommend_weather = FoodRecord.weather_recommend(current_user, @weather[:temp])
+      food_records_mine = current_user.food_records
+      recommend_weather = weather_recommend(food_records_mine, @weather[:temp])
       @weather_recommend = recommend_weather if recommend_weather.present?
 
       respond_to do |format|
         format.html
         format.js
       end
+    end
+  end
+
+  def weather_recommend(foods, temp)
+    if foods.present?
+      FoodRecord.weather_recommend(foods, temp)
+    else
+      null
     end
   end
 end

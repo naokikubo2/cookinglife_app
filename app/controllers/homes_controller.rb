@@ -29,8 +29,6 @@ class HomesController < ApplicationController
   def weather_recommend(foods, temp)
     if foods.present?
       FoodRecord.weather_recommend(foods, temp)
-    else
-      null
     end
   end
 end

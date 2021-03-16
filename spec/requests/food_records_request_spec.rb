@@ -144,13 +144,13 @@ RSpec.describe "FoodRecords", type: :request do
       end
     end
 
-    context 'when 料理が十分に記録されていない' do
+    context 'when 料理投稿が2件のみ' do
       it "最新の料理が２回表示される" do
         food_record2 = create(:food_record, food_name: "food2", healthy_score: -4, workload_score: -4, food_date: Time.zone.today - 11, user: current_user)
         food_record4 = create(:food_record, food_name: "food4", healthy_score: -3, workload_score: -3, food_date: Time.zone.today - 12, user: current_user)
         get root_path
         expect(response.status).to eq(200)
-        expect(response.body).to include(food_record2.image.url.to_s).twice
+        expect(response.body).to include(food_record2.image.url.to_s).at_least(:twice)
         expect(response.body).to include(food_record4.image.url.to_s).once
       end
     end

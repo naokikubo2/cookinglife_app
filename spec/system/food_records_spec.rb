@@ -14,9 +14,15 @@ RSpec.describe "food_records", type: :system do
   end
 
   before do
+    WebMock.enable! # webmockを有効化
+    WebMock.allow_net_connect!
+    set_response
+    set_distance_response
     log_in(login_user, type: :system)
     visit food_record_path(food_record)
   end
+
+  after { WebMock.disable! }
 
   describe 'vision api' do
     context "food picture" do

@@ -11,7 +11,7 @@
         <%= link_to '編集する', edit_user_registration_path(current_user) %>
       <% else %>
         <%= render partial: 'follow' %>
-        <%= render partial: 'follow_count'%>
+        <%= render partial: 'shares/follow_count', locals: { user: @user } %>
       <% end %>
     </div>
 

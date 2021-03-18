@@ -22,7 +22,7 @@
           </div>
         <% end %>
         <div class="col-12 text-center pb-3">
-          <%= render partial: 'layouts/follow_count' %>
+          <%= render partial: 'shares/follow_count', locals: { user: current_user } %>
         </div>
       </div>
     <% else %>

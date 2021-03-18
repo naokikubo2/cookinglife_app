@@ -15,7 +15,7 @@
       <div class="row border-top pt-3">
         <%= link_to user_path(current_user), class: "mx-auto" do %>
           <div class="col-12 text-center">
-            <%= render partial: 'layouts/user_icon', locals: { user: current_user } %>
+            <%= render partial: 'shares/user_icon', locals: { user: current_user, id_img: "slider_user_img" } %>
           </div>
           <div class="col-12 text-center text-muted">
             <h4><%= current_user.name %></h4>

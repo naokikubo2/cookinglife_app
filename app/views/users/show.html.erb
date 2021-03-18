@@ -4,7 +4,7 @@
 
     <h2>ユーザー名：<%= @user.name %></h2>
 
-    <%= render partial: 'user_icon', locals: { user: @user } %>
+    <%= render partial: 'shares/user_icon', locals: { user: @user, id_img: "user_img" } %>
 
     <div>
       <% if @user.id == current_user.id %>

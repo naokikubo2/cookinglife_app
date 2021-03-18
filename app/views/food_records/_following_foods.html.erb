@@ -8,7 +8,7 @@
             <div><%= l fr.food_date, format: :short %></div>
             <div><%= fr.food_date.strftime("%a") %></div>
           </div>
-          <%= render partial: 'user_icon', locals: { user: fr.user } %>
+          <%= render partial: 'shares/user_icon', locals: { user: fr.user, id_img: "following_user_img" } %>
         </div>
       <% end %>
     </div>

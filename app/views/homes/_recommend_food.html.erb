@@ -1,0 +1,37 @@
+<div id="rec_foods" class="carousel slide bg-secondary" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="h5 p-2" id="bg-text">記録した料理 <br/> <strong><%= @food_count %></strong> 品</div>
+      <%= image_tag @food_records.first.image.url, id:"img_background", alt:"First slide" %>
+    </div>
+    <div class="carousel-item">
+      <% if @weather_recommend.present? %>
+        <%= link_to @weather_recommend do %>
+          <div class="h5 p-2" id="bg-text">気温が近い日<br/>今日のレコメンド</div>
+          <div class="h6 bg-secondary p-2" id="bg-description"><%= "#{@weather_recommend.food_name}  #{@weather_recommend.temp}℃  #{date_format(@weather_recommend.food_date)}" %></div>
+          <%= image_tag @weather_recommend.image.url, id:"img_background", alt:"slide" %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="carousel-item">
+      <% if @food_recommend.present? %>
+        <%= link_to @food_recommend do %>
+          <div class="h5 p-2" id="bg-text">アルゴリズム<br/>今日のレコメンド</div>
+          <%= image_tag @food_recommend.image.url, id:"img_background", alt:"slide" %>
+          <div class="h6 bg-secondary p-2" id="bg-description"><%= "#{@food_recommend.food_name}  #{date_format(@food_recommend.food_date)}" %></div>
+        <% end %>
+      <% else %>
+        <div class="h5 p-2" id="bg-text">昨日の料理<br/>未登録</div>
+        <%= image_tag @food_records.first.image.url, id:"img_background", alt:"slide" %>
+      <% end %>
+    </div>
+    <a class="carousel-control-prev" href="#rec_foods" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#rec_foods" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>

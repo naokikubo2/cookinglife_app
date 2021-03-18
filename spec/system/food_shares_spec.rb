@@ -8,10 +8,10 @@ RSpec.describe "food_shares", type: :system do
   let!(:food_share_other) { create(:food_share, user: user_other) }
 
   before do
-    log_in(login_user, type: :system)
     WebMock.enable! # webmockを有効化
-    set_distance_response
     set_response
+    set_distance_response
+    log_in(login_user, type: :system)
   end
 
   after { WebMock.disable! }

@@ -9,6 +9,7 @@ img#img_background {
   width:  100%;
   max-width: 500px;
   max-height: 300px;
+  object-fit: cover;
   background-size:cover;
   margin : 0 auto;
   filter: blur(2px);
@@ -37,6 +38,15 @@ img#img_howtouse {
   left: 0;
 }
 
+#food_usericon{
+  position: absolute;/*絶対配置*/
+  color: white;/*文字は白に*/
+  width: 10%;
+  height: 10%;
+  top: 0;
+  right: 10px;
+}
+
 #bg-all{
   position: relative;/*相対配置*/
 }
@@ -52,6 +62,22 @@ img#img_howtouse {
   margin:0;
   padding:0;
   z-index: 1;
+  background-color: rgba( 23, 162, 184, 0.55 );
+  color: white;
+ }
+
+ #bg-all #bg-description {
+  position: absolute;/*絶対配置*/
+  color: white;/*文字は白に*/
+  top: 10%;
+  left: 50%;
+  width:  100%;
+  max-width: 500px;
+  -ms-transform: translate(-50%,0);
+  -webkit-transform: translate(-50%,0);
+  transform: translate(-50%,0);
+  z-index: 1;
+  opacity:0.5;
  }
 
  .col-4{

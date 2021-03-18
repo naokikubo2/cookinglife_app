@@ -17,4 +17,12 @@ module ApplicationHelper
     suffix = food_record.favorites?(current_user) ? "s" : "r"
     tag.i("", class: "fa#{suffix} fa-heart")
   end
+
+  def date_format(date)
+    l date, format: :default if date.present?
+  end
+
+  def day_format(date)
+    date.strftime("%a") if date.present?
+  end
 end

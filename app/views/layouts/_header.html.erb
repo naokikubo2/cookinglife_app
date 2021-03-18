@@ -1,29 +1,42 @@
-<header>
-  <div>
-    <nav class="navbar navbar-expand-lg bg-transparent fixed-top">
-      <button class="navbar-toggler navbar-toggler" data-toggle="collapse" data-target="#navbarNavAltMarkup">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-        <ul class="navbar navbar-nav bg-white">
-          <% if user_signed_in? %>
-            <li class="nav-item list-unstyled">
-                <%= link_to("ユーザー情報を編集", edit_user_registration_path, class: "nav-link text-info") %>
-            </li>
-            <li class="nav-item list-unstyled">
-                <%= link_to("ログアウト", logout_path,
-                data: {confirm: "本当にログアウトしますか？"}, class: "nav-link text-info") %>
-            </li>
-          <% else %>
-            <li class="nav-item list-unstyled">
-                <%= link_to("会員登録", signup_path, class: "nav-link text-info") %>
-            </li>
-            <li class="nav-item list-unstyled">
-                <%= link_to("ログイン", login_path, class: "nav-link text-info") %>
-            </li>
-          <% end %>
-        </ul>
+
+<header role="banner">
+  <button type="button" class="drawer-toggle drawer-hamburger">
+    <span class="sr-only">toggle navigation</span>
+    <span class="drawer-hamburger-icon"></span>
+  </button>
+  <nav class="drawer-nav" role="navigation">
+    <% if user_signed_in? %>
+      <ul>
+        <li class="nav-item list-unstyled my-3">
+            <%= link_to("ログアウト", logout_path,
+            data: {confirm: "本当にログアウトしますか？"}, class: "nav-link text-info") %>
+        </li>
+      </ul>
+      <div class="row border-top pt-3">
+        <%= link_to user_path(current_user), class: "mx-auto" do %>
+          <div class="col-12 text-center">
+            <%= render partial: 'shares/user_icon', locals: { user: current_user, id_img: "slider_user_img" } %>
+          </div>
+          <div class="col-12 text-center text-muted">
+            <h4><%= current_user.name %></h4>
+          </div>
+        <% end %>
+        <div class="col-12 text-center pb-3">
+          <%= render partial: 'shares/follow_count', locals: { user: current_user } %>
+        </div>
       </div>
-    </nav>
-  </div>
+    <% else %>
+      <ul>
+        <li class="nav-item list-unstyled">
+            <%= link_to("会員登録", signup_path, class: "nav-link text-info") %>
+        </li>
+        <li class="nav-item list-unstyled">
+            <%= link_to("ログイン", login_path, class: "nav-link text-info") %>
+        </li>
+        <li class="nav-item list-unstyled">
+            <%= link_to "ゲストログイン", guest_login_path, method: :post, class: "nav-link text-info" %>
+        </li>
+      </ul>
+    <% end %>
+  </nav>
 </header>

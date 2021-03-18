@@ -81,4 +81,20 @@ class FoodRecord < ApplicationRecord
     find_by(id: max_id)
   rescue StandardError => e
   end
+
+  def self.weather_recommend(food_records_mine, temp_today)
+    temp_min = 999
+    f_id = 0
+    food_records_mine.each do |f|
+      temp = f.temp
+      next if temp.blank?
+
+      diff = (temp - temp_today)**2
+      if diff < temp_min
+        f_id = f.id
+        temp_min = diff
+      end
+    end
+    find_by(id: f_id) unless f_id.zero?
+  end
 end

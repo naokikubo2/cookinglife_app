@@ -22,7 +22,7 @@
         <div class="row"><%= render partial: "foods", locals: { food_records: @food_records, loginuser_flag: "true" } %></div>
       </div>
       <div class="tab-pane fade" id="item2" role="tabpanel" aria-labelledby="item2-tab">
-        <div class="row"><%= render partial: "foods", locals: { food_records: @food_records_followings, loginuser_flag: "false" } %></div>
+        <div class="row"><%= render partial: "following_foods", locals: { food_records: @food_records_followings, loginuser_flag: "false" } %></div>
       </div>
     </div>
   </div>

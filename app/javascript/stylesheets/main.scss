@@ -26,15 +26,30 @@ img#user_img_prev {
   border-radius: 50%;
 }
 
-img#user_img {
+@mixin UserIcon {
   width:  180px;       /* ※縦横を同値に */
   height: 180px;       /* ※縦横を同値に */
   border-radius: 50%;
 }
 
+img#user_img{
+  @include UserIcon;
+}
+img#slider_user_img{
+  @include UserIcon;
+}
+
 img#index_user_img {
   width:  60px;       /* ※縦横を同値に */
   height: 60px;       /* ※縦横を同値に */
+  border-radius: 50%;
+}
+
+img#following_user_img {
+  position: absolute;/*絶対配置*/
+  width:  40px;       /* ※縦横を同値に */
+  height: 40px;       /* ※縦横を同値に */
+  left: 70%;
   border-radius: 50%;
 }
 

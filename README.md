@@ -19,16 +19,40 @@
 
 <img src="readme_images/アプリ説明.jpeg">
 
-# 使用例
+# 使用例・解説
 
 ## TOPページ/レコメンド
 
+<div style="text-align: center;">
+  <img src="readme_images/レコメンド説明.jpeg">
+</div><br/>
+
 ## 料理記録(画像アップロード)
+- 料理画像を解析
+  - 料理以外はアップロード不可
+  - タグを自動入力
+- 詳細情報は、後から任意で入力可能
+- グラフ表示
+- 天気情報は料理登録時に自動保存
+<div style="text-align: center;">
+  <img src="readme_images/foodrecord登録編集.gif">
+</div><br/>
 
 ## 料理検索
+<div style="text-align: center;">
+  <img src="readme_images/検索.gif">
+</div><br/>
 
 ## 料理お裾分け
+### お裾分け料理の登録
+<div style="text-align: center;">
+  <img src="readme_images/foodshare登録.gif">
+</div><br/>
 
+### お裾分け料理の受け取り希望
+<div style="text-align: center;">
+  <img src="readme_images/foodshare受け取り希望.gif">
+</div><br/>
 
 # ER図
 rails-ERDを使用して出力
@@ -116,12 +140,17 @@ rails-ERDを使用して出力
 <hr/>
 
 ## 料理お裾分け機能
-- マッチング
-  - お裾分け募集中の料理と、お裾分けされたいユーザを結びつける
+- お裾分け募集機能
+  - お裾分けされたい人を募集
+  - 友達(相互フォローユーザ)の間でのみ使用可能
+- お裾分け受け取り希望機能
+  - お裾分け募集中の料理に対して、お裾分けを希望する(Ajax使用)
 - GoogleMapの活用
   - 居住地域や、お裾分け待ち合わせ場所の表示
   - ピンを立てることによる、場所の指定
-- 距離と徒歩にかかる時間を取得
+- 自宅から待ち合わせ場所への移動で徒歩でかかる時間と、距離を表示
+- 「募集中」「お裾分け前」「完了」のラベルを表示
+- お裾分け直前の料理(あげる方も、もらう方も)をTODOリストで表示
 <hr/>
 
 ## 共通機能・その他
@@ -146,8 +175,11 @@ rails-ERDを使用して出力
 - modelテスト、requestテスト、systemテストを作成
 - CircleCIのテスト結果を、READMEのバッジで表示
 
-## 外部APIの適用
-- 課題解決型で必要なAPIをリサーチし使用
+## 実用性
+- 毎日の使用を想定している
+  - 1枚の画像を登録するだけで、「タグ」「天気情報」「日付」を自動保存
+  - モバイルファーストデザイン
+- 「今日何食べたい？」の返答に困るという課題に対し、独自アルゴリズムによるレコメンド・天気によるレコメンド・検索機能で多角的に解決
 
 ## QiitaやTwitterによる外部発信
 - Qiita9件執筆、LGMT5件、ストック5件 <br/>
@@ -156,5 +188,27 @@ rails-ERDを使用して出力
   https://twitter.com/@engineer_ikuzou
 
 # 苦労した点
-- 多くのアソシエーションを持つモデルの扱い
-- 外部APIが関連するテストの作成
+- 画像アップロード時のライブラリ「MiniMagick」のエラーで、ローカルのテストを通過できるが、CircleCI上のテストを通過できない問題に直面
+  ⇨ CircleCI上との環境差異を特定し、試行錯誤の末、circleci.ymlの変更で解決
+  ⇨ qiita記事にまとめたところ1LGTMを獲得(自身のエラー解決方法を共有し、人の役に立てた)
+下記参照。
+https://qiita.com/engineer_ikuzou/items/ca419c6ec8369571279f
+
+- テスト時、Goolge Cloud Vision API(画像情報を送信すると関連するタグが返るAPI)のモックを作成
+### 概要
+料理画像としてアップロードする画像を選択直後、Controllerから、Google Cloud Vision APIを呼び出し、画像に写った物体の名前をタグとして得る機能を追加した。しかしテスト時にエラーが発生。
+### エラー詳細
+Google::Cloud::Visionのモジュールを用いて、APIと通信している。このモジュールをwebmock(ライブラリ)でスタブ化すると、送信時の問題は解決できる。
+しかし、受信時に、タグを受け取る際のメソッドもGoogle::Cloud::Visionのモジュールに記述されているためエラーとなる。
+### 試み①APIへの知識が不足しているため、まずはインターネット記事を漁り、知識を深めつつ公式ドキュメントや参考になりそうな記事を探した。
+Google Cloud Vision APIをモック化してテストしている記事がなく、失敗
+### 試み②モジュールを読み解き、Googleモジュールのスタブ化を試みた
+Google::Cloud::Vision.image_annotator(画像を送信する機能) の返却値をmockにするという方針
+⇨responseとして受け取るjsonのタイプがやや特殊であることがわかった。(https://cloud.google.com/vision/docs/request参照)
+responseを読み込むために、Googleモジュールが必須。しかし、Googleモジュールはスタブ化しており使用不可
+### 試み③  ⇨  解決
+controllerの中に、外部APIと連携する処理をメソッド化。メソッドのスタブを作成して対応。
+
+### 学び
+- Google Cloud Vision APIの複雑な処理をブラックボックス化せず理解して利用することができた。
+- 参考になる記事が全く見つからない状況でも、自力で解決方法を考え模索することができた。

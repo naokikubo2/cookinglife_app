@@ -4,7 +4,7 @@
 
 # CookingLife ー総合料理サポートアプリー
 
-<img alt="アプリ概要" style="text-align: center;" src="https://user-images.githubusercontent.com/26429361/111942321-6978d500-8b16-11eb-9dca-7fd0df418a75.png">
+<img alt="アプリ概要" src="https://user-images.githubusercontent.com/26429361/111942321-6978d500-8b16-11eb-9dca-7fd0df418a75.png">
 
 # 作成経緯とアプリ概要
 実家暮らしの私は、母親から毎日のように「今日何が食べたい？」と聞かれます。

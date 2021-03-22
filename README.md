@@ -24,7 +24,7 @@
 ## TOPページ/レコメンド
 
 <div style="text-align: center;">
-  <img width="300" alt="レコメンド説明" src="https://user-images.githubusercontent.com/26429361/111975479-00a85180-8b44-11eb-9cda-d2361163068a.jpeg">
+  <img alt="レコメンド説明" src="https://user-images.githubusercontent.com/26429361/111975479-00a85180-8b44-11eb-9cda-d2361163068a.jpeg">
 </div><br/>
 
 ## 料理記録(画像アップロード)
@@ -33,7 +33,7 @@
   - タグを自動入力
 - 天気情報は料理登録時に自動保存
 <div style="text-align: center;">
-  <img width="300" alt="foodrecord登録" src="https://user-images.githubusercontent.com/26429361111947679-456ec100-8b21-11eb-9f8f-3691ff04d1d9.gif">
+  <img alt="foodrecord登録" src="https://user-images.githubusercontent.com/26429361111947679-456ec100-8b21-11eb-9f8f-3691ff04d1d9.gif">
 </div><br/>
 
 ### 詳細情報は、後から任意で入力可能

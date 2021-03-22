@@ -5,7 +5,7 @@
 # CookingLife ー総合料理サポートアプリー
 
 <div style="text-align: center;">
-  <img src="readme_images/アプリ概要.png">
+  <img width="300" alt="アプリ概要" src="https://user-images.githubusercontent.com/26429361/111942321-6978d500-8b16-11eb-9dca-7fd0df418a75.png">
 </div><br/>
 
 # 作成経緯とアプリ概要
@@ -17,47 +17,51 @@
 
 また、料理を作る側の方にもメリットがあるよう、お裾分け機能を実装しています。ご近所同士で、本アプリを通してお裾分け連絡を取り合うことで、お裾分け料理詳細・待ち合わせ場所・日時を共有した上で、「もらう側」と「あげる側」がマッチングすることができます。
 
-<img src="readme_images/アプリ説明.jpeg">
+![アプリ説明](https://user-images.githubusercontent.com/26429361/111942305-6251c700-8b16-11eb-9a14-c3bd9b8f109e.jpeg)
 
 # 使用例・解説
 
 ## TOPページ/レコメンド
 
 <div style="text-align: center;">
-  <img src="readme_images/レコメンド説明.jpeg">
+  ![レコメンド説明](https://user-images.githubusercontent.com/26429361/111975479-00a85180-8b44-11eb-9cda-d2361163068a.jpeg)
 </div><br/>
 
 ## 料理記録(画像アップロード)
-- 料理画像を解析
+### 料理画像を解析
   - 料理以外はアップロード不可
   - タグを自動入力
-- 詳細情報は、後から任意で入力可能
-- グラフ表示
 - 天気情報は料理登録時に自動保存
 <div style="text-align: center;">
-  <img src="readme_images/foodrecord登録編集.gif">
+  ![foodrecord登録](https://user-images.githubusercontent.com/26429361111947679-456ec100-8b21-11eb-9f8f-3691ff04d1d9.gif)
+</div><br/>
+
+### 詳細情報は、後から任意で入力可能
+- グラフ表示
+<div style="text-align: center;">
+  ![foodrecord編集](https://user-images.githubusercontent.com/26429361/111947690-4acc0b80-8b21-11eb-8d65-20cbabe22d97.gif)
 </div><br/>
 
 ## 料理検索
 <div style="text-align: center;">
-  <img src="readme_images/検索.gif">
+  ![検索](https://user-images.githubusercontent.com/26429361/111944274-9f1fbd00-8b1a-11eb-8012-ad8e1a5dfbf9.gif)
 </div><br/>
 
 ## 料理お裾分け
 ### お裾分け料理の登録
 <div style="text-align: center;">
-  <img src="readme_images/foodshare登録.gif">
+  ![foodshare登録](https://user-images.githubusercontent.com/26429361/111975181-a5765f00-8b43-11eb-8498-82c8a6e30e38.gif)
 </div><br/>
 
 ### お裾分け料理の受け取り希望
 <div style="text-align: center;">
-  <img src="readme_images/foodshare受け取り希望.gif">
+  ![foodshare受け取り希望](https://user-images.githubusercontent.com/26429361/111941998-ba3bfe00-8b15-11eb-83bc-3fbd9ee93942.gif)
 </div><br/>
 
 # ER図
 rails-ERDを使用して出力
 
-<img src="readme_images/ER図.png">
+<img width="1016" alt="ER図" src="https://user-images.githubusercontent.com/26429361/111942330-6d0c5c00-8b16-11eb-95ba-812fd5e66dec.png">
 
 # 制作期間
 - 2020年11/26〜2021年3/19 (約4ヶ月)

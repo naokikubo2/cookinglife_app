@@ -43,7 +43,7 @@
 
     <div><%= "#{cov_score_to_adverb("楽", "大変", @food_record.workload_score)} / #{cov_score_to_adverb("こってり", "ヘルシー", @food_record.healthy_score)}" %></div>
     <p>時間帯：<%= cov_en_to_ja(@food_record.food_timing) %></p>
-    <p>メモ：<%= @food_record.memo %></p>
+    <div><%= @food_record.memo %></div>
 
     <% if @food_record.weather_main.present? %>
       <div class="row border-top">

@@ -17,7 +17,9 @@
 
 また、料理を作る側の方にもメリットがあるよう、お裾分け機能を実装しています。ご近所同士で、本アプリを通してお裾分け連絡を取り合うことで、お裾分け料理詳細・待ち合わせ場所・日時を共有した上で、「もらう側」と「あげる側」がマッチングすることができます。
 
-![アプリ説明](https://user-images.githubusercontent.com/26429361/111942305-6251c700-8b16-11eb-9a14-c3bd9b8f109e.jpeg)
+<div style="text-align: center;">
+  <img alt="アプリ説明" src="https://user-images.githubusercontent.com/26429361/111942305-6251c700-8b16-11eb-9a14-c3bd9b8f109e.jpeg)">
+</div><br/>
 
 # 使用例・解説
 

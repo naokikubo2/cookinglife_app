@@ -32,9 +32,8 @@
   - 料理以外はアップロード不可
   - タグを自動入力
 - 天気情報は料理登録時に自動保存
-<div style="text-align: center;">
-  <img alt="foodrecord登録" src="https://user-images.githubusercontent.com/26429361111947679-456ec100-8b21-11eb-9f8f-3691ff04d1d9.gif">
-</div><br/>
+
+![foodrecord登録](https://user-images.githubusercontent.com/26429361/111947679-456ec100-8b21-11eb-9f8f-3691ff04d1d9.gif)
 
 ### 詳細情報は、後から任意で入力可能
 - グラフ表示

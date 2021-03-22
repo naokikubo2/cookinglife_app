@@ -43,20 +43,18 @@
 
 
 ## 料理検索
-<div style="text-align: center;">
-  ![検索](https://user-images.githubusercontent.com/26429361/111944274-9f1fbd00-8b1a-11eb-8012-ad8e1a5dfbf9.gif)
-</div><br/>
+
+![検索](https://user-images.githubusercontent.com/26429361/111944274-9f1fbd00-8b1a-11eb-8012-ad8e1a5dfbf9.gif)
 
 ## 料理お裾分け
 ### お裾分け料理の登録
-<div style="text-align: center;">
-  ![foodshare登録](https://user-images.githubusercontent.com/26429361/111975181-a5765f00-8b43-11eb-8498-82c8a6e30e38.gif)
-</div><br/>
+
+![foodshare登録](https://user-images.githubusercontent.com/26429361/111975181-a5765f00-8b43-11eb-8498-82c8a6e30e38.gif)
 
 ### お裾分け料理の受け取り希望
-<div style="text-align: center;">
-  ![foodshare受け取り希望](https://user-images.githubusercontent.com/26429361/111941998-ba3bfe00-8b15-11eb-83bc-3fbd9ee93942.gif)
-</div><br/>
+
+![foodshare受け取り希望](https://user-images.githubusercontent.com/26429361/111941998-ba3bfe00-8b15-11eb-83bc-3fbd9ee93942.gif)
+
 
 # ER図
 rails-ERDを使用して出力

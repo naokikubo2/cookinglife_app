@@ -38,9 +38,9 @@
 
 ### 詳細情報は、後から任意で入力可能
 - グラフ表示
-<div style="text-align: center;">
-  ![foodrecord編集](https://user-images.githubusercontent.com/26429361/111947690-4acc0b80-8b21-11eb-8d65-20cbabe22d97.gif)
-</div><br/>
+
+![foodrecord編集](https://user-images.githubusercontent.com/26429361/111947690-4acc0b80-8b21-11eb-8d65-20cbabe22d97.gif)
+
 
 ## 料理検索
 <div style="text-align: center;">

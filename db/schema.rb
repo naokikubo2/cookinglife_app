@@ -12,10 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_02_11_071621) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "cities", force: :cascade do |t|
+  create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.integer "location_id"
     t.float "lon"
@@ -24,7 +21,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_071621) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "favorites", force: :cascade do |t|
+  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "food_record_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -34,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_071621) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
-  create_table "food_records", force: :cascade do |t|
+  create_table "food_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "food_name"
     t.integer "healthy_score"
@@ -58,7 +55,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_071621) do
     t.index ["user_id"], name: "index_food_records_on_user_id"
   end
 
-  create_table "food_shares", force: :cascade do |t|
+  create_table "food_shares", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "food_name"
     t.integer "limit_number"
     t.bigint "user_id", null: false
@@ -75,7 +72,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_071621) do
     t.index ["user_id"], name: "index_food_shares_on_user_id"
   end
 
-  create_table "fr_comments", force: :cascade do |t|
+  create_table "fr_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "food_record_id", null: false
     t.text "content"
@@ -85,7 +82,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_071621) do
     t.index ["user_id"], name: "index_fr_comments_on_user_id"
   end
 
-  create_table "fs_comments", force: :cascade do |t|
+  create_table "fs_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "food_share_id", null: false
     t.text "content"
@@ -95,7 +92,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_071621) do
     t.index ["user_id"], name: "index_fs_comments_on_user_id"
   end
 
-  create_table "matchings", force: :cascade do |t|
+  create_table "matchings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "food_share_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -106,7 +103,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_071621) do
     t.index ["user_id"], name: "index_matchings_on_user_id"
   end
 
-  create_table "relationships", force: :cascade do |t|
+  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "follow_id"
     t.datetime "created_at", precision: 6, null: false
@@ -116,7 +113,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_071621) do
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
-  create_table "taggings", id: :serial, force: :cascade do |t|
+  create_table "taggings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
     t.integer "taggable_id"
@@ -135,15 +132,15 @@ ActiveRecord::Schema.define(version: 2021_02_11_071621) do
     t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
   end
 
-  create_table "tags", id: :serial, force: :cascade do |t|
-    t.string "name"
+  create_table "tags", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", collation: "utf8_bin"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -174,5 +171,4 @@ ActiveRecord::Schema.define(version: 2021_02_11_071621) do
   add_foreign_key "matchings", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
-  add_foreign_key "taggings", "tags"
 end

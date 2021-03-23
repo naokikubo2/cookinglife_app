@@ -1,4 +1,4 @@
-<% if current_user.id != @food_share.user_id %>
+<% if current_user.id != @food_share.user_id && @output_distance.present? %>
   <div class="bg-info">
     <%= "あなたの自宅から徒歩 #{@output_distance[:duration]}" %><br/>
     <%= "距離は#{@output_distance[:distance]}です。" %>

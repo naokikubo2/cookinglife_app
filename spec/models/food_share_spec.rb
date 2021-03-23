@@ -165,7 +165,7 @@ RSpec.describe FoodShare, type: :model do
 
       it 'is invalid with give_time-12時間' do
         food_share.give_time = Time.zone.now + 24 * 3600 + 1
-        food_share.limit_time = Time.zone.now + 12 * 3600 + 1
+        food_share.limit_time = Time.zone.now + 12 * 3600 + 10
         food_share.valid?
         expect(food_share.errors.messages[:limit_time]).to include("は、お裾分け時間より12時間以上前の日時を入力して下さい")
       end

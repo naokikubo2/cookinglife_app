@@ -38,8 +38,8 @@ create_project() {
   compose_build $app
   bundle_cmd install
 
-  echoing "Exec rails new with postgresql and webpack"
-  bundle_exec rails new . -f -d=postgresql $*
+  echoing "Exec rails new with mysql and webpack"
+  bundle_exec rails new . -f -d=mysql $*
 
   echoing "Update config/database.yml"
   mv database.yml config/database.yml
@@ -261,24 +261,24 @@ rake_reset_db() {
 db_console() {
     # from config/database.yml
     database="development"
-    username="postgres"
-    port="5432"
+    username="root"
+    port="3306"
 
-    run_db psql -h $db_container -p $port -U $username $database
+    run_db mysql -h $db_container -p $port -U $username $database
 }
 
 db_dump() {
     # from config/database.yml
     database="development"
-    username="postgres"
-    port="5432"
+    username="root"
+    port="3306"
 
     tm=$(date +\%Y\%m\%d-\%H\%M)
     dump_file=tmp/dbdump-${dbname}-${tm}.dump
 
     echoing "Dump database $dbname data to $dump_file"
 
-    run_db pg_dump -h $db_container -p $port -U $username --disable-triggers $database > $dump_file
+    run_db mysqldump -h $db_container -p $port -U $username --disable-triggers $database > $dump_file
     echo "done"
 }
 

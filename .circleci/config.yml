@@ -27,11 +27,10 @@ jobs:
     # here we set 3 docker images.
     docker:
       - image: cimg/ruby:2.7-node # this is our primary docker image, where step commands run.
-      - image: circleci/postgres
-        environment: # add POSTGRES environment variables.
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: test
+      - image: circleci/mysql:8.0.2
+        environment:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: test
         name: db
       - image: selenium/standalone-chrome
         name: chrome
@@ -55,7 +54,7 @@ jobs:
       # up before we run operations on the database.
       - run:
           name: Wait for DB
-          command: dockerize -wait tcp://db:5432 -timeout 1m
+          command: dockerize -wait tcp://db:3306 -timeout 1m
       - run:
           name: Database setup
           command: bundle exec rails db:schema:load --trace

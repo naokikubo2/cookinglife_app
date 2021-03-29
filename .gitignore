@@ -41,3 +41,5 @@ public/uploads
 /.env
 lib/api/vision/cookinglife-49f68bde9cbe.json
 db/fixtures
+
+ddtest

@@ -6,6 +6,9 @@
 
 <img alt="アプリ概要" src="https://user-images.githubusercontent.com/26429361/111942321-6978d500-8b16-11eb-9dca-7fd0df418a75.png">
 
+## URLはこちら
+https://www.cookinglife.work/
+
 # 作成経緯とアプリ概要
 実家暮らしの私は、母親から毎日のように「今日何が食べたい？」と聞かれます。
 しかし、適当に回答しても却下されてしまうので難しいという課題がありました。また、友人にも話を聞いてみると、同じ悩みを持った方が多いことが分かりました。
@@ -57,6 +60,9 @@
 rails-ERDを使用して出力
 
 <img width="1016" alt="ER図" src="https://user-images.githubusercontent.com/26429361/111942330-6d0c5c00-8b16-11eb-95ba-812fd5e66dec.png">
+
+# インフラ構成図
+![cookinglifeインフラ構成図](https://user-images.githubusercontent.com/26429361/113134481-cc2b4880-925b-11eb-9e1d-769f23f69940.png)
 
 # 制作期間
 - 2020年11/26〜2021年3/19 (約4ヶ月)

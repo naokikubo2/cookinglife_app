@@ -1,5 +1,5 @@
 <% if user.image.present? %>
   <%= image_tag user.image.url, id: id_img %>
 <% else %>
-  <%= image_pack_tag "user_default.png", id: "id_img" %>
+  <%= image_pack_tag "user_default.png", id: id_img %>
 <% end %>

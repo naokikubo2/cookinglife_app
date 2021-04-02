@@ -6,6 +6,16 @@ class UsersController < ApplicationController
     @users_friend = current_user.friends
   end
 
+  def followers
+    user = User.find(params[:id])
+    @followers = user.followers
+  end
+
+  def followings
+    user = User.find(params[:id])
+    @followings = user.followings
+  end
+
   def show
     @user = User.find(params[:id])
   end

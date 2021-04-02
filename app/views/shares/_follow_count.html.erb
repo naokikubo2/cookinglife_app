@@ -1,6 +1,6 @@
-<%= link_to '#', id: follower, class: "text-decoration-none text-muted" do %>
+<%= link_to followers_path(user.id), id: follower, class: "text-decoration-none text-muted" do %>
   <strong><%= user.followers.count %></strong>フォロワー |
 <% end %>
-<%= link_to '#', id: following, class: "text-decoration-none text-muted" do %>
+<%= link_to followings_path(user.id), id: following, class: "text-decoration-none text-muted" do %>
   <strong>  <%= user.followings.count %></strong>フォロー
 <% end %>

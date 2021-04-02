@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     post 'guest_login', to: 'users/sessions#new_guest'
   end
 
+  get "followings/:id", to: "users#followings", as: 'followings'
+  get "followers/:id", to: "users#followers", as: 'followers'
+
+
   resources :food_records do
     resources :fr_comments, only: %w[create destroy]
     post :favorite

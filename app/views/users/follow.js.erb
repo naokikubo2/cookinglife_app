@@ -1,3 +1,5 @@
 $('#follow').html('<%= j(render partial: "follow") %>');
-$("#follower-count").html('フォロワー数|<%= @user.followers.count %>');
-$("#following-count").html('フォロー数|<%= @user.followings.count %>');
+$("#follower-count-header").html('<strong><%= current_user.followers.count %></strong>フォロワー |');
+$("#following-count-header").html('<strong><%= current_user.followings.count %></strong>フォロー');
+$("#follower-count-body").html('<strong><%= @user.followers.count %></strong>フォロワー |');
+$("#following-count-body").html('<strong><%= @user.followings.count %></strong>フォロー');

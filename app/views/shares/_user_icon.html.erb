@@ -1,5 +1,9 @@
 <% if user.image.present? %>
-  <%= image_tag user.image.url, id: id_img %>
+  <%= link_to user_path(user) do %>
+    <%= image_tag user.image.url, id: id_img %>
+  <% end %>
 <% else %>
-  <%= image_pack_tag "user_default.png", id: id_img %>
+  <%= link_to user_path(user) do %>
+    <%= image_pack_tag "user_default.png", id: id_img %>
+  <% end %>
 <% end %>

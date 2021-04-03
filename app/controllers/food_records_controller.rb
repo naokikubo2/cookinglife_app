@@ -35,7 +35,6 @@ class FoodRecordsController < ApplicationController
     @search = current_user.food_records.order(food_date: "DESC").ransack(params[:q])
     @food_records = @search.result(distinct: true)
     @tags = current_user.food_records.tag_counts_on(:tags)
-    @food_records_followings = current_user.food_records_followings.order(food_date: "DESC")
   end
 
   def edit; end
@@ -106,7 +105,7 @@ class FoodRecordsController < ApplicationController
   private
 
   def food_record_params
-    params.fetch(:food_record, {}).permit(:image, :tag_list, :healthy_score, :workload_score, :food_timing, :memo, :total_score, :eating_out)
+    params.fetch(:food_record, {}).permit(:image, :tag_list, :healthy_score, :workload_score, :food_timing, :memo, :total_score, :eating_out, :food_name)
   end
 
   def set_food_record

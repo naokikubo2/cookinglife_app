@@ -16,6 +16,15 @@
 
       <%= render partial: "input_tags", locals: { f: f } %>
 
+      <div class="form-group text-center w-100 mt-3">
+          <label class="btn">
+            <%= f.radio_button :eating_out, false, checked: true %> 手作り
+          </label>
+          <label class="btn">
+            <%= f.radio_button :eating_out, true, {} %> 外食
+          </label>
+      </div>
+
       <div class="form-group">
         <%= f.label :food_name, "料理名" %><br />
         <%= f.text_field :food_name, autofocus: true, class: 'form-control w-75  mx-auto' %>
@@ -43,23 +52,21 @@
 
       <div class="form-group text-center w-100">
         <%= f.label :food_timing %>
-        <div class="btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-outline-secondary active">
+          <label class="btn">
             <%= f.radio_button :food_timing, "" %> 未選択
           </label>
-          <label class="btn btn-outline-secondary">
+          <label class="btn">
             <%= f.radio_button :food_timing, "morning", {} %> 朝
           </label>
-          <label class="btn btn-outline-secondary">
+          <label class="btn">
             <%= f.radio_button :food_timing, "lunch", {} %> 昼
           </label>
-          <label class="btn btn-outline-secondary">
+          <label class="btn">
             <%= f.radio_button :food_timing, "dinner", {} %> 夜
           </label>
-          <label class="btn btn-outline-secondary">
+          <label class="btn">
             <%= f.radio_button :food_timing, "snack", {} %> 間食
           </label>
-        </div>
       </div>
 
       <div class="form-group">

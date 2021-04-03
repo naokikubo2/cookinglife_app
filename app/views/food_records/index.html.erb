@@ -8,9 +8,7 @@
 
   </div>
   <div class="container-fluid">
-
-        <%= render partial: "tags", locals: { tags: @tags } %>
-        <div class="row"><%= render partial: "foods", locals: { food_records: @food_records, loginuser_flag: "true" } %></div>
-
+    <%= render partial: "tags", locals: { tags: @tags } %>
+    <div class="row"><%= render partial: "foods", locals: { food_records: @food_records, loginuser_flag: "true" } %></div>
   </div>
 </main>

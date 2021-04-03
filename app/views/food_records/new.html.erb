@@ -19,9 +19,7 @@
 
         <%= render partial: "input_tags", locals: { f: f } %>
 
-        <div class="h3 mt-3">詳細情報を入力する</div>
-
-        <div class="form-group">
+        <div class="form-group mt-3">
           <%= f.label :total_score, "総合評価" %><br />
           <input type="range" id="food_record_total_score" min="1" max="5" step="1" value=f.total_score name="food_record[total_score]" autofocus="autofocus">
           <div id="value_total">☆☆☆</div>
@@ -40,6 +38,9 @@
           <span>ヘルシー</span>
           <div id="value_cal">普通</div>
         </div>
+
+        <a href="#my_undone_action" data-toggle="collapse">詳細情報を入力する</a>
+        <div id="my_undone_action" class="collapse">
 
         <div class="form-group text-center w-100">
         <div class="btn-group-toggle" data-toggle="buttons">
@@ -64,6 +65,8 @@
       <div class="form-group">
         <%= f.label :memo, "メモ" %><br />
         <textarea class="form-control w-75 mx-auto" rows="3" name="food_record[memo]" id="food_record_memo" autofocus="autofocus" value=f.memo></textarea>
+      </div>
+
       </div>
 
         <div class="actions mt-3">

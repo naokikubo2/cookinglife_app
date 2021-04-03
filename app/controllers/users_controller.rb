@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @food_records = @user.food_records.order(food_date: "DESC")
   end
 
   def follow

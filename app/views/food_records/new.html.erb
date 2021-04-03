@@ -1,4 +1,6 @@
-<main id="nottop" class="text-center mt-5 pt-5 mb-5 pb-5">
+<%= javascript_pack_tag "sliderbar" %>
+
+<main id="nottop" class="text-center mb-5 pb-5">
   <div class="jumbotron">
     <div class="container">
 
@@ -15,7 +17,65 @@
 
         <div id="checkfood"></div>
 
-       <%= render partial: "input_tags", locals: { f: f } %>
+        <%= render partial: "input_tags", locals: { f: f } %>
+
+        <div class="form-check mt-2">
+          <input class="form-check-input lg" type="checkbox" name="food_record[eating_out]" id="food_record_eating_out" autofocus="autofocus" value=f.eating_out>
+          <label class="form-check-label" for="food_record_eating_out">外食ならチェック</label>
+        </div>
+
+        <div class="form-group mt-3">
+          <%= f.label :total_score, "総合評価" %><br />
+          <input type="range" id="food_record_total_score" min="1" max="5" step="1" value=f.total_score
+                 name="food_record[total_score]" autofocus="autofocus" class="custom-range w-50">
+          <div id="value_total">☆☆☆</div>
+        </div>
+
+        <div class="form-group">
+          <span>楽</span>
+          <input type="range" id="food_record_workload_score" min="-4" max="4" step="1" value=f.workload_score
+                 name="food_record[workload_score]" autofocus="autofocus" class="custom-range w-50">
+          <span>大変</span>
+          <div id="value_wl">普通</div>
+        </div>
+
+        <div class="form-group">
+          <span>こってり</span>
+          <input type="range" id="food_record_healthy_score" min="-4" max="4" step="1" value=f.healthy_score
+                 name="food_record[healthy_score]" autofocus="autofocus" class="custom-range w-50">
+          <span>ヘルシー</span>
+          <div id="value_cal">普通</div>
+        </div>
+
+        <a href="#my_undone_action" data-toggle="collapse">さらに詳細情報を入力</a>
+        <div id="my_undone_action" class="collapse">
+
+        <div class="form-group text-center w-100">
+        <div class="btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-outline-secondary active">
+            <%= f.radio_button :food_timing, "" %> 未選択
+          </label>
+          <label class="btn btn-outline-secondary">
+            <%= f.radio_button :food_timing, "morning", {} %> 朝
+          </label>
+          <label class="btn btn-outline-secondary">
+            <%= f.radio_button :food_timing, "lunch", {} %> 昼
+          </label>
+          <label class="btn btn-outline-secondary">
+            <%= f.radio_button :food_timing, "dinner", {} %> 夜
+          </label>
+          <label class="btn btn-outline-secondary">
+            <%= f.radio_button :food_timing, "snack", {} %> 間食
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :memo, "メモ" %><br />
+        <textarea class="form-control w-75 mx-auto" rows="3" name="food_record[memo]" id="food_record_memo" autofocus="autofocus" value=f.memo></textarea>
+      </div>
+
+      </div>
 
         <div class="actions mt-3">
           <%= f.submit "登録する", class: "btn btn-info" %>

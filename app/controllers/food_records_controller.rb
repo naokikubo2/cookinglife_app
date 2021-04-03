@@ -106,7 +106,7 @@ class FoodRecordsController < ApplicationController
   private
 
   def food_record_params
-    params.fetch(:food_record, {}).permit(:image, :tag_list)
+    params.fetch(:food_record, {}).permit(:image, :tag_list, :healthy_score, :workload_score, :food_timing, :memo, :total_score)
   end
 
   def set_food_record

@@ -35,7 +35,6 @@ class FoodRecordsController < ApplicationController
     @search = current_user.food_records.order(food_date: "DESC").ransack(params[:q])
     @food_records = @search.result(distinct: true)
     @tags = current_user.food_records.tag_counts_on(:tags)
-    @food_records_followings = current_user.food_records_followings.order(food_date: "DESC")
   end
 
   def edit; end

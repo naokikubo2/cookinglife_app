@@ -1,0 +1,18 @@
+<% if food_records.present? %>
+  <% food_records.each do |fr| %>
+    <div class = "col-4 d-flex align-items-center justify-content-center">
+      <%= link_to food_record_path(fr), class: "card border-0" do %>
+        <div class = "card mb-1">
+          <%= image_tag fr.image.url, id: "fr_index" %>
+          <div id="food_date" class="small">
+            <div><%= l fr.food_date, format: :short %></div>
+            <div><%= fr.food_date.strftime("%a") %></div>
+          </div>
+          <%= render partial: 'shares/user_icon', locals: { user: fr.user, id_img: "following_user_img" } %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <p>表示可能な料理がありません。</p>
+<% end %>

@@ -42,7 +42,7 @@
     </div>
     <%= javascript_pack_tag "graph" %>
 
-    <div><%= "#{cov_score_to_adverb("楽", "大変", @food_record.workload_score)} / #{cov_score_to_adverb("こってり", "ヘルシー", @food_record.healthy_score)}" %></div>
+    <div><%= "#{cov_score_to_adverb("楽", "大変", @food_record.workload_score)} / #{cov_score_to_adverb("こってり", "ヘルシー", @food_record.healthy_score)}/ #{eating_out?(@food_record.eating_out)}" %></div>
     <p>時間帯：<%= cov_en_to_ja(@food_record.food_timing) %></p>
     <div><%= @food_record.memo %></div>
 

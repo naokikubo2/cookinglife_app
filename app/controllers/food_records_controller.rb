@@ -106,7 +106,7 @@ class FoodRecordsController < ApplicationController
   private
 
   def food_record_params
-    params.fetch(:food_record, {}).permit(:image, :tag_list, :healthy_score, :workload_score, :food_timing, :memo, :total_score)
+    params.fetch(:food_record, {}).permit(:image, :tag_list, :healthy_score, :workload_score, :food_timing, :memo, :total_score, :eating_out)
   end
 
   def set_food_record
@@ -119,7 +119,7 @@ class FoodRecordsController < ApplicationController
 
   def food_records_params
     params.require(:food_record).permit(:food_name, :healthy_score,
-                                        :total_score, :workload_score, :food_timing, :memo, :tag_list, :food_date).merge({ user_id: current_user.id })
+                                        :total_score, :workload_score, :food_timing, :memo, :tag_list, :food_date, :eating_out).merge({ user_id: current_user.id })
   end
 
   def set_vision

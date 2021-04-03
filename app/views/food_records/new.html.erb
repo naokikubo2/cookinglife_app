@@ -24,6 +24,11 @@
           <label class="form-check-label" for="food_record_eating_out">外食ならチェック</label>
         </div>
 
+        <div class="form-group mt-2">
+          <%= f.label :food_name, "料理名" %><br />
+          <%= f.text_field :food_name, autofocus: true, class: 'form-control w-75  mx-auto' %>
+        </div>
+
         <div class="form-group mt-3">
           <%= f.label :total_score, "総合評価" %><br />
           <input type="range" id="food_record_total_score" min="1" max="5" step="1" value=f.total_score

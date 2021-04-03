@@ -40,8 +40,8 @@ module FoodRecordHelper
     link_to "#{tag.name}(#{tag.taggings_count})", tags_path(tag: tag.name), class: "badge badge-primary"
   end
 
-  def eating_out?(bl)
-    if bl
+  def eating_out?(boo)
+    if boo
       '外食'
     else
       '手作り'

@@ -216,6 +216,7 @@ Rails/BulkChangeTable:
     - 'db/migrate/20210118145623_add_column_food_records.rb'
     - 'db/migrate/20210128113835_add_column_food_shares.rb'
     - 'db/migrate/20210129024628_add_column_users.rb'
+    - 'db/migrate/20201201143624_devise_create_users.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -270,6 +271,7 @@ Metrics/ClassLength:
 Lint/SuppressedException:
   Exclude:
     - 'app/models/food_record.rb'
+    - 'config/unicorn.conf.rb'
 
 Style/HashLikeCase:
   Exclude:
@@ -282,3 +284,7 @@ Style/MutableConstant:
 Rails/LexicallyScopedActionFilter:
   Exclude:
     - 'app/controllers/users/registrations_controller.rb'
+
+Style/GlobalVars:
+  Exclude:
+    - 'config/unicorn.conf.rb'

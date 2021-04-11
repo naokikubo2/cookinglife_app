@@ -31,4 +31,8 @@ class UsersController < ApplicationController
     end
     render :follow
   end
+
+  def liked_users
+    @users = Favorite.liked_users(params[:id])
+  end
 end

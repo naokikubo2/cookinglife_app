@@ -2,7 +2,6 @@ class HomesController < ApplicationController
   def top
     if user_signed_in?
 
-
       @food_records = current_user.food_records.order(food_date: "DESC")
       @food_count = @food_records.count
       @tags = current_user.food_records.tag_counts_on(:tags)

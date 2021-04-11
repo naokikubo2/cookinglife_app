@@ -23,7 +23,15 @@
       </div>
       <div class="card-body row">
         <div class="col"><%= star(@food_record.total_score) %></div>
-        <div class="col"><%= render partial: 'favorite' %></div>
+        <div class="col">
+          <span><%= render partial: 'favorite' %>_</span>
+          <% if current_user.id == @food_record.user_id %>
+            <%= link_to liked_users_url(id: @food_record.id) do %>
+              <i class="fas fa-users"></i>
+            <% end %>
+          <% end %>
+
+        </div>
       </div>
     </div>
 

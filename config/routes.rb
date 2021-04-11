@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   get "followings/:id", to: "users#followings", as: 'followings'
   get "followers/:id", to: "users#followers", as: 'followers'
+  get "liked_users/:id", to: "users#liked_users", as: 'liked_users'
 
   resources :food_records do
     resources :fr_comments, only: %w[create destroy]

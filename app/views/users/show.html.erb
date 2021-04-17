@@ -1,8 +1,7 @@
 <main id="nottop" class="text-center mt-4 pt-4 mt-3 mb-5 pb-5">
   <div class="container-fluid">
-    <h2 class="border-bottom text-muted mb-3">ユーザー情報</h2>
 
-    <h2>ユーザー名：<%= @user.name %></h2>
+    <div class="h2"><%= @user.name %></div>
 
     <%= render partial: 'shares/user_icon', locals: { user: @user, id_img: "user_img" } %>
 

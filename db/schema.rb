@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_03_100905) do
+ActiveRecord::Schema.define(version: 2021_04_16_161803) do
 
   create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -102,6 +102,17 @@ ActiveRecord::Schema.define(version: 2021_04_03_100905) do
     t.index ["food_share_id", "user_id"], name: "index_matchings_on_food_share_id_and_user_id", unique: true
     t.index ["food_share_id"], name: "index_matchings_on_food_share_id"
     t.index ["user_id"], name: "index_matchings_on_user_id"
+  end
+
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "visiter_id"
+    t.integer "visited_id"
+    t.integer "food_record_id"
+    t.integer "fr_comment_id"
+    t.string "action"
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

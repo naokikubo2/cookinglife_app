@@ -1,15 +1,28 @@
 
 <header role="banner">
+
   <button type="button" class="drawer-toggle drawer-hamburger">
+    <% if user_signed_in? && unchecked_notifications.any? %>
+      <i class="fa fa-circle text-left" style="color: gold;"></i>
+    <% end %>
     <span class="sr-only">toggle navigation</span>
     <span class="drawer-hamburger-icon"></span>
   </button>
+
   <nav class="drawer-nav" role="navigation">
     <% if user_signed_in? %>
       <ul>
         <li class="nav-item list-unstyled my-3">
             <%= link_to("ログアウト", logout_path,
             data: {confirm: "本当にログアウトしますか？"}, class: "nav-link text-info") %>
+        </li>
+        <li class="nav-item list-unstyled my-3">
+          <%= link_to notifications_path, class: "nav-link text-info" do %>
+            <% if unchecked_notifications.any? %>
+              <i class="fa fa-circle" style="color: gold;"></i>
+            <% end %>
+              お知らせ
+          <% end %>
         </li>
       </ul>
       <div class="row border-top pt-3">

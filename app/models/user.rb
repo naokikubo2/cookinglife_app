@@ -23,6 +23,9 @@ class User < ApplicationRecord
   has_many :fs_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
+  has_many :active_notifications, class_name: "Notification", foreign_key: "visiter_id", dependent: :destroy
+  has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
+
   mount_uploader :image, ImageUploader
 
   def follow(other_user_id)
@@ -62,6 +65,17 @@ class User < ApplicationRecord
       user.address = '東京'
       user.latitude = 35.7090259
       user.longitude = 139.7319925
+    end
+  end
+
+  def create_notification_follow!(current_user)
+    temp = Notification.where(["visiter_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        visited_id: id,
+        action: 'follow'
+      )
+      notification.save if notification.valid?
     end
   end
 end

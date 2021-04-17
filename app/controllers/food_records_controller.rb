@@ -62,6 +62,7 @@ class FoodRecordsController < ApplicationController
 
   def favorite
     @food_record = FoodRecord.includes(:favorites).find(params[:food_record_id])
+    @food_record.create_notification_by(current_user) unless @food_record.favorites?(current_user)
     @food_record.favorites?(current_user) ? @food_record.unlike(current_user.id) : @food_record.like(current_user.id)
     render :favorite
   end

@@ -17,7 +17,12 @@
             data: {confirm: "本当にログアウトしますか？"}, class: "nav-link text-info") %>
         </li>
         <li class="nav-item list-unstyled my-3">
-          <%= link_to "通知", notifications_path, class: "nav-link text-info" %>
+          <%= link_to notifications_path, class: "nav-link text-info" do %>
+            <% if unchecked_notifications.any? %>
+              <i class="fa fa-circle" style="color: gold;"></i>
+            <% end %>
+              お知らせ
+          <% end %>
         </li>
       </ul>
       <div class="row border-top pt-3">

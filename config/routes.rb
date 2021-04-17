@@ -32,5 +32,6 @@ Rails.application.routes.draw do
     post :follow
   end
 
-  resources :notifications, only: :index
+  resources :notifications, only: [:index]
+  delete :notifications, to: 'notifications#destroy_all'
 end

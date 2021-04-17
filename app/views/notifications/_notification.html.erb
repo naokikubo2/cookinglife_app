@@ -3,7 +3,7 @@
 
 <div class="border-bottom mt-3">
   <%= render partial: 'shares/user_icon', locals: { user: visiter, id_img: "index_user_img" } %>
-  <%= visiter.name %>が<%= link_to 'あなたの投稿', food_record_path(food_record) %>にコメント
+  <%= notification_form(notification) %>
 </div>
 
 

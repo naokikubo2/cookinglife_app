@@ -99,6 +99,15 @@ class FoodRecord < ApplicationRecord
     find_by(id: f_id) unless f_id.zero?
   end
 
+  def create_notification_by(current_user)
+    notification = current_user.active_notifications.new(
+      food_record_id: id,
+      visited_id: user_id,
+      action: "like"
+    )
+    notification.save if notification.valid?
+  end
+
   def create_notification_comment!(current_user, comment_id)
     # 自分以外にコメントしている人をすべて取得し、全員に通知を送る(自分のコメントで自分に通知が行かないように)
     temp_ids = FrComment.select(:user_id).where(food_record_id: id).where.not(user_id: current_user.id).distinct

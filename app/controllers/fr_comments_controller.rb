@@ -2,8 +2,13 @@ class FrCommentsController < ApplicationController
   before_action :set_food_record
 
   def create
-    @food_record.fr_comments.new(fr_comment_params).save
-    render :remote_js
+    @comment = @food_record.fr_comments.new(fr_comment_params)
+    if @comment.save
+      #通知の作成
+      @food_record.create_notification_comment!(current_user, @comment.id)
+      render :remote_js
+    end
+
   end
 
   def destroy

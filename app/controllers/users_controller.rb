@@ -28,6 +28,7 @@ class UsersController < ApplicationController
       current_user.unfollow(other_user_id)
     else
       current_user.follow(other_user_id)
+      @user.create_notification_follow!(current_user)
     end
     render :follow
   end

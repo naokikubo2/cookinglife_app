@@ -3,9 +3,9 @@
     <h2 class="border-bottom text-muted mb-3">お知らせ</h2>
     <% if @notifications.exists? %>
       <%= link_to notifications_path, method: :delete do %>
-      <i class="fas fa-trash" style="color: black;"></i>
-      全削除
-    <% end %>
+        <i class="fas fa-trash" style="color: black;"></i>
+        全削除
+      <% end %>
       <div class="border-top"></div>
       <div class="users-index">
         <%= render @notifications %>

@@ -6,7 +6,7 @@
   <%= notification_form(notification) %>
   <span class="text-muted"><%= " (#{time_ago_in_words(notification.created_at)} 前)" %></span>
   <div class="text-muted text-center">
-    <%= @comment unless @comment.nil? %>
+    <%= @comment.content unless @comment.nil? %>
   </div>
 </div>
 

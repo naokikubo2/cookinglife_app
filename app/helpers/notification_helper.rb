@@ -15,7 +15,7 @@ module NotificationHelper
       when "comment" then
         @visiter_comment = notification.fr_comment_id
         @comment = FrComment.find_by(id: @visiter_comment)
-        if @comment.user_id == notification.visited_id
+        if current_user.food_records.exists?(id: notification.food_record_id)
           tag.a(@visiter.name, href:user_path(@visiter), style:"font-weight: bold;")+"が"+tag.a('あなたの投稿', href:food_record_path(notification.food_record_id), style:"font-weight: bold;")+"にコメント"
         else
           tag.a(@visiter.name, href:user_path(@visiter), style:"font-weight: bold;")+"が"+tag.a( '投稿', href:food_record_path(notification.food_record_id), style:"font-weight: bold;")+"にコメント"

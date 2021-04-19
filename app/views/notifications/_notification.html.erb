@@ -1,9 +1,12 @@
 <% visiter = notification.visiter %>
 <% food_record = notification.food_record %>
 
-<div class="border-bottom mt-3">
+<div class="border-bottom mt-3 text-left">
   <%= render partial: 'shares/user_icon', locals: { user: visiter, id_img: "index_user_img" } %>
   <%= notification_form(notification) %>
+  <div class="text-muted text-center">
+    <%= @comment unless @comment.nil? %>
+  </div>
 </div>
 
 

@@ -2,6 +2,9 @@
 <% food_record = notification.food_record %>
 
 <div class="border-bottom mt-3 text-left">
+  <% if !@check_ids.nil? && @check_ids.include?(notification.id) %>
+    <i class="fa fa-circle text-left" style="color: gold;"></i>
+  <% end %>
   <%= render partial: 'shares/user_icon', locals: { user: visiter, id_img: "index_user_img" } %>
   <%= notification_form(notification) %>
   <span class="text-muted"><%= " (#{time_ago_in_words(notification.created_at)} 前)" %></span>

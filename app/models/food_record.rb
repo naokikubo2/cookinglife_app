@@ -109,12 +109,12 @@ class FoodRecord < ApplicationRecord
   end
 
   def create_notification_comment!(current_user, comment_id)
-    # 自分以外にコメントしている人をすべて取得し、全員に通知を送る(自分のコメントで自分に通知が行かないように)
+    # その料理に自分以外にコメントしている人をすべて取得し、全員に通知を送る(自分のコメントで自分に通知が行かない/返信の通知がいくように)
     temp_ids = FrComment.select(:user_id).where(food_record_id: id).where.not(user_id: current_user.id).distinct
     temp_ids.each do |temp_id|
         save_notification_comment!(current_user, comment_id, temp_id['user_id'])
     end
-    # まだ誰もコメントしていない場合は、投稿者に通知を送る
+    # まだ誰もコメントしていない場合は、料理投稿者に通知を送る
     save_notification_comment!(current_user, comment_id, user_id) if temp_ids.blank?
   end
 

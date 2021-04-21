@@ -74,6 +74,7 @@ class FoodRecord < ApplicationRecord
     max_distance = 0
     max_id = 0
     p_food.each do |p|
+      next if p[0].nil? || p[1].nil?
       next unless max_distance < (p[0] - y_food[0][0])**2 + (p[1] - y_food[0][1])**2
 
       max_distance = (p[0] - y_food[0][0])**2 + (p[1] - y_food[0][1])**2

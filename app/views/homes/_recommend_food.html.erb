@@ -11,6 +11,11 @@
           <div class="h6 bg-secondary p-2" id="bg-description"><%= "#{@weather_recommend.food_name}  #{@weather_recommend.temp}℃  #{date_format(@weather_recommend.food_date)}" %></div>
           <%= image_tag @weather_recommend.image.url, id:"img_background", alt:"slide" %>
         <% end %>
+      <% else %>
+        <%= link_to @food_records.first do %>
+          <div class="h5 p-2" id="bg-text">気温が近い日レコメンド<br/>データ不足<br/>(1週間の料理が必要です)</div>
+          <%= image_tag @food_records.first.image.url, id:"img_background", alt:"slide" %>
+        <% end %>
       <% end %>
     </div>
     <div class="carousel-item">

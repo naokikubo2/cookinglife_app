@@ -1,6 +1,6 @@
 <main id="nottop" class="text-center mt-4 pt-4 mt-3 mb-5 pb-5">
   <div class="container-fluid">
-    <h2 class="border-bottom text-muted mb-3">お知らせ</h2>
+    <h2 class="text-muted mb-3">お知らせ</h2>
     <% if @notifications.exists? %>
       <%= link_to notifications_path, method: :delete do %>
         <i class="fas fa-trash" style="color: black;"></i>

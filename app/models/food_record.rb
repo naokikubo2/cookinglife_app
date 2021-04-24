@@ -85,6 +85,7 @@ class FoodRecord < ApplicationRecord
   end
 
   def self.weather_recommend(food_records_mine, temp_today)
+    food_records_mine = food_records_mine.select { |n| n.food_date < Time.zone.today - 7 }
     temp_min = 999
     f_id = 0
     food_records_mine.each do |f|

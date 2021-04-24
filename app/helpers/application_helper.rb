@@ -1,4 +1,6 @@
 module ApplicationHelper
+  require "uri"
+
   def follow_button(user)
     label, key = current_user.following?(user) ? %w[フォロー中 secondary] : %w[フォローする primary]
     link_to(label, user_follow_path(@user), method: :post, remote: true, class: "btn btn-#{key} rounded-pill")
@@ -24,5 +26,16 @@ module ApplicationHelper
 
   def day_format(date)
     date.strftime("%a") if date.present?
+  end
+
+  def text_url_to_link(text)
+
+    URI.extract(text, ['http','https'] ).uniq.each do |url|
+      sub_text = ""
+      sub_text << "<a href=" << url << " target=\"_blank\">" << url << "</a>"
+
+      text.gsub!(url, sub_text)
+    end
+    text
   end
 end

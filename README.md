@@ -59,7 +59,8 @@ https://www.cookinglife.work/
 # ER図
 rails-ERDを使用して出力
 
-<img width="1016" alt="ER図" src="https://user-images.githubusercontent.com/26429361/111942330-6d0c5c00-8b16-11eb-95ba-812fd5e66dec.png">
+<img width="1012" alt="スクリーンショット 2021-05-10 12 06 41" src="https://user-images.githubusercontent.com/26429361/117601041-32bf5280-b188-11eb-9c84-99c14bd21237.png">
+
 
 # インフラ構成図
 <img width="1040" alt="スクリーンショット 2021-05-09 20 44 02" src="https://user-images.githubusercontent.com/26429361/117570919-5ee6bf00-b107-11eb-849e-54d50320e43d.png">
